@@ -1,0 +1,662 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200"
+     height="720"
+     viewBox="0 0 1200 720"
+     role="img"
+     aria-labelledby="title desc">
+
+  <title id="title">OmicsEdge Evidence Explorer preview</title>
+
+  <desc id="desc">
+    Conceptual interface showing variant evidence across samples,
+    sequencing technologies, genomic contexts, and provenance.
+  </desc>
+
+  <defs>
+    <linearGradient id="brand"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="50%" stop-color="#0891B2"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <filter id="shadow"
+            x="-10%"
+            y="-10%"
+            width="120%"
+            height="130%">
+      <feDropShadow dx="0"
+                    dy="8"
+                    stdDeviation="12"
+                    flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200"
+        height="720"
+        rx="22"
+        fill="#F8FAFC"/>
+
+  <!-- Header -->
+  <rect x="24"
+        y="24"
+        width="1152"
+        height="78"
+        rx="16"
+        fill="#FFFFFF"
+        stroke="#E2E8F0"/>
+
+  <!-- Mini helix mark -->
+  <g transform="translate(48 42)"
+     fill="none"
+     stroke-linecap="round">
+
+    <path d="M0 0 C38 12, 0 34, 38 46"
+          stroke="url(#brand)"
+          stroke-width="5"/>
+
+    <path d="M38 0 C0 12, 38 34, 0 46"
+          stroke="url(#brand)"
+          stroke-width="5"/>
+  </g>
+
+  <text x="108"
+        y="62"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="24"
+        font-weight="700"
+        fill="#0F172A">
+    OmicsEdge Evidence Explorer
+  </text>
+
+  <text x="108"
+        y="84"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="13"
+        fill="#64748B">
+    Benchmark evidence with preserved experimental provenance
+  </text>
+
+  <rect x="946"
+        y="46"
+        width="194"
+        height="34"
+        rx="17"
+        fill="#ECFDF5"/>
+
+  <circle cx="967"
+          cy="63"
+          r="5"
+          fill="#10B981"/>
+
+  <text x="980"
+        y="68"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="13"
+        font-weight="600"
+        fill="#047857">
+    Evidence registry
+  </text>
+
+  <!-- Search -->
+  <rect x="24"
+        y="122"
+        width="1152"
+        height="76"
+        rx="16"
+        fill="#FFFFFF"
+        stroke="#E2E8F0"/>
+
+  <text x="48"
+        y="149"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="12"
+        font-weight="700"
+        fill="#475569">
+    SEARCH BIOLOGICAL VARIANT
+  </text>
+
+  <rect x="48"
+        y="159"
+        width="850"
+        height="26"
+        rx="8"
+        fill="#F8FAFC"
+        stroke="#CBD5E1"/>
+
+  <text x="65"
+        y="177"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="13"
+        fill="#0F172A">
+    GRCh38 · chr7:140453136 · A&gt;T
+  </text>
+
+  <rect x="914"
+        y="151"
+        width="226"
+        height="36"
+        rx="10"
+        fill="url(#brand)"/>
+
+  <text x="1027"
+        y="174"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="13"
+        font-weight="700"
+        fill="#FFFFFF">
+    Explore evidence
+  </text>
+
+  <!-- Variant overview -->
+  <rect x="24"
+        y="218"
+        width="760"
+        height="150"
+        rx="16"
+        fill="#FFFFFF"
+        stroke="#E2E8F0"
+        filter="url(#shadow)"/>
+
+  <text x="48"
+        y="249"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="12"
+        font-weight="700"
+        fill="#64748B">
+    BIOLOGICAL VARIANT
+  </text>
+
+  <text x="48"
+        y="285"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="27"
+        font-weight="700"
+        fill="#0F172A">
+    chr7:140453136 A&gt;T
+  </text>
+
+  <text x="48"
+        y="310"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="14"
+        fill="#64748B">
+    Assembly: GRCh38
+  </text>
+
+  <text x="48"
+        y="336"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="12"
+        fill="#64748B">
+    variant:sha256:9f1c...73a2
+  </text>
+
+  <rect x="500"
+        y="250"
+        width="110"
+        height="30"
+        rx="15"
+        fill="#EEF2FF"/>
+
+  <text x="555"
+        y="270"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="12"
+        font-weight="700"
+        fill="#4338CA">
+    3 samples
+  </text>
+
+  <rect x="620"
+        y="250"
+        width="130"
+        height="30"
+        rx="15"
+        fill="#ECFEFF"/>
+
+  <text x="685"
+        y="270"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="12"
+        font-weight="700"
+        fill="#0E7490">
+    2 technologies
+  </text>
+
+  <rect x="500"
+        y="292"
+        width="250"
+        height="44"
+        rx="10"
+        fill="#F8FAFC"/>
+
+  <text x="516"
+        y="311"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="11"
+        fill="#64748B">
+    Registry state
+  </text>
+
+  <text x="516"
+        y="329"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="13"
+        font-weight="700"
+        fill="#0F172A">
+    Evidence preserved · no forced consensus
+  </text>
+
+  <!-- Context card -->
+  <rect x="804"
+        y="218"
+        width="372"
+        height="150"
+        rx="16"
+        fill="#FFFFFF"
+        stroke="#E2E8F0"
+        filter="url(#shadow)"/>
+
+  <text x="828"
+        y="249"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="12"
+        font-weight="700"
+        fill="#64748B">
+    GENOMIC CONTEXT
+  </text>
+
+  <rect x="828"
+        y="266"
+        width="129"
+        height="29"
+        rx="14"
+        fill="#FEF3C7"/>
+
+  <text x="892"
+        y="285"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="11"
+        font-weight="700"
+        fill="#92400E">
+    Tandem repeat
+  </text>
+
+  <rect x="965"
+        y="266"
+        width="138"
+        height="29"
+        rx="14"
+        fill="#FEE2E2"/>
+
+  <text x="1034"
+        y="285"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="11"
+        font-weight="700"
+        fill="#991B1B">
+    Low mappability
+  </text>
+
+  <rect x="828"
+        y="307"
+        width="111"
+        height="29"
+        rx="14"
+        fill="#DCFCE7"/>
+
+  <text x="883"
+        y="326"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="11"
+        font-weight="700"
+        fill="#166534">
+    Callable
+  </text>
+
+  <text x="828"
+        y="352"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="11"
+        fill="#64748B">
+    GIAB genome-stratifications v3.6
+  </text>
+
+  <!-- Evidence table -->
+  <rect x="24"
+        y="389"
+        width="1152"
+        height="218"
+        rx="16"
+        fill="#FFFFFF"
+        stroke="#E2E8F0"
+        filter="url(#shadow)"/>
+
+  <text x="48"
+        y="421"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="14"
+        font-weight="700"
+        fill="#0F172A">
+    Empirical evidence
+  </text>
+
+  <!-- Table header -->
+  <rect x="48"
+        y="438"
+        width="1104"
+        height="34"
+        rx="7"
+        fill="#F8FAFC"/>
+
+  <g font-family="Arial, Helvetica, sans-serif"
+     font-size="11"
+     font-weight="700"
+     fill="#64748B">
+
+    <text x="65" y="459">SAMPLE</text>
+    <text x="190" y="459">TECHNOLOGY</text>
+    <text x="360" y="459">DECISION</text>
+    <text x="495" y="459">TRUTH</text>
+    <text x="650" y="459">COMPARATOR</text>
+    <text x="825" y="459">RUN</text>
+    <text x="1010" y="459">PROVENANCE</text>
+
+  </g>
+
+  <!-- Row 1 -->
+  <line x1="48" y1="510" x2="1152" y2="510"
+        stroke="#E2E8F0"/>
+
+  <text x="65" y="495"
+        font-family="Arial"
+        font-size="13"
+        font-weight="700"
+        fill="#0F172A">
+    HG002
+  </text>
+
+  <text x="190" y="495"
+        font-family="Arial"
+        font-size="13"
+        fill="#334155">
+    Illumina
+  </text>
+
+  <circle cx="374" cy="490" r="6" fill="#10B981"/>
+
+  <text x="389" y="495"
+        font-family="Arial"
+        font-size="12"
+        font-weight="700"
+        fill="#047857">
+    TP
+  </text>
+
+  <text x="495" y="495"
+        font-family="Arial"
+        font-size="12"
+        fill="#334155">
+    GIAB v4.2.1
+  </text>
+
+  <text x="650" y="495"
+        font-family="Arial"
+        font-size="12"
+        fill="#334155">
+    hap.py 0.3.15
+  </text>
+
+  <text x="825" y="495"
+        font-family="Arial"
+        font-size="11"
+        fill="#475569">
+    run-60z59
+  </text>
+
+  <text x="1010" y="495"
+        font-family="Arial"
+        font-size="11"
+        font-weight="700"
+        fill="#4F46E5">
+    Inspect →
+  </text>
+
+  <!-- Row 2 -->
+  <line x1="48" y1="550" x2="1152" y2="550"
+        stroke="#E2E8F0"/>
+
+  <text x="65" y="535"
+        font-family="Arial"
+        font-size="13"
+        font-weight="700"
+        fill="#0F172A">
+    HG002
+  </text>
+
+  <text x="190" y="535"
+        font-family="Arial"
+        font-size="13"
+        fill="#334155">
+    Oxford Nanopore
+  </text>
+
+  <circle cx="374" cy="530" r="6" fill="#10B981"/>
+
+  <text x="389" y="535"
+        font-family="Arial"
+        font-size="12"
+        font-weight="700"
+        fill="#047857">
+    TP
+  </text>
+
+  <text x="495" y="535"
+        font-family="Arial"
+        font-size="12"
+        fill="#334155">
+    GIAB v4.2.1
+  </text>
+
+  <text x="650" y="535"
+        font-family="Arial"
+        font-size="12"
+        fill="#334155">
+    hap.py 0.3.15
+  </text>
+
+  <text x="825" y="535"
+        font-family="Arial"
+        font-size="11"
+        fill="#475569">
+    run-ru88n
+  </text>
+
+  <text x="1010" y="535"
+        font-family="Arial"
+        font-size="11"
+        font-weight="700"
+        fill="#4F46E5">
+    Inspect →
+  </text>
+
+  <!-- Row 3 -->
+  <text x="65" y="575"
+        font-family="Arial"
+        font-size="13"
+        font-weight="700"
+        fill="#0F172A">
+    HG003
+  </text>
+
+  <text x="190" y="575"
+        font-family="Arial"
+        font-size="13"
+        fill="#334155">
+    Illumina
+  </text>
+
+  <circle cx="374" cy="570" r="6" fill="#F59E0B"/>
+
+  <text x="389" y="575"
+        font-family="Arial"
+        font-size="12"
+        font-weight="700"
+        fill="#B45309">
+    Phase 2C
+  </text>
+
+  <text x="495" y="575"
+        font-family="Arial"
+        font-size="12"
+        fill="#334155">
+    GIAB v4.2.1
+  </text>
+
+  <text x="650" y="575"
+        font-family="Arial"
+        font-size="12"
+        fill="#334155">
+    frozen runtime
+  </text>
+
+  <text x="825" y="575"
+        font-family="Arial"
+        font-size="11"
+        fill="#64748B">
+    pending
+  </text>
+
+  <text x="1010" y="575"
+        font-family="Arial"
+        font-size="11"
+        fill="#94A3B8">
+    pending
+  </text>
+
+  <!-- Provenance footer -->
+  <rect x="24"
+        y="628"
+        width="1152"
+        height="68"
+        rx="16"
+        fill="#0F172A"/>
+
+  <text x="48"
+        y="655"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="11"
+        font-weight="700"
+        fill="#94A3B8">
+    PROVENANCE PATH
+  </text>
+
+  <text x="48"
+        y="679"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="13"
+        fill="#FFFFFF">
+    public submission
+  </text>
+
+  <text x="180"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#64748B">
+    →
+  </text>
+
+  <text x="210"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#FFFFFF">
+    source artifact
+  </text>
+
+  <text x="330"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#64748B">
+    →
+  </text>
+
+  <text x="360"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#FFFFFF">
+    experiment
+  </text>
+
+  <text x="455"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#64748B">
+    →
+  </text>
+
+  <text x="485"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#FFFFFF">
+    benchmark run
+  </text>
+
+  <text x="605"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#64748B">
+    →
+  </text>
+
+  <text x="635"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#FFFFFF">
+    event
+  </text>
+
+  <text x="690"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#64748B">
+    →
+  </text>
+
+  <text x="720"
+        y="679"
+        font-family="Arial"
+        font-size="13"
+        fill="#FFFFFF">
+    observation
+  </text>
+
+  <text x="1070"
+        y="679"
+        text-anchor="end"
+        font-family="Arial"
+        font-size="11"
+        fill="#94A3B8">
+    CONCEPT PREVIEW
+  </text>
+
+</svg>
