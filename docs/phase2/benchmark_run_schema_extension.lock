@@ -1,0 +1,17 @@
+project=Project 003
+phase=2C
+schema_name=BENCHMARK_RUN
+schema_version=2.0.0
+schema_path=schemas/phase2/benchmark_run.schema.json
+schema_sha256=2db3310a8f52dc30f0668b5cf0bd25fb91b1bed35f8c1111191b80d38410c2d7
+rationale_path=docs/phase2/benchmark_run_schema_extension.md
+rationale_sha256=06899273f6168c1dd0d48c432e087f0660f656eaafc0e3b917ce8bcbcfbbac09
+phase1_schema_modified=False
+benchmark_region_set_sha256=4c77e17c3dec47051cb9b29fa14fee67f31a559785417d083f4f7bcacb05cd26
+selected_windows=50
+segment_count=541
+context_count=5
+chromosome_count=19
+assessable_bases=1162571
+retrieval_padding_bp=1000
+status=FROZEN_BEFORE_PHASE2C_COMPUTE

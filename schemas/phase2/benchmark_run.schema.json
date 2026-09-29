@@ -1,0 +1,256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/project003/v2/benchmark_run.schema.json",
+  "title": "BENCHMARK_RUN \u2014 Phase 2 multi-region",
+  "description": "One immutable comparator invocation over a frozen multi-region benchmark panel. This schema extends the Phase 1 single-interval run model without modifying the frozen Phase 1 schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_run_id",
+    "experiment_id",
+    "observation_origin",
+    "query_artifact_id",
+    "truth_artifact_id",
+    "benchmark_region_set_artifact_id",
+    "benchmark_region_set_sha256",
+    "retrieval_region_set_artifact_id",
+    "retrieval_region_set_sha256",
+    "reference_artifact_id",
+    "reference_assembly",
+    "benchmark_region_set",
+    "retrieval_padding_bp",
+    "comparator",
+    "comparator_version",
+    "engine",
+    "engine_version",
+    "environment_lock_id",
+    "run_status",
+    "command_argv",
+    "output_artifact_ids"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "benchmark_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "experiment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observation_origin": {
+      "const": "REGENERATED"
+    },
+    "query_artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_region_set_artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_region_set_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "retrieval_region_set_artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retrieval_region_set_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reference_artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference_assembly": {
+      "const": "GRCh38"
+    },
+    "benchmark_region_set": {
+      "$ref": "#/$defs/region_set"
+    },
+    "retrieval_padding_bp": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "comparator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "comparator_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "environment_lock_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtime_image_digest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "command_argv": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "run_status": {
+      "enum": [
+        "PLANNED",
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
+    "started_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "output_artifact_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "failure_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$defs": {
+    "region_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assembly",
+        "coordinate_system",
+        "selected_window_count",
+        "segment_count",
+        "context_count",
+        "chromosome_count",
+        "chromosomes",
+        "excluded_chromosomes",
+        "assessable_bases"
+      ],
+      "properties": {
+        "assembly": {
+          "const": "GRCh38"
+        },
+        "coordinate_system": {
+          "const": "0-based half-open"
+        },
+        "selected_window_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "segment_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "context_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "chromosome_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "chromosomes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "excluded_chromosomes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "assessable_bases": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "run_status": {
+            "const": "SUCCEEDED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "command_argv": {
+            "minItems": 1
+          },
+          "output_artifact_ids": {
+            "minItems": 1
+          },
+          "runtime_image_digest": {
+            "type": "string"
+          },
+          "started_at": {
+            "type": "string"
+          },
+          "completed_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}
