@@ -9,7 +9,7 @@ OUT = ROOT / "notebooks/project003_phase2c_colab.ipynb"
 SHA_OUT = ROOT / "notebooks/project003_phase2c_colab.sha256"
 RUNNER_PATH = ROOT / "scripts/phase2/run_phase2c_colab.py"
 RUNNER_SHA_OUT = ROOT / "scripts/phase2/run_phase2c_colab.sha256"
-EXPECTED_RUNNER_SHA256 = "a221d9d0b25db963b83082c81161bbc23cddaa2701d7211df4bf9634940ee44d"
+EXPECTED_RUNNER_SHA256 = "eb1838e100e31cadbae052cc1f08c175208e9e6046ef4365efa36d4ba0b4a718"
 
 required = [
     "environment/comparator-lock.yaml",

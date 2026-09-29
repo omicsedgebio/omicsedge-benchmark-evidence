@@ -160,6 +160,8 @@ def run(argv, *, cwd=None, check=True, capture=True, env=None):
         cwd=cwd,
         env=env,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         stdout=subprocess.PIPE if capture else None,
         stderr=subprocess.PIPE if capture else None,
     )
@@ -182,6 +184,8 @@ def run_to_file(argv, destination, *, env=None):
             stdout=out,
             stderr=subprocess.PIPE,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             env=env,
         )
     if cp.returncode:
