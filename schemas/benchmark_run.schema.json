@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/project003/v1/benchmark_run.schema.json",
+  "title": "BENCHMARK_RUN",
+  "description": "One immutable comparator invocation and its exact scientific/runtime context.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_run_id",
+    "experiment_id",
+    "observation_origin",
+    "query_artifact_id",
+    "truth_artifact_id",
+    "benchmark_bed_artifact_id",
+    "reference_artifact_id",
+    "core_interval",
+    "padded_interval",
+    "comparator",
+    "comparator_version",
+    "engine",
+    "engine_version",
+    "environment_lock_id",
+    "run_status",
+    "command_argv",
+    "output_artifact_ids"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "benchmark_run_id": {"type": "string", "minLength": 1},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "observation_origin": {"const": "REGENERATED"},
+    "query_artifact_id": {"type": "string", "minLength": 1},
+    "truth_artifact_id": {"type": "string", "minLength": 1},
+    "benchmark_bed_artifact_id": {"type": "string", "minLength": 1},
+    "reference_artifact_id": {"type": "string", "minLength": 1},
+    "core_interval": {"$ref": "#/$defs/interval"},
+    "padded_interval": {"$ref": "#/$defs/interval"},
+    "comparator": {"type": "string", "minLength": 1},
+    "comparator_version": {"type": "string", "minLength": 1},
+    "engine": {"type": "string", "minLength": 1},
+    "engine_version": {"type": "string", "minLength": 1},
+    "environment_lock_id": {"type": "string", "minLength": 1},
+    "runtime_image_digest": {"type": ["string", "null"], "pattern": "^sha256:[0-9a-f]{64}$"},
+    "command_argv": {"type": "array", "items": {"type": "string"}},
+    "parameters": {"type": "object"},
+    "run_status": {"enum": ["PLANNED", "RUNNING", "SUCCEEDED", "FAILED"]},
+    "started_at": {"type": ["string", "null"], "format": "date-time"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"},
+    "output_artifact_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "failure_reason": {"type": ["string", "null"]},
+    "notes": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "interval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assembly", "contig", "start_0based", "end_0based"],
+      "properties": {
+        "assembly": {"type": "string", "minLength": 1},
+        "contig": {"type": "string", "minLength": 1},
+        "start_0based": {"type": "integer", "minimum": 0},
+        "end_0based": {"type": "integer", "minimum": 1}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"run_status": {"const": "SUCCEEDED"}}},
+      "then": {
+        "properties": {
+          "command_argv": {"minItems": 1},
+          "output_artifact_ids": {"minItems": 1},
+          "runtime_image_digest": {"type": "string"},
+          "started_at": {"type": "string"},
+          "completed_at": {"type": "string"}
+        }
+      }
+    }
+  ]
+}
+

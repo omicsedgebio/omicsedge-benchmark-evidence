@@ -1,0 +1,19 @@
+{
+  "all_endpoints_resolve": true,
+  "all_evidence_provenance_json_parses": true,
+  "event_variant_link_count": 3332,
+  "event_variant_link_schema": "schemas/event_variant_link.phase1b.schema.json",
+  "event_variant_link_schema_sha256": "18c5eba5095ff73770a23a2f9689bef3f606916e46d1f36b3b2a10573cfe709e",
+  "event_variant_links_parquet_sha256": "bd695855e3e9fb6c80bd5d16d93f1a64bffc25da71754614f640e225bdb1e76e",
+  "operation": "ENTITY_SCHEMA_VALIDATION",
+  "phase": "1B",
+  "project": "Project 003",
+  "schema_validated_row_count": 4998,
+  "status": "PASS",
+  "unique_event_variant_link_ids": 3332,
+  "unique_variant_ids": 1666,
+  "variant_count": 1666,
+  "variant_schema": "schemas/variant.phase1b.schema.json",
+  "variant_schema_sha256": "aa8b63b943c4a0ba967de8357d0174f5a7bc74bff12621fde705b0083ef4ae08",
+  "variants_parquet_sha256": "c08939e19a71f140dd7c1901df0a7eafd528a4d35c4808701c3282cb4a008968"
+}

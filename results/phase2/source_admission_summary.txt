@@ -1,0 +1,9 @@
+PROJECT 003 — PHASE 2A SOURCE ADMISSION PREFLIGHT
+
+source_candidates_sha256=f0085da28d6e9089f6f74fb90f1acd9606dd3f6e3d8bd2c3741f0846081edc21
+source_candidates=4
+eligible=4
+unresolved=0
+eligible_samples=HG003,HG004
+eligible_technologies=ILLUMINA,ONT
+benchmark_performance_consulted=False

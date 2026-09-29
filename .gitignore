@@ -1,0 +1,81 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# IDE / editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# ------------------------------------------------------------
+# Project 003 — large reproducible genomic inputs
+# ------------------------------------------------------------
+
+# Downloaded GIAB stratification BED files.
+# Metadata/manifests remain versioned.
+data/phase2/stratifications/v3.6/GRCh38/
+
+# Downloaded GIAB sample benchmark BEDs.
+# Their URLs/checksums/manifests remain versioned.
+data/phase2/truth_beds/
+
+# Phase 2 large query/truth VCF staging.
+data/phase2/query_vcfs/
+data/phase2/truth_vcfs/
+data/phase2/downloads/
+data/phase2/raw/
+
+# Genome references / indexes
+data/phase2/reference/
+data/phase2/references/
+
+# Heavy comparator workspaces
+results/phase2/benchmark_work/
+results/phase2/work/
+results/phase2/tmp/
+results/phase2/temp/
+
+# Locally reconstructed databases
+*.duckdb
+*.duckdb.wal
+
+# Common heavy genomic intermediates
+*.bam
+*.bai
+*.cram
+*.crai
+*.bcf
+*.csi
+*.tbi
+
+# Colab/local transient downloads
+*.part
+*.download
+*.tmp
+
+# Final tarballs should become release assets rather than Git blobs.
+results/phase1b/*.tar.gz
+results/phase1b/*.tar.gz.sha256
+results/phase2/*.tar.gz
+results/phase2/*.tar.gz.sha256
+
+# Reconstructable Phase 2 shared-callable universe
+data/phase2/shared_callable.bed

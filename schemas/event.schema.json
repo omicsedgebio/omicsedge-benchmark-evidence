@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/project003/v1/event.schema.json",
+  "title": "EVENT",
+  "description": "A run-scoped comparison event. It is not a universal biological-variant identity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "identity_scope",
+    "benchmark_run_id",
+    "reference_artifact_id",
+    "assembly",
+    "contig",
+    "start_0based",
+    "end_0based",
+    "derivation_method",
+    "cross_run_equivalence_asserted"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "event_id": {"type": "string", "minLength": 1},
+    "identity_scope": {
+      "enum": ["COMPARATOR_SUPERLOCUS", "SOURCE_RECORD_FALLBACK", "NORMALIZED_ALLELE_LOOKUP"]
+    },
+    "benchmark_run_id": {"type": "string", "minLength": 1},
+    "reference_artifact_id": {"type": "string", "minLength": 1},
+    "assembly": {"type": "string", "minLength": 1},
+    "contig": {"type": "string", "minLength": 1},
+    "start_0based": {"type": "integer", "minimum": 0},
+    "end_0based": {"type": "integer", "minimum": 1},
+    "source_event_id": {"type": ["string", "null"]},
+    "normalized_allele_lookup_key": {"type": ["string", "null"]},
+    "derivation_method": {"type": "string", "minLength": 1},
+    "derivation_version": {"type": ["string", "null"]},
+    "cross_run_equivalence_asserted": {"const": false},
+    "notes": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"identity_scope": {"const": "COMPARATOR_SUPERLOCUS"}}},
+      "then": {
+        "required": ["source_event_id"],
+        "properties": {"source_event_id": {"type": "string", "minLength": 1}}
+      }
+    }
+  ]
+}

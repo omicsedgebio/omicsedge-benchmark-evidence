@@ -1,0 +1,195 @@
+{
+  "artifacts": [
+    {
+      "path": "data/phase1b/input_manifest.tsv",
+      "sha256": "17dac2450069be57a9a6e13abf48390f4928f55f62f98bfad84cf323cdbae92d",
+      "size_bytes": 524
+    },
+    {
+      "path": "data/phase1b/phase1b_freeze_manifest.tsv",
+      "sha256": "5e17d1d0cb7d9d7339ace8cfe1cef829303dd7e628057983a9f220a16bd7b69d",
+      "size_bytes": 483
+    },
+    {
+      "path": "docs/phase1b/phase1b_protocol.lock",
+      "sha256": "c8e4498b51db34abf42a34f08e1817ebfab50afc7d98f35b2077ed10ddfe974d",
+      "size_bytes": 403
+    },
+    {
+      "path": "docs/phase1b/phase1b_protocol.md",
+      "sha256": "ec1833c55877b25c37be24483f8598ff89efb18850f4d733a08b492e55ef5c45",
+      "size_bytes": 12755
+    },
+    {
+      "path": "results/phase1b/candidate_identity_classification.tsv",
+      "sha256": "b06f0c8a12b9f782a1ca73076906ce085cdff8191c09f7e00add7d028fa0f8fd",
+      "size_bytes": 925991
+    },
+    {
+      "path": "results/phase1b/candidate_identity_summary.json",
+      "sha256": "4ed7179aea2f7c8d70ff955a3d612f2b047b1d8aa3b5b195606ec269082f89f1",
+      "size_bytes": 795
+    },
+    {
+      "path": "results/phase1b/entity_materialization_summary.json",
+      "sha256": "24d9a7a368bfd4d839011fef4c155715a568348683c58ffb8a418ce70cc829b4",
+      "size_bytes": 1704
+    },
+    {
+      "path": "results/phase1b/entity_schema_validation.json",
+      "sha256": "d893e750e0f0d7ade55cac83e67f25483fbb84d7d2f1023715ada5c7b6217e0b",
+      "size_bytes": 907
+    },
+    {
+      "path": "results/phase1b/event_variant_links.parquet",
+      "sha256": "bd695855e3e9fb6c80bd5d16d93f1a64bffc25da71754614f640e225bdb1e76e",
+      "size_bytes": 394404
+    },
+    {
+      "path": "results/phase1b/event_variant_links.tsv",
+      "sha256": "2d8f81de2009bfb05d1871299815bd32d636df1d70096f592db82829db9a46a2",
+      "size_bytes": 4806526
+    },
+    {
+      "path": "results/phase1b/example_variant_evidence_query.tsv",
+      "sha256": "54cd8f268288af226eb21307ee98cff99ee9ad8fcd621b47ead8cbad1906879b",
+      "size_bytes": 7095
+    },
+    {
+      "path": "results/phase1b/identity_graph_audit.tsv",
+      "sha256": "1cda3425d70e896c703ee37b37f688058628ed16ac756aa70bf305eef67617d2",
+      "size_bytes": 441221
+    },
+    {
+      "path": "results/phase1b/identity_graph_summary.json",
+      "sha256": "7815da68b393c932e127b43241ff0258e6a25f8ec664b92c9e64dad2f0eefce7",
+      "size_bytes": 1173
+    },
+    {
+      "path": "results/phase1b/phase1b_gate_report.md",
+      "sha256": "04be38c2f69622896ae80d30caa0ca5e87b4ed6b197eee297410cad455265927",
+      "size_bytes": 2968
+    },
+    {
+      "path": "results/phase1b/phase1b_validation.json",
+      "sha256": "2c18ecc9366a24f4af44b5bf86579763256cdbe4fd27a131e1a6f81cfbafd8d4",
+      "size_bytes": 663
+    },
+    {
+      "path": "results/phase1b/phase1b_validation.tsv",
+      "sha256": "eab7cb049bca15d9520f729a976c130d1745e9c4999d82e7c1d5e7052ab2bf92",
+      "size_bytes": 4094
+    },
+    {
+      "path": "results/phase1b/variant_query_summary.json",
+      "sha256": "fae9a47147420360d2106a457f8d40f4610d8d66697dcfacd28264d52df5d6de",
+      "size_bytes": 1189
+    },
+    {
+      "path": "results/phase1b/variants.parquet",
+      "sha256": "c08939e19a71f140dd7c1901df0a7eafd528a4d35c4808701c3282cb4a008968",
+      "size_bytes": 81652
+    },
+    {
+      "path": "results/phase1b/variants.tsv",
+      "sha256": "4d1f4111a4d6190bf9b0a5a7d44b21abf451cd8c5aaa2ad9470e73a7548d8896",
+      "size_bytes": 579210
+    },
+    {
+      "path": "schemas/event_variant_link.phase1b.schema.json",
+      "sha256": "18c5eba5095ff73770a23a2f9689bef3f606916e46d1f36b3b2a10573cfe709e",
+      "size_bytes": 1905
+    },
+    {
+      "path": "schemas/variant.phase1b.schema.json",
+      "sha256": "aa8b63b943c4a0ba967de8357d0174f5a7bc74bff12621fde705b0083ef4ae08",
+      "size_bytes": 1860
+    },
+    {
+      "path": "scripts/phase1b/audit_candidate_structure.py",
+      "sha256": "1539a2f8791c651c2aa1a4304b80f063713a3296fca750c0445cacf90e226d4a",
+      "size_bytes": 16541
+    },
+    {
+      "path": "scripts/phase1b/audit_identity_graph.py",
+      "sha256": "bcb84c7405c7cbf55191608d69bbba0c6d079e4487bbe4100355f24286c19ab6",
+      "size_bytes": 15940
+    },
+    {
+      "path": "scripts/phase1b/build_variant_query.py",
+      "sha256": "119a88e746f27581e4e23cc93c1c4f83a19a5fe4ddbea74e639fe23d1c3497e7",
+      "size_bytes": 18566
+    },
+    {
+      "path": "scripts/phase1b/classify_real_candidates.py",
+      "sha256": "116d43383e9fcd55b38363e28fc5c4606a24be51bbe025159d6df026627a3dee",
+      "size_bytes": 16545
+    },
+    {
+      "path": "scripts/phase1b/evaluate_phase1b_gate.py",
+      "sha256": "c41bbeb7833425cfccdb235c6e1003d499e6cadb0153016baf0026942588631b",
+      "size_bytes": 44905
+    },
+    {
+      "path": "scripts/phase1b/materialize_identity_entities.py",
+      "sha256": "249db78b47b87859ca2a3d41db18f0ecb66af2ee81d393c750a8abf56e07b384",
+      "size_bytes": 35290
+    },
+    {
+      "path": "scripts/phase1b/validate_identity_entities.py",
+      "sha256": "e6659d4c81892c890946f1f854c37447b255d8916c8041f6591033881a0380b4",
+      "size_bytes": 14335
+    },
+    {
+      "path": "scripts/phase1b/verify_frozen_inputs.py",
+      "sha256": "a5f2e43522cfbca9f8c817dc3ae63aa70aae33d20666d0e4e4818e45832fd430",
+      "size_bytes": 9084
+    },
+    {
+      "path": "scripts/phase1b/verify_identity_primitive.py",
+      "sha256": "ba925345a1e80bf503210363317604cfa40e231a727f330eb81b6458d34fdc42",
+      "size_bytes": 3993
+    },
+    {
+      "path": "scripts/phase1b/verify_reproducibility.py",
+      "sha256": "fc2a37bd34c2debe4a105b0e403569dfdf191b5c53d0800cee024b451657d957",
+      "size_bytes": 31595
+    },
+    {
+      "path": "sql/phase1b/variant_evidence.sql",
+      "sha256": "a48ba94feee2ce86bac04ff46a80142214b84a82177d23b2f07dd137229e04ae",
+      "size_bytes": 1858
+    },
+    {
+      "path": "src/benchmark_evidence/phase1b_identity.py",
+      "sha256": "ef05ab077a5bc4495616331dff663d3cea45297651c7a18cd243e98b21532a5c",
+      "size_bytes": 4942
+    },
+    {
+      "path": "tests/phase1b/synthetic_identity_cases.tsv",
+      "sha256": "b5570acd87ad721c1a8cabc416d3630455c0417715b0b6c73d70eff1aa3f5c27",
+      "size_bytes": 1682
+    }
+  ],
+  "candidate_relationship_count": 1666,
+  "event_variant_link_count": 3332,
+  "forced_cross_technology_consensus": false,
+  "identity_method": "PHASE1B_EXACT_NORMALIZED_ALLELE_V1",
+  "phase": "1B",
+  "phase1a_authority_archive": {
+    "path": "data/phase1a/omicsedge_phase1a_results.tar.gz",
+    "sha256": "6630879776c3da2326f5c56b4dbb16ca5bd409b5cbc065590608d40a99a28202"
+  },
+  "phase1b_protocol": {
+    "path": "docs/phase1b/phase1b_protocol.md",
+    "sha256": "ec1833c55877b25c37be24483f8598ff89efb18850f4d733a08b492e55ef5c45"
+  },
+  "project": "Project 003",
+  "release_status": "FROZEN",
+  "reliability_scoring_enabled": false,
+  "representation_equivalence_enabled": false,
+  "scientific_gate": "PASS",
+  "scope": "Cross-run biological variant identity layer for the frozen Phase 1A candidate set.",
+  "validation_criteria": "15/15 PASS",
+  "variant_count": 1666
+}

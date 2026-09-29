@@ -1,0 +1,9 @@
+project=Project 003
+phase=1B
+protocol=docs/phase1b/phase1b_protocol.md
+protocol_sha256=ec1833c55877b25c37be24483f8598ff89efb18850f4d733a08b492e55ef5c45
+phase1a_archive=data/phase1a/omicsedge_phase1a_results.tar.gz
+phase1a_archive_sha256=6630879776c3da2326f5c56b4dbb16ca5bd409b5cbc065590608d40a99a28202
+expected_phase1a_checksums=35
+expected_cross_run_candidates=1666
+status=FROZEN_BEFORE_IMPLEMENTATION

@@ -1,0 +1,65 @@
+{
+  "benchmark_outcomes_consulted": false,
+  "operation": "SHARED_CALLABLE_INTERSECTION",
+  "phase": "2B",
+  "phase2_eligible_scope": {
+    "chromosome_count": 21,
+    "chromosomes": [
+      "chr1",
+      "chr2",
+      "chr3",
+      "chr4",
+      "chr5",
+      "chr6",
+      "chr7",
+      "chr8",
+      "chr9",
+      "chr10",
+      "chr11",
+      "chr12",
+      "chr13",
+      "chr14",
+      "chr15",
+      "chr16",
+      "chr17",
+      "chr18",
+      "chr19",
+      "chr21",
+      "chr22"
+    ],
+    "excluded_chromosome": "chr20",
+    "shared_callable_bases": 2440390080
+  },
+  "project": "Project 003",
+  "query_vcfs_consulted": false,
+  "reference_assembly": "GRCh38",
+  "samples": [
+    "HG003",
+    "HG004"
+  ],
+  "shared_callable": {
+    "bases": 2496289212,
+    "chromosome_count": 22,
+    "interval_count": 657173,
+    "path": "data/phase2/shared_callable.bed",
+    "sha256": "22abff164c57dc25327d5a395e5fc17d49f30cbde4b2d18cbc4748a52643c549"
+  },
+  "truth_bed_manifest_sha256": "e775a87ec2aa4c0db6f8474a56f51dfe96eaa6f7a00c214df473f6578d121a75",
+  "truth_beds": {
+    "HG003": {
+      "merged_bases": 2528531102,
+      "merged_interval_count": 554108,
+      "raw_interval_count": 554108,
+      "sha256": "652afd3046705af3200f9c87c255fef11bb212dd76c75a19999c9b2df8a3180c",
+      "size_bytes": 13219856
+    },
+    "HG004": {
+      "merged_bases": 2524487531,
+      "merged_interval_count": 548306,
+      "raw_interval_count": 548306,
+      "sha256": "88d1c926fdc8abd9c39b3e9fe2af3fc43dd67d284690a3dc6127b369d96bccad",
+      "size_bytes": 13081043
+    }
+  },
+  "truth_version": "GIAB_v4.2.1"
+}

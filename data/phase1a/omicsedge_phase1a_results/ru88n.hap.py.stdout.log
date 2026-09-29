@@ -1,0 +1,14 @@
+Hap.py 
+Benchmarking Summary:
+  Type Filter  TRUTH.TOTAL  TRUTH.TP  TRUTH.FN  QUERY.TOTAL  QUERY.FP  QUERY.UNK  FP.gt  FP.al  METRIC.Recall  METRIC.Precision  METRIC.Frac_NA  METRIC.F1_Score  TRUTH.TOTAL.TiTv_ratio  QUERY.TOTAL.TiTv_ratio  TRUTH.TOTAL.het_hom_ratio  QUERY.TOTAL.het_hom_ratio
+ INDEL    ALL          234       139        95          258        32         83     13     10       0.594017          0.817143        0.321705         0.687940                     NaN                     NaN                   1.426966                   1.571429
+ INDEL   PASS          234       139        95          258        32         83     13     10       0.594017          0.817143        0.321705         0.687940                     NaN                     NaN                   1.426966                   1.571429
+   SNP    ALL         1355      1354         1         1452         5         93      0      4       0.999262          0.996321        0.064050         0.997789                2.205674                2.221729                   1.670611                   1.572695
+   SNP   PASS         1355      1354         1         1452         5         93      0      4       0.999262          0.996321        0.064050         0.997789                2.205674                2.221729                   1.670611                   1.572695
+ 
+ ****************************************************************************** 
+ *                                                                            * 
+ *               STARTING c23f499d-13a6-322d-85a7-772e199ece44                * 
+ *                                                                            * 
+ ****************************************************************************** 
+ executing: env-execute

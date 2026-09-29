@@ -1,0 +1,16 @@
+# syntax=docker/dockerfile:1.6
+FROM quay.io/biocontainers/hap.py@sha256:d63b963a6cb01b4830393b22369e7b91d298e4156dde353739e74e4cfa4f96d0
+
+ADD --checksum=sha256:ba43cadbb3e79bff74e7d2f8540dd5e201574ec8e293ba555f3aeefd1375dfc5 \
+    https://github.com/RealTimeGenomics/rtg-tools/releases/download/3.12.1/rtg-tools-3.12.1-linux-x64.zip \
+    /tmp/rtg-tools-3.12.1-linux-x64.zip
+
+RUN python -c "import zipfile; zipfile.ZipFile('/tmp/rtg-tools-3.12.1-linux-x64.zip').extractall('/opt')" \
+    && rm /tmp/rtg-tools-3.12.1-linux-x64.zip
+
+ENV PATH="/opt/rtg-tools-3.12.1:${PATH}"
+
+LABEL org.opencontainers.image.title="Project 003 Phase 1A comparator"
+LABEL org.opencontainers.image.version="hap.py-0.3.15_rtgeval-3.12.1"
+LABEL org.opencontainers.image.source="local bootstrap; no remote repository created"
+

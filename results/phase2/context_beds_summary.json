@@ -1,0 +1,33 @@
+{
+  "benchmark_outcomes_consulted": false,
+  "context_count": 5,
+  "context_manifest_sha256": "9e6158cfc60c44c0aa266d0a9729a0ed8ccd0122e1268a8f5b8172a8cf8b6446",
+  "contexts": {
+    "HOMOPOLYMER": {
+      "official_md5": "e4ff8193cf3a1f87b3f75b11d1bfc6d7",
+      "path": "LowComplexity/GRCh38_AllHomopolymers_ge7bp_imperfectge11bp_slop5.bed.gz"
+    },
+    "LOW_MAPPABILITY": {
+      "official_md5": "8a78766bb99abf1d25a5b307d49a0324",
+      "path": "Mappability/GRCh38_lowmappabilityall.bed.gz"
+    },
+    "NON_DIFFICULT": {
+      "official_md5": "562ebfd3b3994ae50c3d162d96c66e94",
+      "path": "Union/GRCh38_notinalldifficultregions.bed.gz"
+    },
+    "SEGMENTAL_DUPLICATION": {
+      "official_md5": "72ec3f7db18ef9318c64b1df271703fe",
+      "path": "SegmentalDuplications/GRCh38_segdups.bed.gz"
+    },
+    "TANDEM_REPEAT": {
+      "official_md5": "d27d2b4e43e46a724da4934333cf0367",
+      "path": "LowComplexity/GRCh38_AllTandemRepeats.bed.gz"
+    }
+  },
+  "lock_sha256": "9800f827f385b2c36c5a8857bef0d3e2ae14102e2c8508465ef6a341c09d006d",
+  "phase": "2B",
+  "project": "Project 003",
+  "reference_assembly": "GRCh38",
+  "status": "FROZEN_BEFORE_CONTEXT_BED_DOWNLOAD",
+  "stratification_version": "v3.6"
+}

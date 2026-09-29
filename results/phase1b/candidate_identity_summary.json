@@ -1,0 +1,19 @@
+{
+  "candidate_count": 1666,
+  "candidate_input_sha256": "c9d0d50e8e96ce0fd98773ccf9fe306e9beac2186771fc89c76b959f91b7d758",
+  "classification_output": "results/phase1b/candidate_identity_classification.tsv",
+  "classification_output_sha256": "b06f0c8a12b9f782a1ca73076906ce085cdff8191c09f7e00add7d028fa0f8fd",
+  "identity_method": "PHASE1B_EXACT_NORMALIZED_ALLELE_V1",
+  "identity_method_version": "1.0.0",
+  "identity_status_counts": {
+    "EXACT_NORMALIZED_ALLELE": 1666
+  },
+  "operation": "REAL_CANDIDATE_IDENTITY_CLASSIFICATION",
+  "phase": "1B",
+  "phase1a_entities_modified": false,
+  "representation_equivalence_supported_in_v1": false,
+  "same_variant_id_counts": {
+    "TRUE": 1666
+  },
+  "structure_audit_sha256": "557f8e7f29c145a1d2da840bc3f299058f1fd0199b99f9f62061c110bedac4c1"
+}

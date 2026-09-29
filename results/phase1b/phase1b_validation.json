@@ -1,0 +1,18 @@
+{
+  "candidate_count": 1666,
+  "candidate_input_sha256": "c9d0d50e8e96ce0fd98773ccf9fe306e9beac2186771fc89c76b959f91b7d758",
+  "criteria_failed": 0,
+  "criteria_passed": 15,
+  "criteria_total": 15,
+  "event_variant_link_count": 3332,
+  "failed_criteria": [],
+  "phase": "1B",
+  "phase1a_archive_sha256": "6630879776c3da2326f5c56b4dbb16ca5bd409b5cbc065590608d40a99a28202",
+  "phase1a_entities_modified": false,
+  "project": "Project 003",
+  "protocol_sha256": "ec1833c55877b25c37be24483f8598ff89efb18850f4d733a08b492e55ef5c45",
+  "reliability_score_generated": false,
+  "representation_equivalence_evaluated": false,
+  "variant_count": 1666,
+  "verdict": "PASS"
+}

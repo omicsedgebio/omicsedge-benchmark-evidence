@@ -1,0 +1,19 @@
+{
+  "audit_output": "results/phase1b/candidate_structure_audit.tsv",
+  "audit_output_sha256": "557f8e7f29c145a1d2da840bc3f299058f1fd0199b99f9f62061c110bedac4c1",
+  "candidate_count": 1666,
+  "candidate_input_sha256": "c9d0d50e8e96ce0fd98773ccf9fe306e9beac2186771fc89c76b959f91b7d758",
+  "candidate_structure_counts": {
+    "SINGLE_NORMALIZED_ALLELE__SINGLE_NORMALIZED_ALLELE": 1666
+  },
+  "event_structure_counts": {
+    "SINGLE_NORMALIZED_ALLELE": 3332
+  },
+  "identity_classification_performed": false,
+  "phase": "1B",
+  "phase1a_candidate_status_counts": {
+    "CROSS_RUN_EQUIVALENCE_UNRESOLVED": 1666
+  },
+  "phase1a_entities_modified": false,
+  "purpose": "STRUCTURAL_AUDIT_ONLY"
+}

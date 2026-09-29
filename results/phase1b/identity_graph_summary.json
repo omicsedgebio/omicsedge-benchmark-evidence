@@ -1,0 +1,34 @@
+{
+  "candidate_relationship_count": 1666,
+  "classification_input_sha256": "b06f0c8a12b9f782a1ca73076906ce085cdff8191c09f7e00add7d028fa0f8fd",
+  "duplicate_candidate_pair_count": 0,
+  "events_mapping_to_multiple_runs": 0,
+  "events_mapping_to_multiple_variants": 0,
+  "events_seen_in_multiple_candidate_rows": 0,
+  "graph_audit_output": "results/phase1b/identity_graph_audit.tsv",
+  "graph_audit_sha256": "1cda3425d70e896c703ee37b37f688058628ed16ac756aa70bf305eef67617d2",
+  "operation": "IDENTITY_GRAPH_AUDIT",
+  "per_run_unique_events": {
+    "run-phase1a-60z59-hg002-grch38-v421": 1666,
+    "run-phase1a-ru88n-hg002-grch38-v421": 1666
+  },
+  "per_run_unique_variants": {
+    "run-phase1a-60z59-hg002-grch38-v421": 1666,
+    "run-phase1a-ru88n-hg002-grch38-v421": 1666
+  },
+  "phase": "1B",
+  "phase1a_entities_modified": false,
+  "unique_candidate_event_count": 3332,
+  "unique_candidate_pair_count": 1666,
+  "unique_event_variant_link_count": 3332,
+  "unique_variant_count": 1666,
+  "variant_candidate_relationship_distribution": {
+    "1": 1666
+  },
+  "variant_event_degree_distribution": {
+    "2": 1666
+  },
+  "variant_run_count_distribution": {
+    "2": 1666
+  }
+}

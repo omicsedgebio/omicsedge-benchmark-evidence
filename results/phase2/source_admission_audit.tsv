@@ -1,0 +1,5 @@
+candidate_id	sample_id	technology	source_submission_id	reference_assembly	performance_consulted_for_selection	metadata_complete	query_checksum_record_reachable	query_checksum_record_valid	expected_query_sha256	query_vcf_endpoint	query_http	truth_vcf_endpoint	truth_http	benchmark_bed_endpoint	benchmark_bed_http	admission_state	unresolved_reasons	checksum_error
+phase2-hg003-60z59	HG003	ILLUMINA	60Z59	GRCh38	False	True	True	True	c4384b734ae7f54ceedc3c5e5b52ef4b4805cba8dcc70079a5dcf412010ab44a	True	200	True	200	True	200	ELIGIBLE		
+phase2-hg004-60z59	HG004	ILLUMINA	60Z59	GRCh38	False	True	True	True	b4184c164ef2cef60b50fa9db579c2548efa5d4301d105a49f8d7803114e1eff	True	200	True	200	True	200	ELIGIBLE		
+phase2-hg003-ru88n	HG003	ONT	RU88N	GRCh38	False	True	True	True	84ac5c526a92548fa6f1ce46108674c29d32ea754f863c9e90fbca41a44edc20	True	200	True	200	True	200	ELIGIBLE		
+phase2-hg004-ru88n	HG004	ONT	RU88N	GRCh38	False	True	True	True	ec0e481dde0486d30c9f85c9323c1bf75008e2bad2ba50e2ac44e7e15277dabd	True	200	True	200	True	200	ELIGIBLE		

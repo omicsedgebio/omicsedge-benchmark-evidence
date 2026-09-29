@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/project003/v1/source_artifact.schema.json",
+  "title": "SOURCE_ARTIFACT",
+  "description": "A byte-addressable input, metadata, software, or generated output object.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_artifact_id",
+    "artifact_name",
+    "artifact_role",
+    "uri",
+    "media_type",
+    "byte_size",
+    "version",
+    "checksums",
+    "checksum_status",
+    "retrieval_status",
+    "license_expression",
+    "reuse_basis",
+    "derivation_state"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "source_artifact_id": {"type": "string", "minLength": 1},
+    "artifact_name": {"type": "string", "minLength": 1},
+    "artifact_role": {
+      "enum": [
+        "QUERY_VCF", "TRUTH_VCF", "TRUTH_INDEX", "BENCHMARK_BED",
+        "REFERENCE_FASTA", "REFERENCE_INDEX", "EXPERIMENT_METADATA",
+        "DATASET_MANIFEST", "SOFTWARE_IMAGE", "SOFTWARE_ARCHIVE",
+        "DERIVED_SLICE", "COMPARATOR_OUTPUT", "RUN_LOG", "PARQUET",
+        "DUCKDB", "VALIDATION_REPORT", "OTHER"
+      ]
+    },
+    "uri": {"type": "string", "minLength": 1},
+    "media_type": {"type": "string", "minLength": 1},
+    "byte_size": {"type": ["integer", "null"], "minimum": 0},
+    "version": {"type": "string", "minLength": 1},
+    "checksums": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["algorithm", "value", "source"],
+        "properties": {
+          "algorithm": {"enum": ["sha256", "md5", "oci-manifest-digest"]},
+          "value": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+          "source": {"enum": ["PUBLISHER", "COMPUTED_ON_RETRIEVAL", "REGISTRY"]}
+        }
+      }
+    },
+    "checksum_status": {"enum": ["PUBLISHER_VERIFIED", "COMPUTED_NOT_YET_VERIFIED", "NOT_YET_RETRIEVED"]},
+    "retrieval_status": {"enum": ["NOT_DOWNLOADED", "DOWNLOADED", "GENERATED"]},
+    "retrieved_at": {"type": ["string", "null"], "format": "date-time"},
+    "license_expression": {"type": "string", "minLength": 1},
+    "reuse_basis": {"type": "string", "minLength": 1},
+    "derivation_state": {"enum": ["SOURCE", "TRANSFORMED", "GENERATED"]},
+    "publisher_last_modified": {"type": ["string", "null"], "format": "date-time"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"checksum_status": {"const": "PUBLISHER_VERIFIED"}}},
+      "then": {"properties": {"checksums": {"minItems": 1}}}
+    },
+    {
+      "if": {"properties": {"retrieval_status": {"enum": ["DOWNLOADED", "GENERATED"]}}},
+      "then": {
+        "properties": {
+          "checksums": {"minItems": 1},
+          "retrieved_at": {"type": "string"}
+        }
+      }
+    }
+  ]
+}
+

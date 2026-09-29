@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/project003/v1/provenance_link.schema.json",
+  "title": "PROVENANCE_LINK",
+  "description": "A directed lineage edge. This schema does not encode biological equivalence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "provenance_link_id",
+    "source_entity_type",
+    "source_entity_id",
+    "target_entity_type",
+    "target_entity_id",
+    "relation",
+    "asserted_at",
+    "asserted_by",
+    "transformation"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "provenance_link_id": {"type": "string", "minLength": 1},
+    "source_entity_type": {"$ref": "#/$defs/entity_type"},
+    "source_entity_id": {"type": "string", "minLength": 1},
+    "target_entity_type": {"$ref": "#/$defs/entity_type"},
+    "target_entity_id": {"type": "string", "minLength": 1},
+    "relation": {
+      "enum": ["USED", "GENERATED", "DERIVED_FROM", "NORMALIZED_FROM", "DESCRIBES", "HAS_MEMBER"]
+    },
+    "asserted_at": {"type": "string", "format": "date-time"},
+    "asserted_by": {"type": "string", "minLength": 1},
+    "transformation": {"type": "string", "minLength": 1},
+    "software_name": {"type": ["string", "null"]},
+    "software_version": {"type": ["string", "null"]},
+    "parameters": {"type": "object"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "entity_type": {
+      "enum": ["EVENT", "EXPERIMENT", "BENCHMARK_RUN", "OBSERVATION", "SOURCE_ARTIFACT", "PROVENANCE_LINK"]
+    }
+  }
+}
+

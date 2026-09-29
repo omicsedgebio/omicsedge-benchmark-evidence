@@ -1,0 +1,13 @@
+case_id	assembly_a	contig_a	start_a	end_a	ref_a	alt_a	assembly_b	contig_b	start_b	end_b	ref_b	alt_b	expected_status	rationale
+case01	GRCh38	chr20	100	101	A	G	GRCh38	chr20	100	101	A	G	EXACT_NORMALIZED_ALLELE	Identical SNV representation.
+case02	GRCh38	chr20	100	101	A	G	GRCh38	chr20	100	101	A	T	NON_EQUIVALENT	Same coordinate but different alternate allele.
+case03	GRCh38	chr20	200	201	A	AT	GRCh38	chr20	200	201	A	AT	EXACT_NORMALIZED_ALLELE	Identical insertion representation.
+case04	GRCh38	chr20	300	302	AT	A	GRCh38	chr20	300	302	AT	A	EXACT_NORMALIZED_ALLELE	Identical deletion representation.
+case05	GRCh38	chr20	400	401	A	AA	GRCh38	chr20	401	402	A	AA	UNRESOLVED	Shifted indel representation requires reference-context equivalence logic.
+case06	GRCh38	chr20	500	501	A	G	GRCh38	chr20	500	501	A	G	EXACT_NORMALIZED_ALLELE	One allele produced after multiallelic decomposition can match exactly.
+case07	GRCh38	chr20	600	602	AC	A	GRCh38	chr20	601	603	CG	C	UNRESOLVED	Overlapping records are not equivalent by coordinate overlap alone.
+case08	GRCh38	chr20	700	702	AC	GT	GRCh38	chr20	700	701	A	G	UNRESOLVED	Potential equivalent local haplotype requires explicit haplotype equivalence procedure.
+case09	GRCh38	chr20	800	801	A	G	GRCh38	chr20	800	801	C	G	NON_EQUIVALENT	Same coordinate but different reference allele.
+case10	GRCh38	chr20	900	901	A	G	GRCh38	chr20	900	901	A	T	NON_EQUIVALENT	Same coordinate and REF but different ALT.
+case11	GRCh38	chr20	1000	1001	A	G	GRCh37	chr20	1000	1001	A	G	NON_EQUIVALENT	Assembly is part of variant identity.
+case12	GRCh38	chr20	1100	1102	AT	A	GRCh38	chr20	1099	1101	TA	T	UNRESOLVED	Deliberately ambiguous representation; equivalence must not be forced.

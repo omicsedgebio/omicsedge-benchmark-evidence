@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedge.bio/schemas/event_variant_link.phase1b.schema.json",
+  "title": "Project 003 Phase 1B EVENT_VARIANT_LINK",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_variant_link_id",
+    "event_id",
+    "variant_id",
+    "benchmark_run_id",
+    "identity_status",
+    "identity_method",
+    "identity_method_version",
+    "evidence",
+    "provenance",
+    "created_from_candidate",
+    "candidate_id",
+    "candidate_number",
+    "phase1a_candidate_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "event_variant_link_id": {
+      "type": "string",
+      "pattern": "^event-variant-link:sha256:[0-9a-f]{64}$"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "variant_id": {
+      "type": "string",
+      "pattern": "^variant:sha256:[0-9a-f]{64}$"
+    },
+    "benchmark_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity_status": {
+      "type": "string",
+      "const": "EXACT_NORMALIZED_ALLELE"
+    },
+    "identity_method": {
+      "type": "string",
+      "const": "PHASE1B_EXACT_NORMALIZED_ALLELE_V1"
+    },
+    "identity_method_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "evidence": {
+      "type": "string",
+      "minLength": 2
+    },
+    "provenance": {
+      "type": "string",
+      "minLength": 2
+    },
+    "created_from_candidate": {
+      "type": "boolean",
+      "const": true
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^candidate:sha256:[0-9a-f]{64}$"
+    },
+    "candidate_number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1666
+    },
+    "phase1a_candidate_status": {
+      "type": "string",
+      "const": "CROSS_RUN_EQUIVALENCE_UNRESOLVED"
+    }
+  }
+}

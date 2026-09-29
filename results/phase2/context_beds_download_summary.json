@@ -1,0 +1,47 @@
+{
+  "all_official_md5_checks_pass": true,
+  "benchmark_outcomes_consulted": false,
+  "context_count": 5,
+  "downloaded_beds": {
+    "HOMOPOLYMER": {
+      "chromosome_count": 24,
+      "interval_count": 3819656,
+      "official_md5": "e4ff8193cf3a1f87b3f75b11d1bfc6d7",
+      "sha256": "1ec3cbd1a123ff7ba8ad5ccefe9d20a5d914c003eda08010151bda55d015134d",
+      "size_bytes": 24630221
+    },
+    "LOW_MAPPABILITY": {
+      "chromosome_count": 24,
+      "interval_count": 673815,
+      "official_md5": "8a78766bb99abf1d25a5b307d49a0324",
+      "sha256": "38707879ab51dcee3dd3331c082e2d9552a9f9d487d4de84f9ebae5b5c556d56",
+      "size_bytes": 4466885
+    },
+    "NON_DIFFICULT": {
+      "chromosome_count": 24,
+      "interval_count": 4840633,
+      "official_md5": "562ebfd3b3994ae50c3d162d96c66e94",
+      "sha256": "9bbc18faf541223e279fc739075e521e173f548bf4e0c14280a6a160bf3b74ea",
+      "size_bytes": 32740446
+    },
+    "SEGMENTAL_DUPLICATION": {
+      "chromosome_count": 24,
+      "interval_count": 7432,
+      "official_md5": "72ec3f7db18ef9318c64b1df271703fe",
+      "sha256": "09ac029a7d0d681a9f0ed6581a6bc10fc708a834bc3f91c46a9bef504f6055c5",
+      "size_bytes": 65098
+    },
+    "TANDEM_REPEAT": {
+      "chromosome_count": 24,
+      "interval_count": 1403470,
+      "official_md5": "d27d2b4e43e46a724da4934333cf0367",
+      "sha256": "ff58710eb3aab81c172f83ac263ab698068b0a4f0d8357d7347ff9a7b8774179",
+      "size_bytes": 9228465
+    }
+  },
+  "lock_sha256": "cb9cb2dabfe498eac143a0980609cc3ac6da8f3f8dd31e4fe31abbbca5764ffd",
+  "manifest_sha256": "977bf8110db8e26486eaea51d138cd02264da4b26b29fd9c29c595e3bf405cc5",
+  "phase": "2B",
+  "project": "Project 003",
+  "status": "FROZEN_BEFORE_INTERVAL_SELECTION"
+}

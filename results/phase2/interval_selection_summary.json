@@ -1,0 +1,157 @@
+{
+  "benchmark_outcomes_consulted": false,
+  "context_beds_downloaded_manifest_sha256": "977bf8110db8e26486eaea51d138cd02264da4b26b29fd9c29c595e3bf405cc5",
+  "contexts": {
+    "HOMOPOLYMER": {
+      "eligible_callable_anchors": 3429318,
+      "evaluated_frontier_candidates": 10,
+      "frontier_limit": 10000,
+      "frontier_limit_used": 10000,
+      "frontier_unique_candidates": 10000,
+      "max_windows_on_one_chromosome": 2,
+      "raw_eligible_chromosome_anchors": 3514433,
+      "selected_chromosome_count": 9,
+      "selected_chromosomes": [
+        "chr2",
+        "chr3",
+        "chr4",
+        "chr8",
+        "chr10",
+        "chr14",
+        "chr15",
+        "chr18",
+        "chr19"
+      ],
+      "selected_windows": 10
+    },
+    "LOW_MAPPABILITY": {
+      "eligible_callable_anchors": 570458,
+      "evaluated_frontier_candidates": 10,
+      "frontier_limit": 10000,
+      "frontier_limit_used": 10000,
+      "frontier_unique_candidates": 10000,
+      "max_windows_on_one_chromosome": 2,
+      "raw_eligible_chromosome_anchors": 605646,
+      "selected_chromosome_count": 8,
+      "selected_chromosomes": [
+        "chr1",
+        "chr2",
+        "chr4",
+        "chr6",
+        "chr12",
+        "chr14",
+        "chr19",
+        "chr22"
+      ],
+      "selected_windows": 10
+    },
+    "NON_DIFFICULT": {
+      "eligible_callable_anchors": 4456299,
+      "evaluated_frontier_candidates": 10,
+      "frontier_limit": 10000,
+      "frontier_limit_used": 10000,
+      "frontier_unique_candidates": 10000,
+      "max_windows_on_one_chromosome": 2,
+      "raw_eligible_chromosome_anchors": 4476048,
+      "selected_chromosome_count": 9,
+      "selected_chromosomes": [
+        "chr2",
+        "chr5",
+        "chr7",
+        "chr8",
+        "chr9",
+        "chr10",
+        "chr14",
+        "chr15",
+        "chr18"
+      ],
+      "selected_windows": 10
+    },
+    "SEGMENTAL_DUPLICATION": {
+      "eligible_callable_anchors": 5969,
+      "evaluated_frontier_candidates": 10,
+      "frontier_limit": 10000,
+      "frontier_limit_used": 10000,
+      "frontier_unique_candidates": 5969,
+      "max_windows_on_one_chromosome": 2,
+      "raw_eligible_chromosome_anchors": 6487,
+      "selected_chromosome_count": 8,
+      "selected_chromosomes": [
+        "chr4",
+        "chr5",
+        "chr7",
+        "chr8",
+        "chr13",
+        "chr15",
+        "chr17",
+        "chr19"
+      ],
+      "selected_windows": 10
+    },
+    "TANDEM_REPEAT": {
+      "eligible_callable_anchors": 1245732,
+      "evaluated_frontier_candidates": 10,
+      "frontier_limit": 10000,
+      "frontier_limit_used": 10000,
+      "frontier_unique_candidates": 10000,
+      "max_windows_on_one_chromosome": 2,
+      "raw_eligible_chromosome_anchors": 1290773,
+      "selected_chromosome_count": 9,
+      "selected_chromosomes": [
+        "chr1",
+        "chr2",
+        "chr4",
+        "chr5",
+        "chr6",
+        "chr7",
+        "chr15",
+        "chr16",
+        "chr17"
+      ],
+      "selected_windows": 10
+    }
+  },
+  "interval_selection_method_sha256": "b3dd8fdbd8c308a9f9098fbc213a9a243ceec081b92b74862d60d212ea1619b2",
+  "minimum_assessable_bp": 5000,
+  "operation": "DETERMINISTIC_INTERVAL_SELECTION",
+  "output_sha256": {
+    "interval_candidates.tsv": "7c51c1450db192deac0726d9446e33ac5ea4b4a44f40412599b34bc7d566676a",
+    "selected_assessable_segments.bed": "4c77e17c3dec47051cb9b29fa14fee67f31a559785417d083f4f7bcacb05cd26",
+    "selected_intervals.tsv": "2e5a6a97c9bacf5fdf3cf547ac7db32d06f611a1f2bcca66cbcfbd04e722c01c",
+    "selected_window_segments.tsv": "ee0bcecb92f2c3f0972fded421343a833fc64a177bd87a336859589a5a3649fd"
+  },
+  "phase": "2B",
+  "project": "Project 003",
+  "query_vcfs_consulted": false,
+  "selected_panel": {
+    "assessable_bases": 1162571,
+    "chr20_present": false,
+    "chromosome_count": 19,
+    "chromosomes": [
+      "chr1",
+      "chr2",
+      "chr3",
+      "chr4",
+      "chr5",
+      "chr6",
+      "chr7",
+      "chr8",
+      "chr9",
+      "chr10",
+      "chr12",
+      "chr13",
+      "chr14",
+      "chr15",
+      "chr16",
+      "chr17",
+      "chr18",
+      "chr19",
+      "chr22"
+    ],
+    "merged_interval_count": 541
+  },
+  "selected_window_count": 50,
+  "shared_callable_sha256": "22abff164c57dc25327d5a395e5fc17d49f30cbde4b2d18cbc4748a52643c549",
+  "status": "PASS",
+  "window_size_bp": 25000
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedge.bio/schemas/variant.phase1b.schema.json",
+  "title": "Project 003 Phase 1B VARIANT",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "variant_id",
+    "assembly",
+    "contig",
+    "normalized_start_0based",
+    "normalized_end_0based",
+    "normalized_ref",
+    "normalized_alt",
+    "normalization_method",
+    "source_normalization_methods",
+    "source_normalization_versions",
+    "reference_artifact_id",
+    "identity_schema_version",
+    "phase1b_origin"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "variant_id": {
+      "type": "string",
+      "pattern": "^variant:sha256:[0-9a-f]{64}$"
+    },
+    "assembly": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contig": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalized_start_0based": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "normalized_end_0based": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "normalized_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalized_alt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalization_method": {
+      "type": "string",
+      "const": "UPSTREAM_PHASE1A_NORMALIZED_FIELDS"
+    },
+    "source_normalization_methods": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_normalization_versions": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference_artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity_schema_version": {
+      "type": "string",
+      "const": "phase1b-variant-identity-v1"
+    },
+    "phase1b_origin": {
+      "type": "string",
+      "const": "GENERATED_FROM_EXACT_NORMALIZED_ALLELE"
+    }
+  }
+}

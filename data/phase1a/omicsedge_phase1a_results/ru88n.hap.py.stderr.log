@@ -1,0 +1,16 @@
+2026-09-29 00:57:50,888 WARNING  No reference file found at default locations. You can set the environment variable 'HGREF' or 'HG19' to point to a suitable Fasta file.
+[I] Total VCF records:         1626
+[I] Non-reference VCF records: 1626
+[W] variant at chr20:10802728 has more than one base of reference padding 
+[W] Variants that have >1 base of reference padding: 2
+[I] Total VCF records:         1688
+[I] Non-reference VCF records: 1688
+2026-09-29 00:57:53,913 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:53,914 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:53,915 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:53,948 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:53,949 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:53,950 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:54,320 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:54,320 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0
+2026-09-29 00:57:54,321 WARNING  [W::bcf_hdr_register_hrec] The definition of Flag "INFO/IMPORT_FAIL" is invalid, forcing Number=0

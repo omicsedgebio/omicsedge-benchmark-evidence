@@ -1,0 +1,58 @@
+{
+  "60z59": {
+    "annotated_vcf": "/content/omicsedge_phase1a/runs/60z59/60z59.happy.vcf.gz",
+    "format_ids": [
+      "BD",
+      "BI",
+      "BK",
+      "BLT",
+      "BVT",
+      "GT",
+      "QQ"
+    ],
+    "has_BD": true,
+    "has_BK": true,
+    "has_BS": false,
+    "has_QUERY": true,
+    "has_TRUTH": true,
+    "metrics": [
+      "/content/omicsedge_phase1a/runs/60z59/60z59.happy.extended.csv",
+      "/content/omicsedge_phase1a/runs/60z59/60z59.happy.metrics.json.gz",
+      "/content/omicsedge_phase1a/runs/60z59/60z59.happy.summary.csv"
+    ],
+    "record_count": 1806,
+    "samples": [
+      "TRUTH",
+      "QUERY"
+    ],
+    "submission": "60z59"
+  },
+  "ru88n": {
+    "annotated_vcf": "/content/omicsedge_phase1a/runs/ru88n/ru88n.happy.vcf.gz",
+    "format_ids": [
+      "BD",
+      "BI",
+      "BK",
+      "BLT",
+      "BVT",
+      "GT",
+      "QQ"
+    ],
+    "has_BD": true,
+    "has_BK": true,
+    "has_BS": false,
+    "has_QUERY": true,
+    "has_TRUTH": true,
+    "metrics": [
+      "/content/omicsedge_phase1a/runs/ru88n/ru88n.happy.extended.csv",
+      "/content/omicsedge_phase1a/runs/ru88n/ru88n.happy.metrics.json.gz",
+      "/content/omicsedge_phase1a/runs/ru88n/ru88n.happy.summary.csv"
+    ],
+    "record_count": 1800,
+    "samples": [
+      "TRUTH",
+      "QUERY"
+    ],
+    "submission": "ru88n"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "artifacts": {
+    "giab-strat-v3.6-global-md5": "816ca97172382a2fae297772b5e0b5fe6cf9d1d7a623d0195d84fe3db467738f",
+    "giab-strat-v3.6-grch38-md5": "f317a526a5c0e58dacd39f14a8b6f7f3001f33aa87a2d4a302a0960f1a02950d",
+    "giab-strat-v3.6-grch38-readme": "f629cdc70b0c6e507df5952398a4097a96e25ef7793a9bd07199fec9249ddebc",
+    "giab-strat-v3.6-grch38-tsv": "2f0de1af36117b4e4495137be8905ee52206bc485c16074d038fdc6784b52d8c",
+    "giab-strat-v3.6-readme": "ebc2c5e237184c95c1395b40c2ec86293b866431dba7d9a92d07d776c455a8f7"
+  },
+  "benchmark_outcomes_consulted": false,
+  "giab_stratification_version": "v3.6",
+  "grch38_stratification_bed_entries": 189,
+  "lock_sha256": "402ea7574ee4297d6538fda5d9a0aa17e266193c83d078ac074c28c2452c1247",
+  "manifest_sha256": "effe001197dd7c3d62d0078beb946de4d6cc546cf06d9a3109e0dad732ccbfdc",
+  "metadata_artifact_count": 5,
+  "phase": "2B",
+  "project": "Project 003",
+  "reference_assembly": "GRCh38"
+}
