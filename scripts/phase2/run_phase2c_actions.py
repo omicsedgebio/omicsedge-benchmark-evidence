@@ -2845,19 +2845,36 @@ def run_example_query(collections):
         WHERE e.event_id = ?
         ORDER BY o.side
         """
-        query_df = con.execute(
+        query_cursor = con.execute(
             query,
             [example_event_id],
-        ).fetchdf()
-        if query_df.empty:
+        )
+        query_rows = query_cursor.fetchall()
+
+        if not query_rows:
             raise RuntimeError(
                 "Example Phase 2C evidence query returned zero rows"
             )
-        query_df.to_csv(
-            RESULTS_DIR / "example_phase2c_event_query.tsv",
-            sep="\t",
-            index=False,
-        )
+
+        query_columns = [
+            column[0]
+            for column in query_cursor.description
+        ]
+
+        with (
+            RESULTS_DIR / "example_phase2c_event_query.tsv"
+        ).open(
+            "w",
+            newline="",
+            encoding="utf-8",
+        ) as handle:
+            writer = csv.writer(
+                handle,
+                delimiter="\t",
+                lineterminator="\n",
+            )
+            writer.writerow(query_columns)
+            writer.writerows(query_rows)
 
         duck_counts = {
             name: con.execute(
