@@ -538,6 +538,9 @@ def install_runtime(paths):
             ],
             capture=False,
         )
+        python_site = TOOLS_DIR / "python-site"
+        python_site.mkdir(parents=True, exist_ok=True)
+
         run(
             [
                 sys.executable,
@@ -546,6 +549,8 @@ def install_runtime(paths):
                 "install",
                 "--quiet",
                 "--disable-pip-version-check",
+                "--target",
+                str(python_site),
                 "duckdb==1.5.6",
                 "pyarrow==25.0.1",
                 "pysam==0.23.3",
@@ -555,7 +560,21 @@ def install_runtime(paths):
             capture=False,
         )
 
+        sys.path.insert(0, str(python_site))
+
+        import duckdb
+        import jsonschema
+        import pyarrow
+        import pysam
         import yaml
+
+        runtime_identity["python_dependency_import_gate"] = {
+            "duckdb": getattr(duckdb, "__version__", "UNKNOWN"),
+            "pyarrow": getattr(pyarrow, "__version__", "UNKNOWN"),
+            "pysam": getattr(pysam, "__version__", "UNKNOWN"),
+            "jsonschema": getattr(jsonschema, "__version__", "UNKNOWN"),
+            "PyYAML": getattr(yaml, "__version__", "UNKNOWN"),
+        }
 
         comparator_lock = yaml.safe_load(
             paths["comparator_lock"].read_text(encoding="utf-8")
