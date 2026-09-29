@@ -520,9 +520,10 @@ def require_config_paths() -> dict[str, Path]:
 
 def install_runtime(paths):
     with stage_guard("comparator/runtime installation", blocked=True):
-        run(["apt-get", "update"], capture=False)
+        run(["sudo", "apt-get", "update"], capture=False)
         run(
             [
+                "sudo",
                 "apt-get",
                 "install",
                 "-y",
