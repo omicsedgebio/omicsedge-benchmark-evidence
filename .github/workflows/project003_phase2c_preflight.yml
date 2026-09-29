@@ -1,0 +1,168 @@
+name: Project 003 Phase 2C Runtime Preflight
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: Phase 2C runtime preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      HAPPY_IMAGE: quay.io/biocontainers/hap.py@sha256:d63b963a6cb01b4830393b22369e7b91d298e4156dde353739e74e4cfa4f96d0
+      HAPPY_DIGEST: sha256:d63b963a6cb01b4830393b22369e7b91d298e4156dde353739e74e4cfa4f96d0
+      RTG_URL: https://github.com/RealTimeGenomics/rtg-tools/releases/download/3.12.1/rtg-tools-3.12.1-linux-x64.zip
+      RTG_SHA256: ba43cadbb3e79bff74e7d2f8540dd5e201574ec8e293ba555f3aeefd1375dfc5
+
+    steps:
+      - name: Checkout frozen repository state
+        uses: actions/checkout@v4
+
+      - name: Verify frozen runtime amendment
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(sha256sum docs/phase2/phase2c_github_actions_runtime_amendment.md | awk '{print $1}')" \
+            = "6aac2e226d88da35c47547cd1b3dfe92b84f92907daadd8bac656064d20abcac"
+
+          test "$(sha256sum docs/phase2/phase2c_github_actions_runtime_amendment.lock | awk '{print $1}')" \
+            = "957a1c5b5e7d9d766c412a04b4015cc739de60b54dfc60ff3e6fab8180f0c534"
+
+          test "$(sha256sum docs/phase2/phase2c_compute_protocol.md | awk '{print $1}')" \
+            = "e2eb2bb92c89b1497a10d0f0b6d57b91b95c20b79193e9e0fd255403027961be"
+
+          test "$(sha256sum data/phase2/selected_assessable_segments.bed | awk '{print $1}')" \
+            = "4c77e17c3dec47051cb9b29fa14fee67f31a559785417d083f4f7bcacb05cd26"
+
+          echo "PASS frozen amendment and scientific inputs"
+
+      - name: Capture runner resources
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          {
+            echo "=== GITHUB ACTIONS RUNTIME ==="
+            echo "GITHUB_SHA=${GITHUB_SHA}"
+            echo "GITHUB_RUN_ID=${GITHUB_RUN_ID}"
+            echo "GITHUB_RUN_ATTEMPT=${GITHUB_RUN_ATTEMPT}"
+            echo "RUNNER_OS=${RUNNER_OS}"
+            echo "RUNNER_ARCH=${RUNNER_ARCH}"
+            echo
+            echo "=== ARCHITECTURE ==="
+            uname -a
+            uname -m
+            echo
+            echo "=== CPU ==="
+            nproc
+            echo
+            echo "=== MEMORY ==="
+            free -b
+            echo
+            echo "=== DISK ==="
+            df -B1 "${RUNNER_TEMP}"
+            df -h "${RUNNER_TEMP}"
+            echo
+            echo "=== DOCKER ==="
+            docker --version
+            docker info --format '{{json .ServerVersion}}'
+          } | tee "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+          free_bytes="$(df -B1 --output=avail "${RUNNER_TEMP}" | tail -1 | tr -d ' ')"
+          echo "FREE_DISK_BYTES=${free_bytes}" | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+          test "$(uname -m)" = "x86_64"
+          test "$(nproc)" -ge 2
+
+          echo "PASS GitHub Actions runtime resource capture" | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+      - name: Verify frozen hap.py container
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker pull "${HAPPY_IMAGE}"
+
+          repo_digests="$(docker image inspect "${HAPPY_IMAGE}" --format '{{join .RepoDigests "\n"}}')"
+          printf '%s\n' "${repo_digests}" | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+          printf '%s\n' "${repo_digests}" | grep -F "${HAPPY_DIGEST}"
+
+          docker run --rm "${HAPPY_IMAGE}" hap.py --help >/tmp/happy_help.txt 2>&1
+
+          set +e
+          docker run --rm "${HAPPY_IMAGE}" hap.py --version >/tmp/happy_version.txt 2>&1
+          version_rc=$?
+          set -e
+
+          {
+            echo
+            echo "=== HAP.PY VERSION PROBE ==="
+            cat /tmp/happy_version.txt
+            echo "hap.py --version exit_code=${version_rc}"
+          } | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+          grep -Eq '0\.3\.15|Hap.py|hap.py|usage|Usage' \
+            /tmp/happy_help.txt /tmp/happy_version.txt
+
+          echo "PASS frozen hap.py OCI comparator executes" \
+            | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+      - name: Verify frozen RTG Tools
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rtg_zip="${RUNNER_TEMP}/rtg-tools-3.12.1-linux-x64.zip"
+          rtg_root="${RUNNER_TEMP}/rtg-tools"
+
+          curl -L --fail --retry 5 --retry-delay 2 \
+            -o "${rtg_zip}" \
+            "${RTG_URL}"
+
+          observed="$(sha256sum "${rtg_zip}" | awk '{print $1}')"
+          test "${observed}" = "${RTG_SHA256}"
+
+          mkdir -p "${rtg_root}"
+          unzip -q -o "${rtg_zip}" -d "${rtg_root}"
+
+          rtg_exe="${rtg_root}/rtg-tools-3.12.1/rtg"
+          test -x "${rtg_exe}"
+
+          {
+            echo
+            echo "=== RTG VERSION ==="
+            "${rtg_exe}" version
+          } | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+          "${rtg_exe}" version 2>&1 | grep -F "3.12.1"
+
+          echo "PASS frozen RTG 3.12.1 executes" \
+            | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+      - name: Capture post-comparator disk
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          {
+            echo
+            echo "=== DISK AFTER COMPARATOR MATERIALIZATION ==="
+            df -B1 "${RUNNER_TEMP}"
+            df -h "${RUNNER_TEMP}"
+            echo
+            echo "PHASE2C_GITHUB_ACTIONS_PREFLIGHT_PASS"
+          } | tee -a "${RUNNER_TEMP}/phase2c_preflight.txt"
+
+      - name: Upload preflight record
+        uses: actions/upload-artifact@v4
+        with:
+          name: project003-phase2c-runtime-preflight
+          path: ${{ runner.temp }}/phase2c_preflight.txt
+          if-no-files-found: error
+          retention-days: 7
