@@ -1,0 +1,155 @@
+name: Project 003 Phase 2C Compute
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compute:
+    name: Phase 2C frozen benchmark compute
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    env:
+      MIN_FREE_DISK_BYTES: "16106127360"
+
+    steps:
+      - name: Checkout frozen repository state
+        uses: actions/checkout@v4
+
+      - name: Verify frozen protocol and runtime evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test "$(sha256sum docs/phase2/phase2c_compute_protocol.md | awk '{print $1}')"             = "e2eb2bb92c89b1497a10d0f0b6d57b91b95c20b79193e9e0fd255403027961be"
+
+          test "$(sha256sum data/phase2/selected_assessable_segments.bed | awk '{print $1}')"             = "4c77e17c3dec47051cb9b29fa14fee67f31a559785417d083f4f7bcacb05cd26"
+
+          test "$(sha256sum docs/phase2/phase2c_github_actions_runtime_amendment.md | awk '{print $1}')"             = "6aac2e226d88da35c47547cd1b3dfe92b84f92907daadd8bac656064d20abcac"
+
+          test "$(sha256sum docs/phase2/phase2c_github_actions_runtime_amendment.lock | awk '{print $1}')"             = "957a1c5b5e7d9d766c412a04b4015cc739de60b54dfc60ff3e6fab8180f0c534"
+
+          test "$(sha256sum docs/phase2/phase2c_github_actions_preflight.md | awk '{print $1}')"             = "1b7872d9198a8834483a08ec7c963c14856683586d7e4ee3059c4cc1650395f0"
+
+          test "$(sha256sum docs/phase2/phase2c_github_actions_preflight.lock | awk '{print $1}')"             = "a397dcd0f83d39b76093e6a4dea3fe051b9f4eb38dc0ff54ed742ec5fc183bc0"
+
+          echo "PASS frozen protocol/runtime evidence"
+
+      - name: Reclaim non-benchmark runner disk
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "=== DISK BEFORE CLEANUP ==="
+          df -B1 "${RUNNER_TEMP}"
+          df -h "${RUNNER_TEMP}"
+
+          sudo rm -rf             /usr/local/lib/android             /usr/share/dotnet             /opt/ghc             /usr/local/.ghcup             /opt/hostedtoolcache/CodeQL
+
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+          docker system prune -af || true
+
+          echo
+          echo "=== DISK AFTER CLEANUP ==="
+          df -B1 "${RUNNER_TEMP}"
+          df -h "${RUNNER_TEMP}"
+
+      - name: Enforce frozen runtime gate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          free_bytes="$(df -B1 --output=avail "${RUNNER_TEMP}" | tail -1 | tr -d ' ')"
+
+          echo "FREE_DISK_BYTES=${free_bytes}"
+          echo "MIN_FREE_DISK_BYTES=${MIN_FREE_DISK_BYTES}"
+          echo "LOGICAL_CPUS=$(nproc)"
+          echo "ARCHITECTURE=$(uname -m)"
+
+          test "$(uname -m)" = "x86_64"
+          test "$(nproc)" -ge 2
+
+          if [ "${free_bytes}" -lt "${MIN_FREE_DISK_BYTES}" ]; then
+            echo "FAIL free disk below frozen 15 GiB minimum"
+            exit 1
+          fi
+
+          echo "PASS frozen >=15 GiB free-disk gate"
+
+          echo "OMICSEDGE_PHASE2C_WORK_ROOT=${RUNNER_TEMP}/omicsedge_phase2c" >> "${GITHUB_ENV}"
+          echo "OMICSEDGE_PHASE2C_CONFIG_DIR=${RUNNER_TEMP}/omicsedge_phase2c/authoritative_config" >> "${GITHUB_ENV}"
+          echo "OMICSEDGE_PHASE2C_RESULTS_DIR=${RUNNER_TEMP}/omicsedge_phase2c_results" >> "${GITHUB_ENV}"
+          echo "OMICSEDGE_PHASE2C_ARCHIVE=${RUNNER_TEMP}/omicsedge_phase2c_results.tar.gz" >> "${GITHUB_ENV}"
+
+      - name: Materialize frozen authoritative configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          config_root="${RUNNER_TEMP}/omicsedge_phase2c/authoritative_config"
+          mkdir -p "${config_root}"
+
+          required=(
+            environment/comparator-lock.yaml
+            data/phase2/admitted_sources.tsv
+            data/phase2/selected_assessable_segments.bed
+            data/phase2/selected_intervals.tsv
+            data/phase2/interval_panel.lock
+            docs/phase2/phase2_protocol.md
+            docs/phase2/phase2c_compute_protocol.md
+            docs/phase2/phase2c_compute_protocol.lock
+            docs/phase2/benchmark_run_schema_extension.lock
+            data/manifests/selected_experiments.tsv
+            schemas/event.schema.json
+            schemas/observation.schema.json
+            schemas/experiment.schema.json
+            schemas/source_artifact.schema.json
+            schemas/provenance_link.schema.json
+            schemas/phase2/benchmark_run.schema.json
+          )
+
+          for target in "${required[@]}"; do
+            test -f "${target}"
+            cp --parents "${target}" "${config_root}"
+          done
+
+          test "$(find "${config_root}" -type f | wc -l | tr -d ' ')" = "16"
+
+          echo "FROZEN_PHASE2C_CONFIGURATION_MATERIALIZATION_PASS"
+
+      - name: Execute frozen Phase 2C benchmark
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python scripts/phase2/run_phase2c_actions.py             2>&1 | tee "${RUNNER_TEMP}/phase2c_runner.log"
+
+          grep -Fx "PHASE2C_COMPUTE_PASS" "${RUNNER_TEMP}/phase2c_runner.log"
+
+          test -f "${OMICSEDGE_PHASE2C_ARCHIVE}"
+
+          echo "PHASE2C_GITHUB_ACTIONS_RUNNER_EXECUTION_PASS"
+
+      - name: Capture final disk state
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "=== FINAL DISK ==="
+          df -B1 "${RUNNER_TEMP}"
+          df -h "${RUNNER_TEMP}"
+
+      - name: Upload compact Phase 2C result or diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: project003-phase2c-compute-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/omicsedge_phase2c_results.tar.gz
+            ${{ runner.temp }}/phase2c_runner.log
+          if-no-files-found: warn
+          retention-days: 7
