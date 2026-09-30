@@ -112,11 +112,21 @@ def safe_extract(archive: Path, destination: Path) -> list[str]:
     names = []
     with tarfile.open(archive, "r:gz") as tar:
         for member in tar.getmembers():
-            require(member.isfile(), f"archive contains non-file member: {member.name}")
             p = Path(member.name)
             require(not p.is_absolute(), f"archive absolute member: {member.name}")
             require(".." not in p.parts, f"archive parent traversal: {member.name}")
+
             target = destination / p
+
+            if member.isdir():
+                target.mkdir(parents=True, exist_ok=True)
+                continue
+
+            require(
+                member.isfile(),
+                f"archive contains unsupported member type: {member.name}",
+            )
+
             target.parent.mkdir(parents=True, exist_ok=True)
             source = tar.extractfile(member)
             require(source is not None, f"cannot read archive member: {member.name}")
