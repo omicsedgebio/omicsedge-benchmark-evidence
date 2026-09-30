@@ -1,0 +1,83 @@
+{
+  "$id": "https://omicsedge.bio/schemas/phase2/event_variant_link.phase2d.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "admitted_sources_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "benchmark_run_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "event_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "event_variant_link_id": {
+      "pattern": "^event-variant-link:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "evidence": {
+      "minLength": 2,
+      "type": "string"
+    },
+    "identity_method": {
+      "const": "PHASE1B_EXACT_NORMALIZED_ALLELE_V1"
+    },
+    "identity_method_version": {
+      "const": "1.0.0"
+    },
+    "identity_status": {
+      "const": "EXACT_NORMALIZED_ALLELE"
+    },
+    "interval_panel_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase2c_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase2d_application_version": {
+      "const": "1.0.0"
+    },
+    "provenance": {
+      "minLength": 2,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "variant_id": {
+      "pattern": "^variant:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "variant_origin": {
+      "enum": [
+        "PHASE1B_REUSED",
+        "PHASE2D_NEW"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_variant_link_id",
+    "event_id",
+    "variant_id",
+    "benchmark_run_id",
+    "identity_status",
+    "identity_method",
+    "identity_method_version",
+    "phase2d_application_version",
+    "variant_origin",
+    "evidence",
+    "provenance",
+    "phase2c_archive_sha256",
+    "admitted_sources_lock_sha256",
+    "interval_panel_lock_sha256"
+  ],
+  "title": "Project 003 Phase 2D EVENT_VARIANT_LINK",
+  "type": "object"
+}

@@ -1,0 +1,86 @@
+{
+  "$id": "https://omicsedge.bio/schemas/phase2/variant.phase2d.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assembly": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "contig": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "identity_schema_version": {
+      "const": "phase1b-variant-identity-v1"
+    },
+    "normalization_method": {
+      "const": "UPSTREAM_PHASE2C_NORMALIZED_FIELDS"
+    },
+    "normalized_alt": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "normalized_end_0based": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "normalized_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "normalized_start_0based": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "phase2c_archive_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "phase2d_application_version": {
+      "const": "1.0.0"
+    },
+    "phase2d_origin": {
+      "const": "GENERATED_FROM_PHASE2C_EXACT_NORMALIZED_ALLELE"
+    },
+    "reference_artifact_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_normalization_methods": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_normalization_versions": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "variant_id": {
+      "pattern": "^variant:sha256:[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "variant_id",
+    "assembly",
+    "contig",
+    "normalized_start_0based",
+    "normalized_end_0based",
+    "normalized_ref",
+    "normalized_alt",
+    "normalization_method",
+    "source_normalization_methods",
+    "source_normalization_versions",
+    "reference_artifact_id",
+    "identity_schema_version",
+    "phase2d_origin",
+    "phase2d_application_version",
+    "phase2c_archive_sha256"
+  ],
+  "title": "Project 003 Phase 2D VARIANT",
+  "type": "object"
+}
