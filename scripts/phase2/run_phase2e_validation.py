@@ -683,24 +683,105 @@ def main() -> int:
         )
 
         # P2-13
+        #
+        # Phase 2C EVENTs are run-scoped by construction, but identity_scope
+        # records the within-run derivation mechanism:
+        #
+        #   COMPARATOR_SUPERLOCUS
+        #   SOURCE_RECORD_FALLBACK
+        #
+        # Therefore P2-13 must validate run scoping and non-merging directly
+        # rather than require a nonexistent identity_scope="RUN_SCOPED"
+        # literal.
         p2c_event_ids = [row["event_id"] for row in p2c_events]
         link_event_ids = [row["event_id"] for row in p2d_links]
         accounting_event_ids = [row["event_id"] for row in p2d_accounting]
+
+        p2c_run_ids = {
+            row["benchmark_run_id"]
+            for row in p2c_runs
+        }
+
+        p2c_experiment_ids = {
+            row["experiment_id"]
+            for row in p2c_experiments
+        }
+
+        event_by_id = {
+            row["event_id"]: row
+            for row in p2c_events
+        }
+
         event_run_consistency = all(
-            row["benchmark_run_id"] in {run["benchmark_run_id"] for run in p2c_runs}
+            row["benchmark_run_id"] in p2c_run_ids
             for row in p2c_events
         )
+
+        run_experiment_consistency = all(
+            row["experiment_id"] in p2c_experiment_ids
+            for row in p2c_runs
+        )
+
+        event_id_run_namespaced = all(
+            row["event_id"].startswith(
+                "event-"
+                + row["benchmark_run_id"]
+                + "-"
+            )
+            for row in p2c_events
+        )
+
+        link_run_consistency = all(
+            row["event_id"] in event_by_id
+            and row["benchmark_run_id"]
+            == event_by_id[row["event_id"]]["benchmark_run_id"]
+            for row in p2d_links
+        )
+
+        derivation_scopes_valid = all(
+            row.get("identity_scope")
+            in {
+                "COMPARATOR_SUPERLOCUS",
+                "SOURCE_RECORD_FALLBACK",
+            }
+            for row in p2c_events
+        )
+
+        cross_run_equivalence_disabled = all(
+            str(
+                row.get(
+                    "cross_run_equivalence_asserted",
+                    "",
+                )
+            ).lower()
+            == "false"
+            for row in p2c_events
+        )
+
         no_merge = (
             len(p2c_event_ids) == len(set(p2c_event_ids))
             and len(link_event_ids) == len(set(link_event_ids))
+            and len(accounting_event_ids) == len(set(accounting_event_ids))
             and set(accounting_event_ids) == set(p2c_event_ids)
             and event_run_consistency
-            and all(row.get("identity_scope") == "RUN_SCOPED" for row in p2c_events)
+            and run_experiment_consistency
+            and event_id_run_namespaced
+            and link_run_consistency
+            and derivation_scopes_valid
+            and cross_run_equivalence_disabled
         )
+
         add(
             "P2-13",
             no_merge,
-            f"phase2c_events={len(p2c_events)} linked_events={len(link_event_ids)}",
+            (
+                f"phase2c_events={len(p2c_events)} "
+                f"unique_event_ids={len(set(p2c_event_ids))} "
+                f"linked_events={len(link_event_ids)} "
+                f"accounted_events={len(accounting_event_ids)} "
+                f"run_namespaced={event_id_run_namespaced} "
+                f"link_run_consistent={link_run_consistency}"
+            ),
         )
 
         # P2-14
