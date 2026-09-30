@@ -10,10 +10,10 @@
 
 <br>
 
-[![Status](https://img.shields.io/badge/status-Phase_2C_in_progress-blue)](#project-status)
+[![Status](https://img.shields.io/badge/status-Phase_2_PASS-brightgreen)](#project-status)
 [![Phase 1A](https://img.shields.io/badge/Phase_1A-PASS-brightgreen)](#phase-1a--empirical-proof-of-concept)
 [![Phase 1B](https://img.shields.io/badge/Phase_1B-15%2F15_PASS-brightgreen)](#phase-1b--biological-variant-identity)
-[![Phase 2B](https://img.shields.io/badge/Phase_2B-PANEL_FROZEN-brightgreen)](#phase-2--generalization)
+[![Phase 2](https://img.shields.io/badge/Phase_2-20%2F20_PASS-brightgreen)](#phase-2--generalization)
 [![Assembly](https://img.shields.io/badge/assembly-GRCh38-lightgrey)](#)
 [![Truth](https://img.shields.io/badge/GIAB-v4.2.1-lightgrey)](#)
 
@@ -29,7 +29,7 @@ Most variant benchmarks answer a narrow question:
 
 The OmicsEdge Benchmark Evidence Registry asks a different question:
 
-> **What empirical evidence exists for this biological variant across experiments, technologies, benchmark runs, genomic contexts, truth versions, and comparator versions — and exactly where did that evidence come from?**
+> **What empirical evidence exists for this biological variant across experiments, technologies, benchmark runs, genomic contexts, truth versions, and comparator versions - and exactly where did that evidence come from?**
 
 The registry preserves the benchmark evidence itself rather than collapsing it immediately into a single score.
 
@@ -52,16 +52,21 @@ It is designed to make statements such as:
 | Project | **OmicsEdgeBio Project 003** |
 | Phase 1A | ✅ PASS |
 | Phase 1B | ✅ **15 / 15 gates PASS** |
-| Phase 2B | ✅ Frozen |
-| Phase 2C | 🚧 Benchmark expansion next |
+| Phase 2 | ✅ **20 / 20 gates PASS** |
+| Phase 2 release | ✅ Frozen and independently verified |
 | Samples represented after Phase 2 | **HG002 · HG003 · HG004** |
 | Sequencing technologies | **Illumina · Oxford Nanopore** |
 | Phase 1 benchmark runs | **2** |
 | Phase 1 events | **3,602** |
 | Phase 1 observations | **7,204** |
 | Phase 1 provenance links | **10,871** |
-| Biological variants materialized | **1,666** |
-| Event → Variant links | **3,332** |
+| Phase 1 biological variants | **1,666** |
+| Phase 1 EVENT -> VARIANT links | **3,332** |
+| Phase 2C benchmark events | **7,951** |
+| Phase 2C observations | **15,902** |
+| Phase 2D exact EVENT -> VARIANT links | **7,891** |
+| Phase 2D unresolved events | **60** |
+| Phase 2D biological variants touched | **2,612** |
 | Phase 2 genomic contexts | **5** |
 | Frozen Phase 2 windows | **50** |
 | Phase 2 chromosomes represented | **19** |
@@ -82,7 +87,7 @@ It is designed to make statements such as:
 
 <p align="center">
   <sub>
-    Concept preview — the public Evidence Explorer will expose run-scoped observations,
+    Concept preview - the public Evidence Explorer will expose run-scoped observations,
     genomic context, and provenance without collapsing evidence into a single trust score.
   </sub>
 </p>
@@ -249,7 +254,7 @@ sequenceDiagram
 
 ---
 
-# Phase 1A — empirical proof of concept
+# Phase 1A - empirical proof of concept
 
 **Status: PASS**
 
@@ -283,9 +288,9 @@ The original evidence remains run-scoped and immutable.
 
 ---
 
-# Phase 1B — biological variant identity
+# Phase 1B - biological variant identity
 
-**Status: PASS — 15 / 15 validation gates**
+**Status: PASS - 15 / 15 validation gates**
 
 Phase 1B introduced a distinct biological `VARIANT` entity.
 
@@ -345,11 +350,29 @@ UNRESOLVED
 
 ---
 
-# Phase 2 — generalization
+# Phase 2 - generalization
 
-**Status: Phase 2B PASS · Phase 2C next**
+**Status: PASS - 20 / 20 final validation gates**
 
-Phase 2 tests whether the evidence model generalizes beyond a single HG002 chr20 proof of concept.
+Phase 2 tested whether the evidence model generalizes beyond a single HG002 chr20 proof of concept.
+
+The final Phase 2 release passed all **20 / 20 frozen validation criteria**.
+
+Final Phase 2 evidence includes:
+
+```text
+3 benchmark samples: HG002, HG003, HG004
+2 sequencing technologies: Illumina and Oxford Nanopore
+5 genomic contexts
+19 chromosomes
+7,951 Phase 2C run-scoped EVENT records
+15,902 Phase 2C OBSERVATION records
+7,891 exact EVENT_VARIANT_LINK records
+60 UNRESOLVED EVENT records
+2,612 Phase 2D biological VARIANT identities touched
+```
+
+The final release was checksum-manifested, independently extracted, and independently verified.
 
 Frozen Phase 2 sources:
 
@@ -410,7 +433,7 @@ chr20 excluded
 1,162,571 assessable bp
 ```
 
-The chromosome used for the original Phase 1 proof of concept — `chr20` — was deliberately excluded.
+The chromosome used for the original Phase 1 proof of concept - `chr20` - was deliberately excluded.
 
 ```mermaid
 flowchart LR
@@ -711,10 +734,10 @@ Phase 1A  ████████████████████  PASS
 Phase 1B  ████████████████████  PASS
 Phase 2A  ████████████████████  PASS
 Phase 2B  ████████████████████  PASS / FROZEN
-Phase 2C  ░░░░░░░░░░░░░░░░░░░░  NEXT
-Phase 2D  ░░░░░░░░░░░░░░░░░░░░
-Phase 2E  ░░░░░░░░░░░░░░░░░░░░
-Explorer  ░░░░░░░░░░░░░░░░░░░░
+Phase 2C  ████████████████████  PASS
+Phase 2D  ████████████████████  PASS
+Phase 2E  ████████████████████  20 / 20 PASS
+Explorer  ░░░░░░░░░░░░░░░░░░░░  NEXT
 ```
 
 ---
