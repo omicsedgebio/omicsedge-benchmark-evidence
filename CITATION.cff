@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use the OmicsEdge Benchmark Evidence Registry, please cite this software release."
+title: "OmicsEdge Benchmark Evidence Registry"
+type: software
+version: "1.0.0"
+date-released: 2026-10-01
+
+authors:
+  - family-names: "Pathak"
+    given-names: "Priyansh"
+    alias: "priyansh-22"
+
+abstract: >-
+  A provenance-first registry for preserving empirical variant benchmark
+  evidence across biological variants, benchmark events, observations,
+  samples, sequencing technologies, genomic contexts, truth resources,
+  comparator versions, and source artifacts without forcing reliability
+  scores, technology rankings, or consensus.
+
+repository-code: "https://github.com/omicsedgebio/omicsedge-benchmark-evidence"
+url: "https://omicsedge.bio"
+license: MIT
+
+keywords:
+  - genomics
+  - bioinformatics
+  - variant benchmarking
+  - benchmark evidence
+  - provenance
+  - Illumina
+  - Oxford Nanopore
+  - GIAB
+  - reproducibility

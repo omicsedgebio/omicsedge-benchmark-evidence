@@ -809,6 +809,33 @@ caller leaderboards
 
 ---
 
+# Release, citation, and reuse
+
+Project 003 is being prepared as the **OmicsEdge Benchmark Evidence Registry v1.0.0** research release.
+
+For citation metadata, see:
+
+- [`CITATION.cff`](CITATION.cff)
+
+Original OmicsEdgeBio software code is released under the:
+
+- [MIT License](LICENSE)
+
+Public benchmark inputs, truth resources, source metadata, and derived materials may have separate source terms. See:
+
+- [`THIRD_PARTY_DATA_NOTICE.md`](THIRD_PARTY_DATA_NOTICE.md)
+
+The authoritative frozen Phase 2 release is:
+
+- Archive: `results/phase2e/omicsedge_phase2_final_results.tar.gz`
+- SHA-256: `186cbed74fa718a728f7a24b43d58118a308165fae385eb95cc4cb4444788ca3`
+- Size: `8,708,768 bytes`
+- Validation: **20 / 20 PASS**
+
+The registry is a research resource and does not provide clinical interpretation, pathogenicity assessment, reliability scoring, technology ranking, or medical advice.
+
+---
+
 # Vision
 
 The longer-term goal is a searchable empirical evidence layer where a researcher can ask:
