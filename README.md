@@ -11,6 +11,7 @@
 <br>
 
 [![Status](https://img.shields.io/badge/status-Phase_2_PASS-brightgreen)](#project-status)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23085673.svg)](https://doi.org/10.5281/zenodo.23085673)
 [![Phase 1A](https://img.shields.io/badge/Phase_1A-PASS-brightgreen)](#phase-1a--empirical-proof-of-concept)
 [![Phase 1B](https://img.shields.io/badge/Phase_1B-15%2F15_PASS-brightgreen)](#phase-1b--biological-variant-identity)
 [![Phase 2](https://img.shields.io/badge/Phase_2-20%2F20_PASS-brightgreen)](#phase-2--generalization)
@@ -831,6 +832,7 @@ The authoritative frozen Phase 2 release is:
 - SHA-256: `186cbed74fa718a728f7a24b43d58118a308165fae385eb95cc4cb4444788ca3`
 - Size: `8,708,768 bytes`
 - Validation: **20 / 20 PASS**
+- Zenodo DOI: [`10.5281/zenodo.23085673`](https://doi.org/10.5281/zenodo.23085673)
 
 The registry is a research resource and does not provide clinical interpretation, pathogenicity assessment, reliability scoring, technology ranking, or medical advice.
 
