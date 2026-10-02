@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/sequencing_run.schema.json",
+  "title": "SEQUENCING_RUN",
+  "description": "One sequencing run of one library from one sample. Platform is decomposed into technology family, vendor, instrument family, instrument model, chemistry and read mode; none of these substitutes for another.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "run_accession", "sample_id", "study_id",
+    "library", "assay", "platform", "read_type", "basecaller", "coverage",
+    "public_file_artifact_ids", "source_record_ids"
+  ],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "run_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "run_accession": {"$ref": "common.defs.schema.json#/$defs/insdc_run_accession"},
+    "experiment_accession": {"$ref": "common.defs.schema.json#/$defs/insdc_experiment_accession"},
+    "sample_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "study_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "library": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy", "source", "selection", "layout"],
+      "properties": {
+        "strategy": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        "source": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        "selection": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        "layout": {"$ref": "common.defs.schema.json#/$defs/normalized_value"}
+      }
+    },
+    "assay": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["technology_family", "vendor", "instrument_family", "instrument_model", "chemistry", "read_mode"],
+      "properties": {
+        "technology_family": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        "vendor": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        "instrument_family": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        "instrument_model": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        "chemistry": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/normalized_value"}},
+        "read_mode": {"$ref": "common.defs.schema.json#/$defs/normalized_value"}
+      }
+    },
+    "read_type": {
+      "allOf": [
+        {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        {"properties": {"value": {"enum": ["SHORT_PAIRED_END", "SHORT_SINGLE_END", "LONG_SINGLE_MOLECULE", "UNKNOWN"]}}}
+      ]
+    },
+    "basecaller": {
+      "description": "Basecaller / primary-analysis software. NOT_APPLICABLE is only valid when the source distributes no read-level data produced by a basecaller.",
+      "oneOf": [
+        {"const": "NOT_APPLICABLE"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "version", "model"],
+          "properties": {
+            "name": {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+            "version": {"type": "string", "minLength": 1},
+            "model": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "total_bases": {"type": ["integer", "null"], "minimum": 0},
+    "read_count": {"type": ["integer", "null"], "minimum": 0},
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "value"],
+      "properties": {
+        "status": {"enum": ["SOURCE_REPORTED", "COMPUTED_FROM_BASES", "UNKNOWN"]},
+        "value": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "genome_size_assembly_id": {"$ref": "common.defs.schema.json#/$defs/id"}
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "UNKNOWN"}}}, "then": {"properties": {"value": {"type": "null"}}}, "else": {"properties": {"value": {"type": "number"}}}},
+        {"if": {"properties": {"status": {"const": "COMPUTED_FROM_BASES"}}}, "then": {"required": ["genome_size_assembly_id"]}}
+      ]
+    },
+    "public_file_artifact_ids": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/id"}, "uniqueItems": true},
+    "source_record_ids": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/id"}, "minItems": 1, "uniqueItems": true}
+  }
+}

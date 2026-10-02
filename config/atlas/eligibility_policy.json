@@ -1,0 +1,256 @@
+{
+  "policy_version": "0.2.0",
+  "status": "M0_FROZEN_APPROVED",
+  "notice": "Lifecycle states, layers and promotion criteria for Evidence Atlas expansion records. A record's presence in the Public Data Catalog never implies it is evidence.",
+  "layers": [
+    {
+      "layer_id": "PUBLIC_DATA_CATALOG",
+      "description": "Broad metadata discovery. Records need not be scientifically comparable.",
+      "states": [
+        "CATALOGUED",
+        "ELIGIBILITY_PENDING",
+        "INELIGIBLE",
+        "NEEDS_REVIEW",
+        "WITHDRAWN"
+      ]
+    },
+    {
+      "layer_id": "EVIDENCE_CANDIDATE",
+      "description": "Records that satisfy every hard eligibility criterion, plus those undergoing or having completed validation but not yet frozen into a release.",
+      "states": [
+        "ELIGIBLE",
+        "VALIDATION_PENDING",
+        "VALIDATION_FAILED",
+        "VALIDATED"
+      ]
+    },
+    {
+      "layer_id": "VALIDATED_RELEASE",
+      "description": "Validated records frozen into an immutable, versioned release manifest. Membership is defined by the release manifest, not by a mutable flag.",
+      "states": [
+        "RELEASED"
+      ]
+    }
+  ],
+  "states": [
+    {
+      "state": "CATALOGUED",
+      "meaning": "Discovered and metadata snapshot stored. No scientific claim."
+    },
+    {
+      "state": "ELIGIBILITY_PENDING",
+      "meaning": "Queued for (re-)evaluation against the eligibility criteria."
+    },
+    {
+      "state": "ELIGIBLE",
+      "meaning": "Every hard criterion PASS under the stated policy version."
+    },
+    {
+      "state": "INELIGIBLE",
+      "meaning": "At least one hard criterion FAIL. Retained in the catalog with reasons."
+    },
+    {
+      "state": "NEEDS_REVIEW",
+      "meaning": "Abstention: at least one hard criterion UNKNOWN or a normalization conflict. Requires curation; never auto-promoted."
+    },
+    {
+      "state": "VALIDATION_PENDING",
+      "meaning": "Selected for processing under a frozen protocol; validation not yet complete."
+    },
+    {
+      "state": "VALIDATED",
+      "meaning": "Passed the frozen validation gates of its protocol; release-ready but not yet released."
+    },
+    {
+      "state": "VALIDATION_FAILED",
+      "meaning": "Failed at least one validation gate. Retained with the validation report."
+    },
+    {
+      "state": "RELEASED",
+      "meaning": "Included in at least one immutable release manifest."
+    },
+    {
+      "state": "WITHDRAWN",
+      "meaning": "Source suppressed/withdrawn or terms changed; excluded from future releases. Past releases are not altered."
+    }
+  ],
+  "initial_state": "CATALOGUED",
+  "transitions": {
+    "CATALOGUED": [
+      "ELIGIBILITY_PENDING",
+      "WITHDRAWN"
+    ],
+    "ELIGIBILITY_PENDING": [
+      "ELIGIBLE",
+      "INELIGIBLE",
+      "NEEDS_REVIEW",
+      "WITHDRAWN"
+    ],
+    "NEEDS_REVIEW": [
+      "ELIGIBILITY_PENDING",
+      "ELIGIBLE",
+      "INELIGIBLE",
+      "WITHDRAWN"
+    ],
+    "INELIGIBLE": [
+      "ELIGIBILITY_PENDING",
+      "WITHDRAWN"
+    ],
+    "ELIGIBLE": [
+      "VALIDATION_PENDING",
+      "ELIGIBILITY_PENDING",
+      "WITHDRAWN"
+    ],
+    "VALIDATION_PENDING": [
+      "VALIDATED",
+      "VALIDATION_FAILED",
+      "NEEDS_REVIEW",
+      "WITHDRAWN"
+    ],
+    "VALIDATION_FAILED": [
+      "VALIDATION_PENDING",
+      "ELIGIBILITY_PENDING",
+      "WITHDRAWN"
+    ],
+    "VALIDATED": [
+      "RELEASED",
+      "ELIGIBILITY_PENDING",
+      "WITHDRAWN"
+    ],
+    "RELEASED": [
+      "WITHDRAWN"
+    ],
+    "WITHDRAWN": []
+  },
+  "transition_rules": [
+    "No transition into ELIGIBLE may rely on an ML-only hard-gate value; E13 is UNKNOWN for such records, so evaluation yields NEEDS_REVIEW.",
+    "NEEDS_REVIEW -> ELIGIBLE and NEEDS_REVIEW -> INELIGIBLE require a recorded human curation decision.",
+    "INELIGIBLE -> ELIGIBILITY_PENDING is allowed only when the source metadata snapshot or the policy version changes.",
+    "VALIDATED -> RELEASED happens only by inclusion in a release manifest; the release manifest is the authority.",
+    "RELEASED -> WITHDRAWN excludes the record from future releases; it never edits a past release.",
+    "Any change to a released record's scientific content creates a new record version; the released version is immutable."
+  ],
+  "decision_values": [
+    "PASS",
+    "FAIL",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+  ],
+  "aggregation": {
+    "any_hard_fail": "INELIGIBLE",
+    "else_any_hard_unknown": "NEEDS_REVIEW",
+    "else_all_hard_pass_or_not_applicable": "ELIGIBLE",
+    "note": "FAIL dominates UNKNOWN: a record with a definite disqualifier is INELIGIBLE even if other criteria are unknown. NOT_APPLICABLE is allowed only for criteria marked applicability: CONDITIONAL."
+  },
+  "criteria": [
+    {
+      "id": "E01",
+      "name": "stable_public_accession",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Record has a stable public accession (INSDC run/sample/study accession or an authoritative resource persistent identifier) that is not suppressed."
+    },
+    {
+      "id": "E02",
+      "name": "organism_resolved",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Organism resolved to an NCBI Taxonomy ID at species rank or below from authoritative metadata, a deterministic rule, or curation."
+    },
+    {
+      "id": "E03",
+      "name": "open_access",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Data are open access; controlled-access records (e.g. dbGaP, EGA) are INELIGIBLE."
+    },
+    {
+      "id": "E04",
+      "name": "platform_resolved",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "technology_family and vendor resolved; instrument_family resolved or explicitly UNSPECIFIED without conflict."
+    },
+    {
+      "id": "E05",
+      "name": "library_in_domain",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Library strategy and source fall inside the target evidence domain (e.g. WGS/GENOMIC for germline small variants)."
+    },
+    {
+      "id": "E06",
+      "name": "assembly_resolved",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Reference assembly known by accession.version, or a defensible mapping path to a registered assembly exists."
+    },
+    {
+      "id": "E07",
+      "name": "provenance_usable",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Source query, retrieval timestamp and raw metadata snapshot SHA-256 recorded."
+    },
+    {
+      "id": "E08",
+      "name": "public_data_available",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "At least one publicly retrievable data or derived-output artifact with size and checksum (or publisher checksum)."
+    },
+    {
+      "id": "E09",
+      "name": "truth_or_comparator_relationship",
+      "hard": true,
+      "applicability": "CONDITIONAL",
+      "requirement": "Where the evidence domain requires it, a versioned truth/benchmark/comparator resource exists for this sample and assembly."
+    },
+    {
+      "id": "E10",
+      "name": "source_terms_compatible",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Source terms recorded, snapshotted and compatible with the intended derived use and redistribution."
+    },
+    {
+      "id": "E11",
+      "name": "reproducible_transformation_path",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "A frozen protocol exists for this evidence domain and technology family."
+    },
+    {
+      "id": "E12",
+      "name": "deduplicated",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Record is the canonical member of its duplicate cluster; mirrors are not separate candidates."
+    },
+    {
+      "id": "E13",
+      "name": "hard_gate_fields_authoritatively_backed",
+      "hard": true,
+      "applicability": "ALWAYS",
+      "requirement": "Every hard-gate field is backed by authoritative source metadata (SOURCE_CONTROLLED), deterministic normalization of authoritative metadata (RULE_EXACT, RULE_PATTERN), or explicit curator confirmation (CURATED), with no unresolved conflict. An ML-only value never satisfies this criterion, whatever its confidence: it yields UNKNOWN, so the record goes to NEEDS_REVIEW."
+    }
+  ],
+  "hard_gate_fields": [
+    "ncbi_taxonomy_id",
+    "technology_family_id",
+    "vendor_id",
+    "instrument_family_id",
+    "library_strategy",
+    "library_source",
+    "assembly_id",
+    "sample_id",
+    "access_class"
+  ],
+  "hard_gate_accepted_methods": [
+    "SOURCE_CONTROLLED",
+    "RULE_EXACT",
+    "RULE_PATTERN",
+    "CURATED"
+  ],
+  "ml_hard_gate_rule": "An ML_PROPOSED value is never sufficient for a hard-gate field. Before any record enters ELIGIBLE, each hard-gate field must use a method in hard_gate_accepted_methods. ML may propose values, assign confidence and route records to NEEDS_REVIEW; a curator who confirms a proposal records it as CURATED."
+}

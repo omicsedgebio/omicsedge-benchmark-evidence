@@ -22,6 +22,18 @@
 
 ---
 
+## Release status
+
+| Status | Scope |
+|---|---|
+| ✅ **RELEASED** | **Evidence Atlas v1.0.0** (Project 003): human (GRCh38), HG002 · HG003 · HG004, Illumina · Oxford Nanopore, germline small-variant benchmark evidence. Frozen and checksummed. DOI [`10.5281/zenodo.23085673`](https://doi.org/10.5281/zenodo.23085673). |
+| 🔒 **FROZEN DEVELOPMENT MILESTONE** | **M0 — Evidence Atlas Expansion Protocol** (approved 2026-10-01). Defines the architecture and scientific rules for cross-species / cross-platform expansion. **Rules only: no data, no model, no new evidence.** Locked by [`docs/atlas/m0_expansion_protocol.lock`](docs/atlas/m0_expansion_protocol.lock). |
+| ⏭️ **NEXT** | **M1 — Automated Public Data Catalog.** Not started. |
+
+No expansion data has been ingested or released. See [Evidence Atlas expansion](#evidence-atlas-expansion-in-development).
+
+---
+
 ## What is this?
 
 Most variant benchmarks answer a narrow question:
@@ -539,6 +551,116 @@ The registry is an **evidence layer**, not a decision engine.
 
 ---
 
+# Evidence Atlas expansion (in development)
+
+> **Status: IN DEVELOPMENT. Nothing in this section is released.**
+> Evidence Atlas v1.0.0 above is the only released resource. It is frozen.
+> M0, the expansion protocol, is frozen and approved. It defines
+> **architecture and scientific rules only**.
+
+### What M0 is and is not
+
+M0 fixes, in advance, how future data will be discovered, described, judged
+and released. M0 itself does **not** mean any of the following:
+
+- multispecies evidence has been released. It has not; v1.0.0 is human-only.
+- PacBio or other additional technologies are part of Atlas v1. They are not;
+  v1.0.0 covers Illumina and Oxford Nanopore only.
+- public sequencing runs have been ingested. None have.
+- an ML model has been trained. None has, and no ML threshold is active.
+- automated evidence admission is running. It is not.
+- M1 is complete. M1 has not started.
+
+## Goal
+
+The aim is to grow the Atlas into a **species-agnostic** and
+**sequencing-technology-agnostic** evidence system. It should discover public
+sequencing datasets broadly, but admit only scientifically defensible
+datasets into versioned releases. Intended future coverage includes, where
+defensible, *Homo sapiens*, *Mus musculus*, *Saccharomyces cerevisiae*,
+*Danio rerio* and other species. On the technology side it includes Illumina
+short-read, Oxford Nanopore, PacBio HiFi, and further technologies where
+metadata and evidence support them.
+
+## Catalogued is not evidence
+
+The expansion separates three layers:
+
+```text
+1. PUBLIC DATA CATALOG      broad metadata discovery: NOT evidence
+2. EVIDENCE CANDIDATE       passes every hard eligibility criterion: NOT yet validated
+3. VALIDATED RELEASE        passes frozen validation gates, frozen in an immutable manifest
+```
+
+> **catalogued metadata ≠ evidence candidate ≠ validated/released Evidence Atlas evidence**
+
+A dataset can be catalogued without being comparable, eligible or validated.
+Only layer 3 is Atlas evidence. Any count published for layers 1–2 is
+labelled with its layer.
+
+## Model
+
+- **Identity:** organisms by NCBI Taxonomy ID, assemblies by accession.version,
+  runs by INSDC accession. Species ≠ assembly; sample ≠ run.
+- **Platform facets kept separate:** technology family → vendor → instrument
+  family → instrument model, plus chemistry, read mode and basecaller.
+  NovaSeq, Revio and PromethION are instrument families, not technologies.
+- **Mirrors counted once:** NCBI SRA, ENA and DDBJ records of one run are one
+  dataset.
+
+## Role of automation
+
+Scheduled, free CI (GitHub Actions) is intended to handle metadata
+discovery, normalization, validation, manifests and release-candidate
+builds. Public data stays at its source. Heavy compute is used selectively,
+preferring existing public outputs over reprocessing raw reads. Publishing a
+release stays a human-approved step.
+
+## Role and limits of ML
+
+ML may **assist** with messy metadata, such as proposing normalized values,
+entity resolution, duplicate detection, triage and anomaly flags. It reports
+confidence and can route records to human review. An ML-only value **never**
+satisfies a hard eligibility gate: those fields need authoritative source
+metadata, deterministic normalization of it, or curator confirmation. ML
+**never** decides biological truth, benchmark truth, validation outcomes,
+release inclusion, clinical interpretation, technology or caller rankings,
+or trust scores. No model has been trained, and no ML threshold is active.
+The current values are provisional placeholders, pending M2 calibration.
+
+## Reproducibility and versioning
+
+- Releases are immutable and semantically versioned (v1.0.0 → v1.1.0 → v2.0.0).
+  Each has a manifest, source snapshot, provenance, a PASS validation report,
+  checksums, a GitHub release and a Zenodo version.
+- Continuous discovery feeds **future** releases. It never mutates a past
+  release.
+- v1.0.0 is protected by checksummed manifests of 467 frozen files
+  ([`releases/v1.0.0/`](releases/v1.0.0/)), verified by the test suite.
+  There are two lineages: 197 scientific-release files from the `v1.0.0` tag,
+  and 270 later Evidence Explorer web-delivery files (commit `da19599`) that
+  re-represent, but do not alter, the frozen observations.
+
+## Current milestone and roadmap
+
+```text
+M0  Expansion protocol            FROZEN / APPROVED (2026-10-01)
+M1  Automated metadata catalog    NEXT, not started
+M2  Normalization engine          not started
+M3  Eligibility engine            not started
+M4  Human multi-platform release  not started
+M5  Multispecies release          not started
+M6  Automated release pipeline    not started
+```
+
+- Protocol: [`docs/atlas/m0_expansion_protocol.md`](docs/atlas/m0_expansion_protocol.md)
+  (lock: [`docs/atlas/m0_expansion_protocol.lock`](docs/atlas/m0_expansion_protocol.lock);
+  verify with `python scripts/atlas/freeze_m0_protocol.py --check`)
+- Roadmap with validation gates: [`docs/roadmap.md`](docs/roadmap.md)
+- Public progress policy: [`docs/public_progress_policy.md`](docs/public_progress_policy.md)
+
+---
+
 # Repository architecture
 
 ```text
@@ -549,7 +671,10 @@ omicsedge-benchmark-evidence/
 │   ├── evidence_semantics.md
 │   ├── conceptual_schema.md
 │   ├── phase1b/
-│   └── phase2/
+│   ├── phase2/
+│   ├── atlas/                  # expansion protocol (in development)
+│   ├── roadmap.md
+│   └── public_progress_policy.md
 │
 ├── schemas/
 │   ├── experiment.schema.json
@@ -557,14 +682,23 @@ omicsedge-benchmark-evidence/
 │   ├── event.schema.json
 │   ├── observation.schema.json
 │   ├── provenance_link.schema.json
-│   └── variant.phase1b.schema.json
+│   ├── variant.phase1b.schema.json
+│   └── atlas/0.1.0/            # expansion entity schemas
+│
+├── config/
+│   └── atlas/                  # controlled vocabularies + policies
+│
+├── releases/
+│   └── v1.0.0/                 # frozen artifact manifest + release record
 │
 ├── src/
-│   └── benchmark_evidence/
+│   ├── benchmark_evidence/     # v1 (frozen)
+│   └── evidence_atlas/         # expansion protocol rules
 │
 ├── scripts/
 │   ├── phase1b/
-│   └── phase2/
+│   ├── phase2/
+│   └── atlas/
 │
 ├── sql/
 │   ├── event_evidence.sql
@@ -757,6 +891,12 @@ scripts/phase1b/
 scripts/phase2/
 ```
 
+Verify that the released v1.0.0 artifacts are unchanged:
+
+```bash
+python scripts/atlas/build_v1_freeze_manifest.py --check
+```
+
 ---
 
 # Data policy
@@ -812,7 +952,7 @@ caller leaderboards
 
 # Release, citation, and reuse
 
-Project 003 is being prepared as the **OmicsEdge Benchmark Evidence Registry v1.0.0** research release.
+Project 003 is released as the **OmicsEdge Benchmark Evidence Registry v1.0.0** research release (Evidence Atlas v1.0.0).
 
 For citation metadata, see:
 
