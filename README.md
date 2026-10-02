@@ -4,13 +4,18 @@
 
 <br>
 
+# OmicsEdge Benchmark Evidence Registry
+
 ### Traceable benchmark evidence across sequencing technologies, callers, samples, genomic contexts, and comparator versions.
 
 **Project 003 · OmicsEdgeBio**
 
+**[OmicsEdge Evidence Atlas](https://omicsedge.bio/evidence-atlas) · [Live Evidence Explorer](https://omicsedge.bio/explorer) · [DOI / Citation](https://doi.org/10.5281/zenodo.23085673)**
+
 <br>
 
-[![Status](https://img.shields.io/badge/status-Phase_2_PASS-brightgreen)](#project-status)
+[![Evidence Atlas v1.0.0](https://img.shields.io/badge/Evidence_Atlas_v1.0.0-RELEASED-brightgreen)](#release-status)
+[![Expansion M0](https://img.shields.io/badge/Expansion_M0-FROZEN-blue)](#evidence-atlas-expansion-in-development)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23085673.svg)](https://doi.org/10.5281/zenodo.23085673)
 [![Phase 1A](https://img.shields.io/badge/Phase_1A-PASS-brightgreen)](#phase-1a--empirical-proof-of-concept)
 [![Phase 1B](https://img.shields.io/badge/Phase_1B-15%2F15_PASS-brightgreen)](#phase-1b--biological-variant-identity)
@@ -19,6 +24,8 @@
 [![Truth](https://img.shields.io/badge/GIAB-v4.2.1-lightgrey)](#)
 
 </div>
+
+The **[OmicsEdge Evidence Atlas](https://omicsedge.bio/evidence-atlas)** is the public-facing research resource and tool. The **OmicsEdge Benchmark Evidence Registry** is the formal released and citable scientific resource underlying Evidence Atlas v1.0.0.
 
 ---
 
@@ -90,18 +97,24 @@ It is designed to make statements such as:
 
 ---
 
-# Evidence Explorer preview
+# Evidence Explorer
+
+The Evidence Explorer is the live browser interface for inspecting the released Evidence Atlas v1.0.0.
+
+It exposes run-scoped observations, genomic context, and provenance without collapsing the evidence into a single trust score.
+
+**[Open the live Evidence Explorer →](https://omicsedge.bio/explorer)**
 
 <p align="center">
   <img src="assets/evidence-explorer-preview.svg"
        width="100%"
-       alt="Concept preview of the OmicsEdge Evidence Explorer">
+       alt="OmicsEdge Evidence Explorer interface">
 </p>
 
 <p align="center">
   <sub>
-    Concept preview - the public Evidence Explorer will expose run-scoped observations,
-    genomic context, and provenance without collapsing evidence into a single trust score.
+    The live Evidence Explorer presents run-scoped observations, genomic context,
+    and provenance while preserving the released evidence model.
   </sub>
 </p>
 
@@ -200,9 +213,9 @@ Those conclusions require separate scientific methods.
 
 ---
 
-# Tool concept
+# Evidence Explorer interface
 
-The eventual public interface is intended to behave like an **evidence explorer**.
+The live public interface behaves as an **evidence explorer**.
 
 A user searches for a variant:
 
@@ -239,7 +252,7 @@ and receives something conceptually like:
 └──────────────────────────────────────────────────────────────┘
 ```
 
-The final explorer will make each layer inspectable rather than hiding provenance behind a single summary number.
+The Evidence Explorer makes each layer inspectable rather than hiding provenance behind a single summary number.
 
 ---
 
@@ -505,7 +518,7 @@ flowchart RL
     P --> C["Comparator runtime"]
 ```
 
-This allows a future user to distinguish:
+This allows a user to distinguish:
 
 ```text
 same biological variant
@@ -872,7 +885,7 @@ Phase 2B  ████████████████████  PASS / F
 Phase 2C  ████████████████████  PASS
 Phase 2D  ████████████████████  PASS
 Phase 2E  ████████████████████  20 / 20 PASS
-Explorer  ░░░░░░░░░░░░░░░░░░░░  NEXT
+Explorer  ████████████████████  LIVE
 ```
 
 ---
