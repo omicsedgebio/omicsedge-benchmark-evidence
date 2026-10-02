@@ -71,4 +71,3 @@ class CatalogAdapter(Protocol):
 
     def discover(self, taxon: PilotTaxon, *, limit: int) -> DiscoveryResult:
         """Return source count and at most ``limit`` metadata records."""
-
