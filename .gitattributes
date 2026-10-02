@@ -1,0 +1,2 @@
+# Captured ENA TSV fixtures preserve terminal tabs for empty fields.
+tests/fixtures/catalog/ena/*.tsv -whitespace
