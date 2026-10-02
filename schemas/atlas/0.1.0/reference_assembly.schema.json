@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/reference_assembly.schema.json",
+  "title": "REFERENCE_ASSEMBLY",
+  "description": "One versioned genome assembly (accession.version) of exactly one organism. UCSC-style names are aliases. Patch releases with new accession versions are distinct assemblies.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assembly_id",
+    "ncbi_taxonomy_id",
+    "assembly_name",
+    "insdc_accession",
+    "aliases",
+    "verification_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.defs.schema.json#/$defs/schema_version"
+    },
+    "assembly_id": {
+      "$ref": "common.defs.schema.json#/$defs/id"
+    },
+    "ncbi_taxonomy_id": {
+      "$ref": "common.defs.schema.json#/$defs/ncbi_taxonomy_id"
+    },
+    "assembly_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "insdc_accession": {
+      "allOf": [
+        {
+          "$ref": "common.defs.schema.json#/$defs/assembly_accession"
+        },
+        {
+          "pattern": "^GCA_"
+        }
+      ]
+    },
+    "refseq_accession": {
+      "allOf": [
+        {
+          "$ref": "common.defs.schema.json#/$defs/assembly_accession"
+        },
+        {
+          "pattern": "^GCF_"
+        }
+      ]
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "lifecycle": {
+      "enum": [
+        "CURRENT",
+        "LEGACY",
+        "SUPERSEDED"
+      ]
+    },
+    "verification_status": {
+      "enum": [
+        "SOURCE_REPORTED_UNVERIFIED",
+        "VERIFIED_AGAINST_NCBI"
+      ]
+    },
+    "verified_at": {
+      "$ref": "common.defs.schema.json#/$defs/utc_timestamp"
+    },
+    "verification_record": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "if": {
+    "properties": {
+      "verification_status": {
+        "const": "VERIFIED_AGAINST_NCBI"
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "verified_at",
+      "verification_record"
+    ]
+  }
+}

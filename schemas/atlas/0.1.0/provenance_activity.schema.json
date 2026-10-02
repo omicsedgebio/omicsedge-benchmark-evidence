@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/provenance_activity.schema.json",
+  "title": "PROVENANCE_ACTIVITY",
+  "description": "One recorded activity (discovery query, normalization, eligibility evaluation, validation, curation, release build) with the entities it used and generated. Modelled on the W3C PROV entity/activity/agent pattern.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "activity_id", "activity_type", "started_at", "ended_at", "agent", "used", "generated"],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "activity_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "activity_type": {"enum": ["DISCOVERY_QUERY", "NORMALIZATION", "ELIGIBILITY_EVALUATION", "VALIDATION", "CURATION", "RELEASE_BUILD"]},
+    "started_at": {"$ref": "common.defs.schema.json#/$defs/utc_timestamp"},
+    "ended_at": {"$ref": "common.defs.schema.json#/$defs/utc_timestamp"},
+    "agent": {"$ref": "common.defs.schema.json#/$defs/agent"},
+    "parameters_sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"},
+    "used": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/entity_ref"}},
+    "generated": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/entity_ref"}, "minItems": 1}
+  }
+}

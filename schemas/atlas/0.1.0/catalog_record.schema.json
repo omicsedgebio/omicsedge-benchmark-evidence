@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/catalog_record.schema.json",
+  "title": "CATALOG_RECORD",
+  "description": "Lifecycle wrapper around one catalogued entity. Carries the layer, eligibility state and its history, normalization state and confidence, discovery timestamps, deduplication and terms. A catalog record is NOT evidence unless its state places it in the VALIDATED_RELEASE layer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "record_version",
+    "record_kind",
+    "entity_ref",
+    "layer",
+    "eligibility_state",
+    "state_history",
+    "normalization_state",
+    "normalization_confidence",
+    "discovered_at",
+    "last_seen_at",
+    "source_record_ids",
+    "duplicate_cluster_id",
+    "canonical_in_cluster",
+    "terms"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "common.defs.schema.json#/$defs/schema_version"
+    },
+    "record_id": {
+      "$ref": "common.defs.schema.json#/$defs/id"
+    },
+    "record_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "record_kind": {
+      "enum": [
+        "SEQUENCING_RUN",
+        "DERIVED_ARTIFACT",
+        "TRUTH_SOURCE",
+        "STUDY",
+        "SAMPLE"
+      ]
+    },
+    "entity_ref": {
+      "$ref": "common.defs.schema.json#/$defs/entity_ref"
+    },
+    "layer": {
+      "$ref": "common.defs.schema.json#/$defs/layer"
+    },
+    "eligibility_state": {
+      "$ref": "common.defs.schema.json#/$defs/eligibility_state"
+    },
+    "state_history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "from_state",
+          "to_state",
+          "at",
+          "actor",
+          "reason",
+          "policy_version"
+        ],
+        "properties": {
+          "from_state": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "common.defs.schema.json#/$defs/eligibility_state"
+              }
+            ]
+          },
+          "to_state": {
+            "$ref": "common.defs.schema.json#/$defs/eligibility_state"
+          },
+          "at": {
+            "$ref": "common.defs.schema.json#/$defs/utc_timestamp"
+          },
+          "actor": {
+            "$ref": "common.defs.schema.json#/$defs/agent"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "policy_version": {
+            "$ref": "common.defs.schema.json#/$defs/semver"
+          },
+          "assessment_id": {
+            "$ref": "common.defs.schema.json#/$defs/id"
+          },
+          "release_version": {
+            "$ref": "common.defs.schema.json#/$defs/semver"
+          }
+        }
+      }
+    },
+    "normalization_state": {
+      "enum": [
+        "RAW",
+        "PARTIAL",
+        "NORMALIZED",
+        "CONFLICT"
+      ]
+    },
+    "normalization_confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum_hard_gate_confidence",
+        "ml_only_hard_gate_fields",
+        "unresolved_hard_gate_fields"
+      ],
+      "properties": {
+        "minimum_hard_gate_confidence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ml_only_hard_gate_fields": {
+          "description": "Hard-gate fields whose only support is an ML proposal. Must be empty for any state at or beyond ELIGIBLE.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "unresolved_hard_gate_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "discovered_at": {
+      "$ref": "common.defs.schema.json#/$defs/utc_timestamp"
+    },
+    "last_seen_at": {
+      "$ref": "common.defs.schema.json#/$defs/utc_timestamp"
+    },
+    "source_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "common.defs.schema.json#/$defs/id"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "duplicate_cluster_id": {
+      "$ref": "common.defs.schema.json#/$defs/id"
+    },
+    "canonical_in_cluster": {
+      "type": "boolean"
+    },
+    "terms": {
+      "$ref": "common.defs.schema.json#/$defs/source_terms"
+    },
+    "release_memberships": {
+      "description": "Informational mirror of the release manifests that include this record version; the manifests are authoritative.",
+      "type": "array",
+      "items": {
+        "$ref": "common.defs.schema.json#/$defs/semver"
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "eligibility_state": {
+            "enum": [
+              "CATALOGUED",
+              "ELIGIBILITY_PENDING",
+              "INELIGIBLE",
+              "NEEDS_REVIEW",
+              "WITHDRAWN"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "layer": {
+            "const": "PUBLIC_DATA_CATALOG"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "eligibility_state": {
+            "enum": [
+              "ELIGIBLE",
+              "VALIDATION_PENDING",
+              "VALIDATION_FAILED",
+              "VALIDATED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "layer": {
+            "const": "EVIDENCE_CANDIDATE"
+          },
+          "canonical_in_cluster": {
+            "const": true
+          },
+          "normalization_state": {
+            "const": "NORMALIZED"
+          },
+          "normalization_confidence": {
+            "properties": {
+              "unresolved_hard_gate_fields": {
+                "maxItems": 0
+              },
+              "ml_only_hard_gate_fields": {
+                "maxItems": 0
+              }
+            }
+          },
+          "terms": {
+            "properties": {
+              "compatibility": {
+                "const": "COMPATIBLE"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "eligibility_state": {
+            "const": "RELEASED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "release_memberships"
+        ],
+        "properties": {
+          "layer": {
+            "const": "VALIDATED_RELEASE"
+          },
+          "canonical_in_cluster": {
+            "const": true
+          },
+          "normalization_state": {
+            "const": "NORMALIZED"
+          },
+          "terms": {
+            "properties": {
+              "compatibility": {
+                "const": "COMPATIBLE"
+              }
+            }
+          },
+          "release_memberships": {
+            "minItems": 1
+          },
+          "normalization_confidence": {
+            "properties": {
+              "unresolved_hard_gate_fields": {
+                "maxItems": 0
+              },
+              "ml_only_hard_gate_fields": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/source_record.schema.json",
+  "title": "SOURCE_RECORD",
+  "description": "An immutable snapshot of one record as returned by one source at one time. Mirrors of the same INSDC accession share a canonical_accession and mirror_group_id; they are never independent datasets.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "source_record_id", "source_id", "source_accession",
+    "canonical_accession", "mirror_group_id", "retrieved_at", "query",
+    "raw_snapshot_sha256", "raw_snapshot_uri", "terms"
+  ],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "source_record_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "source_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "source_accession": {"type": "string", "minLength": 1},
+    "canonical_accession": {"type": "string", "minLength": 1},
+    "mirror_group_id": {"type": ["string", "null"]},
+    "retrieved_at": {"$ref": "common.defs.schema.json#/$defs/utc_timestamp"},
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["endpoint", "parameters_sha256"],
+      "properties": {
+        "endpoint": {"$ref": "common.defs.schema.json#/$defs/https_or_ftp_uri"},
+        "parameters": {"type": "object"},
+        "parameters_sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"}
+      }
+    },
+    "raw_snapshot_sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"},
+    "raw_snapshot_uri": {"type": "string", "minLength": 1},
+    "source_status": {"enum": ["PUBLIC", "SUPPRESSED", "WITHDRAWN", "REPLACED", "UNKNOWN"]},
+    "terms": {"$ref": "common.defs.schema.json#/$defs/source_terms"}
+  }
+}

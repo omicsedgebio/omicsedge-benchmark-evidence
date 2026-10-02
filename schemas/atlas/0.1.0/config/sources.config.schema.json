@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/config/sources.config.schema.json",
+  "title": "Source strategy configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_registry_version", "status", "notice", "deduplication_rules", "mirror_groups", "sources"],
+  "properties": {
+    "source_registry_version": {"$ref": "../common.defs.schema.json#/$defs/semver"},
+    "status": {"type": "string"},
+    "notice": {"type": "string"},
+    "deduplication_rules": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "mirror_groups": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["mirror_group_id", "label", "member_source_ids", "canonical_key", "independent_count_rule"],
+        "properties": {
+          "mirror_group_id": {"type": "string"},
+          "label": {"type": "string"},
+          "member_source_ids": {"type": "array", "items": {"type": "string"}, "minItems": 2, "uniqueItems": true},
+          "canonical_key": {"type": "string"},
+          "independent_count_rule": {"type": "string"}
+        }
+      }
+    },
+    "sources": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source_id", "label", "mirror_group_id", "contributes", "canonical_identifiers", "duplication_risks", "deduplication_strategy", "terms_review", "role", "evidence_grade_capable"],
+        "properties": {
+          "source_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "label": {"type": "string"},
+          "mirror_group_id": {"type": ["string", "null"]},
+          "contributes": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "canonical_identifiers": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "duplication_risks": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "deduplication_strategy": {"type": "string", "minLength": 1},
+          "terms_review": {"type": "string", "minLength": 1},
+          "role": {"enum": ["DISCOVERY_AND_METADATA", "REFERENCE_VOCABULARY", "TRUTH_AND_EVIDENCE", "DISCOVERY_ONLY_UNTIL_TERMS_REVIEWED"]},
+          "evidence_grade_capable": {"type": "boolean"},
+          "evidence_grade_note": {"type": "string"}
+        }
+      }
+    }
+  }
+}

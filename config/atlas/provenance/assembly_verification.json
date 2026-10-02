@@ -1,0 +1,527 @@
+{
+  "organism_results": [
+    {
+      "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/taxonomy/taxon/9606",
+      "failures": [],
+      "ncbi_taxonomy_id": 9606,
+      "observed": {
+        "immediate_parent": 9605,
+        "organism_name": "Homo sapiens",
+        "rank": "SPECIES",
+        "tax_id": 9606
+      },
+      "response_sha256": "edb2d22409eb58c25442a6c86e3e1b58e5c7e1e4677cb6a5b9ff4451f76c9a0b",
+      "response_snapshot": "config/atlas/provenance/ncbi_datasets/taxon_9606.json",
+      "retrieved_at": "2026-10-01T23:50:41Z",
+      "scientific_name": "Homo sapiens",
+      "verdict": "VERIFIED"
+    },
+    {
+      "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/taxonomy/taxon/10090",
+      "failures": [],
+      "ncbi_taxonomy_id": 10090,
+      "observed": {
+        "immediate_parent": 862507,
+        "organism_name": "Mus musculus",
+        "rank": "SPECIES",
+        "tax_id": 10090
+      },
+      "response_sha256": "d8786d3b4a3f8f795ae85d8bb2972319edab09c2e760c3e79b0cbd81409fb6d8",
+      "response_snapshot": "config/atlas/provenance/ncbi_datasets/taxon_10090.json",
+      "retrieved_at": "2026-10-01T23:50:42Z",
+      "scientific_name": "Mus musculus",
+      "verdict": "VERIFIED"
+    },
+    {
+      "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/taxonomy/taxon/4932",
+      "failures": [],
+      "ncbi_taxonomy_id": 4932,
+      "observed": {
+        "immediate_parent": 4930,
+        "organism_name": "Saccharomyces cerevisiae",
+        "rank": "SPECIES",
+        "tax_id": 4932
+      },
+      "response_sha256": "6fdc2aae46924e89489fad3ee3f6bb0fa83f374c91d0cc92907ff3e77c0ec7fe",
+      "response_snapshot": "config/atlas/provenance/ncbi_datasets/taxon_4932.json",
+      "retrieved_at": "2026-10-01T23:50:42Z",
+      "scientific_name": "Saccharomyces cerevisiae",
+      "verdict": "VERIFIED"
+    },
+    {
+      "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/taxonomy/taxon/559292",
+      "failures": [],
+      "ncbi_taxonomy_id": 559292,
+      "observed": {
+        "immediate_parent": 4932,
+        "organism_name": "Saccharomyces cerevisiae S288C",
+        "rank": "STRAIN",
+        "tax_id": 559292
+      },
+      "response_sha256": "3cd1ed765d86180a7fc0b96d50b1d8dc87afba6d4be8609fa2570fd92536aac5",
+      "response_snapshot": "config/atlas/provenance/ncbi_datasets/taxon_559292.json",
+      "retrieved_at": "2026-10-01T23:50:43Z",
+      "scientific_name": "Saccharomyces cerevisiae S288C",
+      "verdict": "VERIFIED"
+    },
+    {
+      "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/taxonomy/taxon/7955",
+      "failures": [],
+      "ncbi_taxonomy_id": 7955,
+      "observed": {
+        "immediate_parent": 7954,
+        "organism_name": "Danio rerio",
+        "rank": "SPECIES",
+        "tax_id": 7955
+      },
+      "response_sha256": "d26d9603783c59b3adf572b2c0028419c8a5fcc73cfd0d70ef6e03eb3782fa1b",
+      "response_snapshot": "config/atlas/provenance/ncbi_datasets/taxon_7955.json",
+      "retrieved_at": "2026-10-01T23:50:44Z",
+      "scientific_name": "Danio rerio",
+      "verdict": "VERIFIED"
+    }
+  ],
+  "results": [
+    {
+      "assembly_id": "grch37",
+      "assembly_name": "GRCh37",
+      "checks": [
+        {
+          "accession": "GCA_000001405.1",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000001405.1/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCh37",
+            "current_accession": "GCA_000001405.29",
+            "ncbi_assembly_status": "previous",
+            "organism_name": "Homo sapiens",
+            "paired_accession": "GCF_000001405.13",
+            "release_date": "2009-02-27",
+            "report_count": 1,
+            "tax_id": 9606
+          },
+          "response_sha256": "126ad279af1b62dc2c23a1e2d7f94766e5251d9694732aad72ab7619d8a7c1ee",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_000001405.1.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:45Z"
+        },
+        {
+          "accession": "GCF_000001405.13",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000001405.13/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCh37",
+            "current_accession": "GCF_000001405.40",
+            "ncbi_assembly_status": "previous",
+            "organism_name": "Homo sapiens",
+            "paired_accession": "GCA_000001405.1",
+            "release_date": "2009-02-27",
+            "report_count": 1,
+            "tax_id": 9606
+          },
+          "response_sha256": "e268eee4290564a4c57d23e75ba88c8e6881cdbf516a21d8d5e29649a1f32fde",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_000001405.13.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:46Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 9606,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "Feb. 2009 (GRCh37/hg19)",
+          "scientificName": "Homo sapiens",
+          "sourceName": "GRCh37 Genome Reference Consortium Human Reference 37 (GCA_000001405.1)",
+          "taxId": 9606
+        },
+        "ucsc_db": "hg19"
+      },
+      "verdict": "VERIFIED"
+    },
+    {
+      "assembly_id": "grch38",
+      "assembly_name": "GRCh38",
+      "checks": [
+        {
+          "accession": "GCA_000001405.15",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000001405.15/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCh38",
+            "current_accession": "GCA_000001405.29",
+            "ncbi_assembly_status": "previous",
+            "organism_name": "Homo sapiens",
+            "paired_accession": "GCF_000001405.26",
+            "release_date": "2013-12-17",
+            "report_count": 1,
+            "tax_id": 9606
+          },
+          "response_sha256": "61cefe8b4d9a9b241a199a338cc3e6e6cb9190f4fd2e00cc4700786a9504e1ea",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_000001405.15.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:46Z"
+        },
+        {
+          "accession": "GCF_000001405.26",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000001405.26/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCh38",
+            "current_accession": "GCF_000001405.40",
+            "ncbi_assembly_status": "previous",
+            "organism_name": "Homo sapiens",
+            "paired_accession": "GCA_000001405.15",
+            "release_date": "2013-12-17",
+            "report_count": 1,
+            "tax_id": 9606
+          },
+          "response_sha256": "d0860a7e402fd30baf04803235188e3701550fed3bca94dc6beaf7c6c8266dcd",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_000001405.26.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:47Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 9606,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "Dec. 2013 (GRCh38/hg38)",
+          "scientificName": "Homo sapiens",
+          "sourceName": "GRCh38 Genome Reference Consortium Human Reference 38 (GCA_000001405.15)",
+          "taxId": 9606
+        },
+        "ucsc_db": "hg38"
+      },
+      "verdict": "VERIFIED"
+    },
+    {
+      "assembly_id": "t2t_chm13v2",
+      "assembly_name": "T2T-CHM13v2.0",
+      "checks": [
+        {
+          "accession": "GCA_009914755.4",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_009914755.4/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "T2T-CHM13v2.0",
+            "current_accession": "GCA_009914755.4",
+            "ncbi_assembly_status": "current",
+            "organism_name": "Homo sapiens",
+            "paired_accession": "GCF_009914755.1",
+            "release_date": "2022-01-24",
+            "report_count": 1,
+            "tax_id": 9606
+          },
+          "response_sha256": "c6c8a38b01de4c2ff11cf96d306f3a58093e41766d2036b1c33158c69ee960b1",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_009914755.4.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:48Z"
+        },
+        {
+          "accession": "GCF_009914755.1",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_009914755.1/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "T2T-CHM13v2.0",
+            "current_accession": "GCF_009914755.1",
+            "ncbi_assembly_status": "current",
+            "organism_name": "Homo sapiens",
+            "paired_accession": "GCA_009914755.4",
+            "release_date": "2022-01-24",
+            "report_count": 1,
+            "tax_id": 9606
+          },
+          "response_sha256": "2b3c4a93eea3be2502a0ac41d0d168dc9275a28680a1c4e219716463e00cfaf5",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_009914755.1.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:48Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 9606,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "Jan. 2022 (T2T CHM13v2.0/hs1)",
+          "scientificName": "Homo sapiens",
+          "sourceName": "Telomere to telomere (T2T) assembly of haploid CHM13 + chrY (GCA_009914755.4)",
+          "taxId": 9606
+        },
+        "ucsc_db": "hs1"
+      },
+      "verdict": "VERIFIED"
+    },
+    {
+      "assembly_id": "grcm38",
+      "assembly_name": "GRCm38",
+      "checks": [
+        {
+          "accession": "GCA_000001635.2",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000001635.2/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCm38",
+            "current_accession": "GCA_000001635.9",
+            "ncbi_assembly_status": "previous",
+            "organism_name": "Mus musculus",
+            "paired_accession": "GCF_000001635.20",
+            "release_date": "2012-01-09",
+            "report_count": 1,
+            "tax_id": 10090
+          },
+          "response_sha256": "4c4ad96c8aad56363b8585c6408fd9210d6c64b4cd2a7dd0af613c7e56677b3c",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_000001635.2.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:49Z"
+        },
+        {
+          "accession": "GCF_000001635.20",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000001635.20/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCm38",
+            "current_accession": "GCF_000001635.27",
+            "ncbi_assembly_status": "previous",
+            "organism_name": "Mus musculus",
+            "paired_accession": "GCA_000001635.2",
+            "release_date": "2012-01-09",
+            "report_count": 1,
+            "tax_id": 10090
+          },
+          "response_sha256": "0f1a1c3e91040dc06bc2c762677e08af3cf547314be4c524f8849c8400ba8165",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_000001635.20.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:50Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 10090,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "Dec. 2011 (GRCm38/mm10)",
+          "scientificName": "Mus musculus",
+          "sourceName": "Genome Reference Consortium Mouse Build 38 (GCA_000001635.2)",
+          "taxId": 10090
+        },
+        "ucsc_db": "mm10"
+      },
+      "verdict": "VERIFIED"
+    },
+    {
+      "assembly_id": "grcm39",
+      "assembly_name": "GRCm39",
+      "checks": [
+        {
+          "accession": "GCA_000001635.9",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000001635.9/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCm39",
+            "current_accession": "GCA_000001635.9",
+            "ncbi_assembly_status": "current",
+            "organism_name": "Mus musculus",
+            "paired_accession": "GCF_000001635.27",
+            "release_date": "2020-06-24",
+            "report_count": 1,
+            "tax_id": 10090
+          },
+          "response_sha256": "061616673f0f8d81277b1f0a8dea59e0bc82000565eb1920b1319a41222ef4d0",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_000001635.9.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:50Z"
+        },
+        {
+          "accession": "GCF_000001635.27",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000001635.27/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCm39",
+            "current_accession": "GCF_000001635.27",
+            "ncbi_assembly_status": "current",
+            "organism_name": "Mus musculus",
+            "paired_accession": "GCA_000001635.9",
+            "release_date": "2020-06-24",
+            "report_count": 1,
+            "tax_id": 10090
+          },
+          "response_sha256": "4dc3bf791be5a90d697a4581c6c24fbeb8eaa98445ce071574cd41a00528183e",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_000001635.27.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:51Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 10090,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "Jun. 2020 (GRCm39/mm39)",
+          "scientificName": "Mus musculus",
+          "sourceName": "Genome Reference Consortium Mouse Build 39 (GCA_000001635.9)",
+          "taxId": 10090
+        },
+        "ucsc_db": "mm39"
+      },
+      "verdict": "VERIFIED"
+    },
+    {
+      "assembly_id": "saccer_r64",
+      "assembly_name": "R64",
+      "checks": [
+        {
+          "accession": "GCA_000146045.2",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000146045.2/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "R64",
+            "current_accession": "GCA_000146045.2",
+            "ncbi_assembly_status": "current",
+            "organism_name": "Saccharomyces cerevisiae S288C",
+            "paired_accession": "GCF_000146045.2",
+            "release_date": "2011-04-18",
+            "report_count": 1,
+            "tax_id": 559292
+          },
+          "response_sha256": "c68dca679709244f252f8d1a3bd43e4649739dbe70626f88065bd5ca6dfadd56",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_000146045.2.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:52Z"
+        },
+        {
+          "accession": "GCF_000146045.2",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000146045.2/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "R64",
+            "current_accession": "GCF_000146045.2",
+            "ncbi_assembly_status": "current",
+            "organism_name": "Saccharomyces cerevisiae S288C",
+            "paired_accession": "GCA_000146045.2",
+            "release_date": "2014-12-17",
+            "report_count": 1,
+            "tax_id": 559292
+          },
+          "response_sha256": "eea3ad4615328e7cf871868e85cc305c5e836ee8d4be4b37ba85b8be6d85b926",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_000146045.2.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:52Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 559292,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "Apr. 2011 (SacCer_Apr2011/sacCer3)",
+          "scientificName": "Saccharomyces cerevisiae",
+          "sourceName": "Saccharomyces cerevisiae S288c assembly from Saccharomyces Genome Database (GCA_000146045.2)",
+          "taxId": 559292
+        },
+        "ucsc_db": "sacCer3"
+      },
+      "verdict": "VERIFIED"
+    },
+    {
+      "assembly_id": "grcz10",
+      "assembly_name": "GRCz10",
+      "checks": [
+        {
+          "accession": "GCA_000002035.3",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000002035.3/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCz10",
+            "current_accession": "GCA_000002035.4",
+            "ncbi_assembly_status": "previous",
+            "organism_name": "Danio rerio",
+            "paired_accession": "GCF_000002035.5",
+            "release_date": "2014-09-02",
+            "report_count": 1,
+            "tax_id": 7955
+          },
+          "response_sha256": "75b8a460ab877846cd113d1fd6c3ef8b356e5259ab1da958c0a2e6cddf906188",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_000002035.3.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:53Z"
+        },
+        {
+          "accession": "GCF_000002035.5",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000002035.5/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCz10",
+            "current_accession": "GCF_000002035.5",
+            "ncbi_assembly_status": "suppressed",
+            "organism_name": "Danio rerio",
+            "paired_accession": "GCA_000002035.3",
+            "release_date": "2014-09-02",
+            "report_count": 1,
+            "tax_id": 7955
+          },
+          "response_sha256": "f081f283d7a9c9dbadaf4a2eca3639bce054ab7a79543aa445e7f467412acbf2",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_000002035.5.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:54Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 7955,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "Sep. 2014 (GRCz10/danRer10)",
+          "scientificName": "Danio rerio",
+          "sourceName": "Genome Reference Consortium Zebrafish Build 10 (GCA_000002035.3)",
+          "taxId": 7955
+        },
+        "ucsc_db": "danRer10"
+      },
+      "verdict": "VERIFIED"
+    },
+    {
+      "assembly_id": "grcz11",
+      "assembly_name": "GRCz11",
+      "checks": [
+        {
+          "accession": "GCA_000002035.4",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCA_000002035.4/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCz11",
+            "current_accession": "GCA_000002035.4",
+            "ncbi_assembly_status": "current",
+            "organism_name": "Danio rerio",
+            "paired_accession": "GCF_000002035.6",
+            "release_date": "2017-05-09",
+            "report_count": 1,
+            "tax_id": 7955
+          },
+          "response_sha256": "8e3958f6d76bcf1876e74fe36a9e4e935e70c14e0304a3876544695995f0d14e",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCA_000002035.4.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:54Z"
+        },
+        {
+          "accession": "GCF_000002035.6",
+          "endpoint": "https://api.ncbi.nlm.nih.gov/datasets/v2/genome/accession/GCF_000002035.6/dataset_report?filters.assembly_version=all_assemblies",
+          "failures": [],
+          "observed": {
+            "assembly_name": "GRCz11",
+            "current_accession": "GCF_000002035.6",
+            "ncbi_assembly_status": "suppressed",
+            "organism_name": "Danio rerio",
+            "paired_accession": "GCA_000002035.4",
+            "release_date": "2017-05-09",
+            "report_count": 1,
+            "tax_id": 7955
+          },
+          "response_sha256": "1893620d278720d493b2c665ea891b80327936087d3c6f7f1ed280f9d00ddf52",
+          "response_snapshot": "config/atlas/provenance/ncbi_datasets/GCF_000002035.6.dataset_report.json",
+          "retrieved_at": "2026-10-01T23:50:55Z"
+        }
+      ],
+      "ncbi_taxonomy_id": 7955,
+      "ucsc_check": {
+        "failures": [],
+        "observed": {
+          "description": "May 2017 (GRCz11/danRer11)",
+          "scientificName": "Danio rerio",
+          "sourceName": "Genome Reference Consortium Zebrafish Build 11 (GCA_000002035.4)",
+          "taxId": 7955
+        },
+        "ucsc_db": "danRer11"
+      },
+      "verdict": "VERIFIED"
+    }
+  ],
+  "script": "scripts/atlas/verify_seed_assemblies.py",
+  "sequence_data_downloaded": false,
+  "ucsc_source": {
+    "endpoint": "https://api.genome.ucsc.edu/list/ucscGenomes",
+    "extract": "config/atlas/provenance/ucsc_genomes_extract.json",
+    "response_sha256": "db29d013b63d724856e379404f088b88da8bb660afaf1143d1d2530a96929a32",
+    "retrieved_at": "2026-10-01T23:50:40Z"
+  },
+  "verification_method": "NCBI Datasets v2 taxonomy taxon report: taxonomy ID, scientific name, rank and immediate parent; NCBI Datasets v2 genome dataset_report (JSON metadata only): exact accession.version, assembly name, taxonomy ID and GCA/GCF pairing; UCSC Genome Browser API ucscGenomes list: database name, taxonomy ID and cited GCA accession"
+}
