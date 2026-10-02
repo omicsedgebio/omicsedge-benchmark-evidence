@@ -1,0 +1,139 @@
+name: M1A bounded catalog discovery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  catalog:
+    name: Test and run bounded ENA catalog pilot
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install project dependencies
+        run: python -m pip install --upgrade pip '.[dev]'
+
+      - name: Verify frozen v1 and M0 artifacts before discovery
+        run: |
+          python scripts/atlas/build_v1_freeze_manifest.py --check
+          python scripts/atlas/freeze_m0_protocol.py --check
+
+      - name: Run full offline test suite
+        run: python -m pytest
+
+      - name: Run bounded M1A ENA metadata discovery
+        run: |
+          python scripts/atlas/catalog_discover.py \
+            --source ena \
+            --cloud-live \
+            --limit 100 \
+            --output-dir data/catalog/m1a \
+            --results-dir results/catalog
+
+      - name: Verify compact outputs and catalog-only lifecycle
+        run: |
+          test -s data/catalog/m1a/manifests/pilot_snapshot_manifest.json
+          test -s data/catalog/m1a/normalized/catalog_records.jsonl
+          test -s results/catalog/m1a_summary.json
+          test -s results/catalog/m1a_summary.tsv
+          test -s results/catalog/unresolved_metadata.tsv
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          records = [json.loads(line) for line in Path(
+              "data/catalog/m1a/normalized/catalog_records.jsonl"
+          ).read_text().splitlines()]
+          assert records
+          assert all(record["layer"] == "PUBLIC_DATA_CATALOG" for record in records)
+          assert all(record["eligibility_state"] == "CATALOGUED" for record in records)
+          assert len(records) <= 400
+          PY
+
+      - name: Re-verify frozen artifacts
+        run: |
+          python scripts/atlas/build_v1_freeze_manifest.py --check
+          python scripts/atlas/freeze_m0_protocol.py --check
+
+      - name: Enforce compact metadata-only artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          roots = (Path("data/catalog/m1a"), Path("results/catalog"))
+          files = sorted(path for root in roots for path in root.rglob("*") if path.is_file())
+          assert files, "no M1A output files"
+          allowed_suffixes = {".json", ".jsonl", ".tsv"}
+          forbidden = {".fastq", ".fq", ".bam", ".cram", ".sam", ".bcf", ".vcf"}
+          for path in files:
+              assert path.suffix.lower() in allowed_suffixes, f"unexpected artifact type: {path}"
+              assert not any(str(path).lower().endswith(suffix) for suffix in forbidden), path
+          total = sum(path.stat().st_size for path in files)
+          assert total <= 25 * 1024 * 1024, f"M1A artifact too large: {total} bytes"
+          print(f"M1A compact artifact: {len(files)} files, {total} bytes")
+          PY
+
+      - name: Write GitHub Actions job summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          summary = json.loads(Path("results/catalog/m1a_summary.json").read_text())
+          manifest = Path("data/catalog/m1a/manifests/pilot_snapshot_manifest.json")
+          counts = summary["counts"]
+          normalized = counts["NORMALIZED"]
+          unresolved = counts["UNRESOLVED"]
+          rows = [
+              "# M1A bounded catalog pilot",
+              "",
+              "Canonical execution: manual GitHub-hosted workflow",
+              "",
+              "| Metric | Value |",
+              "|---|---:|",
+              f"| Pilot records fetched | {normalized['pilot_records_fetched']} |",
+              f"| Unique INSDC run accessions | {normalized['unique_run_accessions']} |",
+              f"| Duplicate run accessions | {normalized['duplicate_run_accessions_within_queries'] + normalized['duplicate_run_accessions_across_query_scopes']} |",
+              f"| Unresolved metadata fields | {unresolved['metadata_fields']} |",
+              f"| Output lifecycle | `{summary['lifecycle_assertion']['state']}` |",
+              "",
+              f"Manifest SHA-256: `{hashlib.sha256(manifest.read_bytes()).hexdigest()}`",
+              "",
+              "Metadata-only pilot; not Evidence Atlas evidence. No sequencing payloads were downloaded.",
+          ]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as handle:
+              handle.write("\n".join(rows) + "\n")
+          PY
+
+      - name: Upload compact M1A metadata artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1a-canonical-catalog-pilot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            data/catalog/m1a/manifests/
+            data/catalog/m1a/snapshots/
+            data/catalog/m1a/normalized/
+            results/catalog/m1a_summary.json
+            results/catalog/m1a_summary.tsv
+            results/catalog/unresolved_metadata.tsv
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 9

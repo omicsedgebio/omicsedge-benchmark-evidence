@@ -1,0 +1,24 @@
+columnId	description	type
+run_accession	captured ENA read_run field	text
+experiment_accession	captured ENA read_run field	text
+study_accession	captured ENA read_run field	text
+secondary_study_accession	captured ENA read_run field	text
+sample_accession	captured ENA read_run field	text
+secondary_sample_accession	captured ENA read_run field	text
+tax_id	captured ENA read_run field	text
+scientific_name	captured ENA read_run field	text
+library_strategy	captured ENA read_run field	text
+library_source	captured ENA read_run field	text
+library_selection	captured ENA read_run field	text
+library_layout	captured ENA read_run field	text
+instrument_platform	captured ENA read_run field	text
+instrument_model	captured ENA read_run field	text
+read_count	captured ENA read_run field	text
+base_count	captured ENA read_run field	text
+first_public	captured ENA read_run field	text
+fastq_ftp	captured ENA read_run field	text
+fastq_md5	captured ENA read_run field	text
+fastq_bytes	captured ENA read_run field	text
+submitted_ftp	captured ENA read_run field	text
+submitted_md5	captured ENA read_run field	text
+submitted_bytes	captured ENA read_run field	text
