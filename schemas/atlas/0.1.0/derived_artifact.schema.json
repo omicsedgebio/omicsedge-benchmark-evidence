@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/derived_artifact.schema.json",
+  "title": "DERIVED_ARTIFACT",
+  "description": "A file-level artifact: reads, alignments, variant calls, truth files or benchmark outputs. Source-hosted artifacts are referenced, not copied. A derived artifact never increases the dataset count of the run it derives from.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "artifact_id", "artifact_kind", "origin", "uri",
+    "size_bytes", "checksum", "derived_from", "availability"
+  ],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "artifact_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "artifact_kind": {"enum": ["FASTQ", "UNALIGNED_BAM", "SIGNAL", "BAM", "CRAM", "VCF", "GVCF", "BED", "REFERENCE_FASTA", "BENCHMARK_OUTPUT", "METADATA", "OTHER"]},
+    "origin": {"enum": ["SOURCE_HOSTED", "ATLAS_DERIVED"]},
+    "uri": {"$ref": "common.defs.schema.json#/$defs/https_or_ftp_uri"},
+    "size_bytes": {"type": ["integer", "null"], "minimum": 0},
+    "checksum": {
+      "oneOf": [
+        {"const": "UNKNOWN"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value", "source"],
+          "properties": {
+            "algorithm": {"enum": ["sha256", "md5"]},
+            "value": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+            "source": {"enum": ["PUBLISHER", "COMPUTED_ON_RETRIEVAL", "ATLAS_BUILD"]}
+          }
+        }
+      ]
+    },
+    "assembly_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "sequence_set_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "produced_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pipeline", "software", "version"],
+      "properties": {
+        "pipeline": {"type": "string", "minLength": 1},
+        "software": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1}
+      }
+    },
+    "derived_from": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/entity_ref"}},
+    "availability": {"enum": ["PUBLIC", "REQUESTER_PAYS", "CONTROLLED", "UNAVAILABLE", "UNKNOWN"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"artifact_kind": {"enum": ["BAM", "CRAM", "VCF", "GVCF", "BENCHMARK_OUTPUT"]}}},
+      "then": {"required": ["assembly_id"]}
+    },
+    {
+      "if": {"properties": {"origin": {"const": "ATLAS_DERIVED"}}},
+      "then": {
+        "required": ["produced_by"],
+        "properties": {
+          "checksum": {"type": "object", "properties": {"algorithm": {"const": "sha256"}}},
+          "derived_from": {"minItems": 1}
+        }
+      }
+    }
+  ]
+}

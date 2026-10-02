@@ -1,0 +1,146 @@
+{
+  "policy_version": "0.2.0",
+  "status": "M0_FROZEN_APPROVED",
+  "notice": "Where machine learning may assist the Evidence Atlas and where it must not decide. M0 trains no model and activates no model.",
+  "principle": "Rules first. ML may propose normalized metadata, resolve entities, classify and triage, detect possible duplicates, flag anomalies, assign confidence and route records to NEEDS_REVIEW. An ML-only value never satisfies a hard eligibility criterion, and ML never autonomously determines truth, validation, release inclusion, rankings or scores.",
+  "normalization_methods": [
+    {
+      "method": "SOURCE_CONTROLLED",
+      "description": "Value copied from a source controlled vocabulary with an exact registry mapping.",
+      "ml": false
+    },
+    {
+      "method": "RULE_EXACT",
+      "description": "Exact alias match in a versioned Atlas vocabulary.",
+      "ml": false
+    },
+    {
+      "method": "RULE_PATTERN",
+      "description": "Deterministic, versioned pattern rule.",
+      "ml": false
+    },
+    {
+      "method": "CURATED",
+      "description": "Recorded human curation decision.",
+      "ml": false
+    },
+    {
+      "method": "ML_PROPOSED",
+      "description": "Value proposed by an evaluated ML model with a confidence score.",
+      "ml": true
+    },
+    {
+      "method": "UNRESOLVED",
+      "description": "No method produced a value; the field is UNKNOWN.",
+      "ml": false
+    }
+  ],
+  "allowed_tasks": [
+    {
+      "task": "instrument_name_normalization",
+      "output": "proposed instrument_family_id / instrument_model_id from free text"
+    },
+    {
+      "task": "metadata_entity_resolution",
+      "output": "proposed links between sample aliases, studies and publications"
+    },
+    {
+      "task": "study_classification",
+      "output": "proposed assay / evidence-domain class for a study"
+    },
+    {
+      "task": "duplicate_detection",
+      "output": "proposed duplicate clusters beyond exact-accession rules"
+    },
+    {
+      "task": "benchmark_suitability_triage",
+      "output": "priority ordering of catalog records for human/rule review"
+    },
+    {
+      "task": "anomaly_detection",
+      "output": "flags for implausible metadata (e.g. read length inconsistent with technology)"
+    },
+    {
+      "task": "review_routing",
+      "output": "route a record to NEEDS_REVIEW with the proposal and its confidence"
+    }
+  ],
+  "prohibited_decisions": [
+    {
+      "decision": "hard_eligibility_gate",
+      "reason": "Hard-gate fields require authoritative metadata, deterministic normalization of it, or curator confirmation."
+    },
+    {
+      "decision": "biological_truth",
+      "reason": "Truth comes from versioned truth resources and frozen protocols."
+    },
+    {
+      "decision": "benchmark_truth",
+      "reason": "Benchmark outcomes come from frozen comparators, never from ML."
+    },
+    {
+      "decision": "clinical_interpretation",
+      "reason": "Outside scientific scope."
+    },
+    {
+      "decision": "technology_ranking",
+      "reason": "Benchmark context is conditional; no rankings are generated."
+    },
+    {
+      "decision": "trust_score",
+      "reason": "No trust or reliability score is generated without a separately validated method."
+    },
+    {
+      "decision": "caller_ranking",
+      "reason": "The Atlas is not a caller leaderboard."
+    },
+    {
+      "decision": "release_inclusion",
+      "reason": "Release membership requires rule/curation gates and a release manifest."
+    },
+    {
+      "decision": "validation_outcome",
+      "reason": "Validation gates are deterministic protocol checks."
+    }
+  ],
+  "rule_conflict_behaviour": "If an ML proposal disagrees with a rule-derived or source-controlled value, the non-ML value stands and the record is flagged NEEDS_REVIEW; ML never overrides a rule.",
+  "deployment_requirements": [
+    "All thresholds.activation_requirements satisfied and recorded in thresholds.activation_record (report paths and SHA-256).",
+    "Comparison against the rules-only baseline on the same frozen evaluation set.",
+    "Model, training-data snapshot, code commit and evaluation report versioned and checksummed.",
+    "Activation is a policy-version change reviewed by a human; it never happens implicitly.",
+    "Every ML-produced value stores model_id, model_version, confidence and input hash."
+  ],
+  "thresholds": {
+    "status": "PROVISIONAL",
+    "active": false,
+    "validated": false,
+    "calibration_milestone": "M2",
+    "statement": "PROVISIONAL / INACTIVE / NOT VALIDATED / SUBJECT TO M2 CALIBRATION. These numbers are configuration placeholders, not scientific thresholds. No model exists in M0, so they have no evidential meaning.",
+    "provisional_values": {
+      "accept_threshold": 0.95,
+      "review_threshold": 0.7,
+      "min_precision_at_accept": 0.99
+    },
+    "applies_to": "Non-hard-gate catalog fields only, and only once active. Thresholds never let an ML value satisfy a hard eligibility gate.",
+    "behaviour_while_inactive": "Every ML proposal is routed to human review (REVIEW); no ML value is written as a normalized field automatically.",
+    "behaviour_when_active": {
+      "confidence >= accept_threshold": "ACCEPT_NON_GATE: may populate a non-hard-gate catalog field as ML_PROPOSED",
+      "review_threshold <= confidence < accept_threshold": "REVIEW: proposal shown to a curator; field stays UNKNOWN",
+      "confidence < review_threshold": "ABSTAIN: proposal discarded; field UNRESOLVED"
+    },
+    "activation_requirements": [
+      "frozen, checksummed evaluation set created before training",
+      "class-specific performance (per-class precision and recall)",
+      "calibration analysis (reliability curve, expected calibration error)",
+      "abstention analysis (coverage and abstention rate at each candidate threshold)",
+      "error analysis of false accepts and false abstentions",
+      "documented threshold-selection rationale"
+    ],
+    "activation_record": null
+  },
+  "model_registry": {
+    "active_models": [],
+    "statement": "No ML model is activated by M0."
+  }
+}

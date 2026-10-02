@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/truth_source.schema.json",
+  "title": "TRUTH_SOURCE",
+  "description": "A versioned benchmark/truth/comparator resource for one sample on one assembly (e.g. GIAB HG002 v4.2.1 GRCh38). A truth source is never produced or altered by ML.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "truth_source_id", "provider", "release_version",
+    "sample_id", "assembly_id", "sequence_set_id", "evidence_domain",
+    "truth_artifact_id", "confident_regions_artifact_id", "terms"
+  ],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "truth_source_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "provider": {"type": "string", "minLength": 1},
+    "release_version": {"type": "string", "minLength": 1},
+    "sample_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "assembly_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "sequence_set_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "evidence_domain": {"enum": ["GERMLINE_SMALL_VARIANT", "GERMLINE_STRUCTURAL_VARIANT", "OTHER"]},
+    "truth_artifact_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "confident_regions_artifact_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "publication_ids": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/id"}, "uniqueItems": true},
+    "terms": {"$ref": "common.defs.schema.json#/$defs/source_terms"}
+  }
+}

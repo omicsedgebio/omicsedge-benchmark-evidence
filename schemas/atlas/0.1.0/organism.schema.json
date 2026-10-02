@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/organism.schema.json",
+  "title": "ORGANISM",
+  "description": "A taxon identified by its NCBI Taxonomy ID. Names are labels; the taxonomy ID is the identity. An organism is never an assembly, and strain/cell line belongs to SAMPLE unless the taxon itself is strain-ranked.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "organism_id", "ncbi_taxonomy_id", "scientific_name", "rank", "taxonomy_snapshot"],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "organism_id": {"type": "string", "pattern": "^taxon:[1-9][0-9]*$"},
+    "ncbi_taxonomy_id": {"$ref": "common.defs.schema.json#/$defs/ncbi_taxonomy_id"},
+    "scientific_name": {"type": "string", "minLength": 1},
+    "common_name": {"type": "string"},
+    "rank": {"type": "string", "minLength": 1},
+    "parent_ncbi_taxonomy_id": {"$ref": "common.defs.schema.json#/$defs/ncbi_taxonomy_id"},
+    "merged_from_taxonomy_ids": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/ncbi_taxonomy_id"}, "uniqueItems": true},
+    "taxonomy_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "retrieved_at"],
+      "properties": {
+        "source_id": {"const": "ncbi_taxonomy"},
+        "retrieved_at": {"$ref": "common.defs.schema.json#/$defs/utc_timestamp"},
+        "raw_snapshot_sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"}
+      }
+    }
+  }
+}

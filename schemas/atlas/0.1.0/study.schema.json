@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/study.schema.json",
+  "title": "STUDY",
+  "description": "A study/project. BioProject is preferred; INSDC study accessions are recorded alongside. Umbrella projects are relationships, not additional studies.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "study_id", "accessions", "title", "source_record_ids"],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "study_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "accessions": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "bioproject": {"$ref": "common.defs.schema.json#/$defs/bioproject_accession"},
+        "insdc_study": {"$ref": "common.defs.schema.json#/$defs/insdc_study_accession"},
+        "resource_persistent_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "title": {"type": "string", "minLength": 1},
+    "umbrella_study_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "publication_ids": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/id"}, "uniqueItems": true},
+    "source_record_ids": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/id"}, "minItems": 1, "uniqueItems": true}
+  }
+}

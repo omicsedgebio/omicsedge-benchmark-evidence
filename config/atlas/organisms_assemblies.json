@@ -1,0 +1,174 @@
+{
+  "registry_version": "0.2.0",
+  "status": "M0_FROZEN_APPROVED",
+  "notice": "Seed organism and reference-assembly registry. It is an extensible starting set, NOT the supported universe: any organism with a stable NCBI Taxonomy ID can be catalogued. Every taxonomy ID (with name, rank and declared parent), assembly accession and UCSC database name below was verified by metadata lookup against NCBI Datasets and the UCSC Genome Browser API; see config/atlas/provenance/assembly_verification.json. Identifiers that could not be verified are not included.",
+  "rules": [
+    "Organism identity is the NCBI Taxonomy ID; names are labels only.",
+    "An assembly is a separate entity linked to exactly one organism taxonomy ID; a species is never an assembly.",
+    "An assembly version (accession.version) is distinct from a reference sequence set derived from it (analysis sets, decoy/ALT inclusion, contig naming).",
+    "UCSC names (hg38, mm39, sacCer3, danRer11) are aliases of an assembly, not separate assemblies.",
+    "Strain, breed, cultivar or cell line belongs to the sample, not the organism.",
+    "Every accession and UCSC name in this registry must have a VERIFIED entry in config/atlas/provenance/assembly_verification.json; unverified identifiers are not admitted.",
+    "NCBI version status is recorded as observed. 'previous' means a later patch version exists; 'suppressed' means NCBI has withdrawn that record. A suppressed accession is kept only as a historical alias and is never canonical."
+  ],
+  "organisms": [
+    {
+      "ncbi_taxonomy_id": 9606,
+      "scientific_name": "Homo sapiens",
+      "rank": "species",
+      "atlas_scope": "RELEASED_IN_V1",
+      "verification_status": "VERIFIED_AGAINST_NCBI"
+    },
+    {
+      "ncbi_taxonomy_id": 10090,
+      "scientific_name": "Mus musculus",
+      "rank": "species",
+      "atlas_scope": "EXPANSION_TARGET",
+      "verification_status": "VERIFIED_AGAINST_NCBI"
+    },
+    {
+      "ncbi_taxonomy_id": 4932,
+      "scientific_name": "Saccharomyces cerevisiae",
+      "rank": "species",
+      "atlas_scope": "EXPANSION_TARGET",
+      "verification_status": "VERIFIED_AGAINST_NCBI"
+    },
+    {
+      "ncbi_taxonomy_id": 559292,
+      "scientific_name": "Saccharomyces cerevisiae S288C",
+      "rank": "strain",
+      "parent_ncbi_taxonomy_id": 4932,
+      "atlas_scope": "EXPANSION_TARGET",
+      "verification_status": "VERIFIED_AGAINST_NCBI"
+    },
+    {
+      "ncbi_taxonomy_id": 7955,
+      "scientific_name": "Danio rerio",
+      "rank": "species",
+      "atlas_scope": "EXPANSION_TARGET",
+      "verification_status": "VERIFIED_AGAINST_NCBI"
+    }
+  ],
+  "assemblies": [
+    {
+      "assembly_id": "grch37",
+      "ncbi_taxonomy_id": 9606,
+      "assembly_name": "GRCh37",
+      "insdc_accession": "GCA_000001405.1",
+      "insdc_ncbi_status_observed": "previous",
+      "refseq_accession": "GCF_000001405.13",
+      "refseq_ncbi_status_observed": "previous",
+      "ucsc_db": "hg19",
+      "reference_generation": "LEGACY",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json"
+    },
+    {
+      "assembly_id": "grch38",
+      "ncbi_taxonomy_id": 9606,
+      "assembly_name": "GRCh38",
+      "insdc_accession": "GCA_000001405.15",
+      "insdc_ncbi_status_observed": "previous",
+      "refseq_accession": "GCF_000001405.26",
+      "refseq_ncbi_status_observed": "previous",
+      "ucsc_db": "hg38",
+      "reference_generation": "CURRENT",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json",
+      "used_in_v1": true,
+      "verification_note": "GCA_000001405.15 is also the accession of the GIAB GRCh38 no-alt analysis set used in v1 (data/manifests/source_artifacts.tsv)."
+    },
+    {
+      "assembly_id": "t2t_chm13v2",
+      "ncbi_taxonomy_id": 9606,
+      "assembly_name": "T2T-CHM13v2.0",
+      "insdc_accession": "GCA_009914755.4",
+      "insdc_ncbi_status_observed": "current",
+      "refseq_accession": "GCF_009914755.1",
+      "refseq_ncbi_status_observed": "current",
+      "ucsc_db": "hs1",
+      "reference_generation": "CURRENT",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json"
+    },
+    {
+      "assembly_id": "grcm38",
+      "ncbi_taxonomy_id": 10090,
+      "assembly_name": "GRCm38",
+      "insdc_accession": "GCA_000001635.2",
+      "insdc_ncbi_status_observed": "previous",
+      "refseq_accession": "GCF_000001635.20",
+      "refseq_ncbi_status_observed": "previous",
+      "ucsc_db": "mm10",
+      "reference_generation": "LEGACY",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json"
+    },
+    {
+      "assembly_id": "grcm39",
+      "ncbi_taxonomy_id": 10090,
+      "assembly_name": "GRCm39",
+      "insdc_accession": "GCA_000001635.9",
+      "insdc_ncbi_status_observed": "current",
+      "refseq_accession": "GCF_000001635.27",
+      "refseq_ncbi_status_observed": "current",
+      "ucsc_db": "mm39",
+      "reference_generation": "CURRENT",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json"
+    },
+    {
+      "assembly_id": "saccer_r64",
+      "ncbi_taxonomy_id": 559292,
+      "assembly_name": "R64",
+      "insdc_accession": "GCA_000146045.2",
+      "insdc_ncbi_status_observed": "current",
+      "refseq_accession": "GCF_000146045.2",
+      "refseq_ncbi_status_observed": "current",
+      "ucsc_db": "sacCer3",
+      "reference_generation": "CURRENT",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json"
+    },
+    {
+      "assembly_id": "grcz10",
+      "ncbi_taxonomy_id": 7955,
+      "assembly_name": "GRCz10",
+      "insdc_accession": "GCA_000002035.3",
+      "insdc_ncbi_status_observed": "previous",
+      "refseq_accession": "GCF_000002035.5",
+      "refseq_ncbi_status_observed": "suppressed",
+      "ucsc_db": "danRer10",
+      "reference_generation": "LEGACY",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json"
+    },
+    {
+      "assembly_id": "grcz11",
+      "ncbi_taxonomy_id": 7955,
+      "assembly_name": "GRCz11",
+      "insdc_accession": "GCA_000002035.4",
+      "insdc_ncbi_status_observed": "current",
+      "refseq_accession": "GCF_000002035.6",
+      "refseq_ncbi_status_observed": "suppressed",
+      "ucsc_db": "danRer11",
+      "reference_generation": "CURRENT",
+      "verification_status": "VERIFIED_AGAINST_NCBI",
+      "verification_record": "config/atlas/provenance/assembly_verification.json"
+    }
+  ],
+  "reference_sequence_sets": [
+    {
+      "sequence_set_id": "grch38_giab_no_alt_analysis_set",
+      "assembly_id": "grch38",
+      "label": "GRCh38 no-alt analysis set (GIAB distribution)",
+      "includes_alt_contigs": false,
+      "includes_decoys": null,
+      "includes_decoys_note": "Not asserted in M0; must be determined from the FASTA sequence names in M1. null means UNVERIFIED, not false.",
+      "contig_naming": "UCSC_chr_prefix",
+      "source_artifact_ref": "artifact-reference-grch38-no-alt",
+      "source_artifact_manifest": "data/manifests/source_artifacts.tsv",
+      "verification_status": "USED_IN_V1"
+    }
+  ]
+}

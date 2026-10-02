@@ -1,0 +1,156 @@
+{
+  "source_registry_version": "0.1.0",
+  "status": "M0_FROZEN_APPROVED",
+  "notice": "Source strategy for the Public Data Catalog. No source is queried in M0. Terms entries summarise what must be reviewed; they are not legal conclusions and every source's current terms must be re-read and snapshotted before its records advance past CATALOGUED.",
+  "deduplication_rules": [
+    "INSDC archives (NCBI SRA, ENA, DDBJ DRA) exchange records; a run mirrored across archives is ONE dataset keyed by its run accession, never three.",
+    "The accession prefix (SRR/ERR/DRR, SRX/ERX/DRX, SRP/ERP/DRP, SAMN/SAMEA/SAMD, PRJNA/PRJEB/PRJDB) records the originating archive; it does not create a separate dataset.",
+    "Sample identity is keyed on BioSample accession; cell-line and repository aliases (e.g. HG002 / NA24385 / GM24385) are resolved to one sample via an alias table with provenance.",
+    "Benchmark-resource records (GIAB, precisionFDA) that point to INSDC runs are linked to the INSDC run record, not counted as additional datasets.",
+    "Derived artifacts (VCF, BAM, CRAM) are distinct entities linked to the run(s) they derive from; a derived artifact never increases the dataset count of its source run."
+  ],
+  "mirror_groups": [
+    {
+      "mirror_group_id": "insdc",
+      "label": "International Nucleotide Sequence Database Collaboration",
+      "member_source_ids": ["ncbi_sra", "ena", "ddbj_dra"],
+      "canonical_key": "run_accession",
+      "independent_count_rule": "count distinct run_accession across all members"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "ncbi_sra",
+      "label": "NCBI Sequence Read Archive",
+      "mirror_group_id": "insdc",
+      "contributes": ["run accession", "experiment accession", "instrument model string", "INSDC platform term", "library strategy/source/selection/layout", "base and read counts", "BioSample and BioProject links", "public file availability"],
+      "canonical_identifiers": ["run_accession", "experiment_accession", "study_accession"],
+      "duplication_risks": ["INSDC mirroring with ENA/DDBJ", "re-submitted or replaced runs", "suppressed or withdrawn runs", "multiple runs per library"],
+      "deduplication_strategy": "Key on run_accession within the INSDC mirror group; record suppression status; never count mirrors.",
+      "terms_review": "INSDC/NCBI public-data policies; submitter-imposed restrictions must be checked. Controlled-access (dbGaP) data is out of scope.",
+      "role": "DISCOVERY_AND_METADATA",
+      "evidence_grade_capable": false,
+      "evidence_grade_note": "Raw-read metadata alone is not evidence; a run becomes evidence-relevant only when linked to a truth/comparator relationship and a frozen protocol."
+    },
+    {
+      "source_id": "ena",
+      "label": "European Nucleotide Archive",
+      "mirror_group_id": "insdc",
+      "contributes": ["run accession", "instrument model", "library metadata", "FASTQ/submitted-file URLs with MD5 and byte sizes", "taxonomy ID"],
+      "canonical_identifiers": ["run_accession", "experiment_accession", "study_accession", "sample_accession"],
+      "duplication_risks": ["INSDC mirroring with SRA/DDBJ"],
+      "deduplication_strategy": "Same run_accession key as ncbi_sra; ENA may be preferred for file-level checksums, but contributes no additional dataset count.",
+      "terms_review": "EMBL-EBI terms of use; INSDC policies.",
+      "role": "DISCOVERY_AND_METADATA",
+      "evidence_grade_capable": false
+    },
+    {
+      "source_id": "ddbj_dra",
+      "label": "DDBJ Sequence Read Archive",
+      "mirror_group_id": "insdc",
+      "contributes": ["run accession", "library and platform metadata"],
+      "canonical_identifiers": ["run_accession"],
+      "duplication_risks": ["INSDC mirroring with SRA/ENA"],
+      "deduplication_strategy": "Same run_accession key as ncbi_sra.",
+      "terms_review": "DDBJ policies; INSDC policies.",
+      "role": "DISCOVERY_AND_METADATA",
+      "evidence_grade_capable": false
+    },
+    {
+      "source_id": "ncbi_bioproject",
+      "label": "NCBI BioProject",
+      "mirror_group_id": "insdc",
+      "contributes": ["study/project identity", "project title and description", "umbrella/sub-project relationships"],
+      "canonical_identifiers": ["bioproject_accession"],
+      "duplication_risks": ["umbrella projects double-counting child projects"],
+      "deduplication_strategy": "Count studies at the leaf project level; umbrella links are relationships, not datasets.",
+      "terms_review": "NCBI policies.",
+      "role": "DISCOVERY_AND_METADATA",
+      "evidence_grade_capable": false
+    },
+    {
+      "source_id": "ncbi_biosample",
+      "label": "NCBI BioSample",
+      "mirror_group_id": "insdc",
+      "contributes": ["sample identity", "organism taxonomy ID", "strain/cell line/isolate attributes", "sample aliases"],
+      "canonical_identifiers": ["biosample_accession"],
+      "duplication_risks": ["one biological source registered as several BioSamples", "free-text attributes"],
+      "deduplication_strategy": "BioSample accession is the sample key; biological-source equivalence across BioSamples requires an alias table with provenance and is never inferred by ML alone.",
+      "terms_review": "NCBI policies.",
+      "role": "DISCOVERY_AND_METADATA",
+      "evidence_grade_capable": false
+    },
+    {
+      "source_id": "ncbi_taxonomy",
+      "label": "NCBI Taxonomy",
+      "mirror_group_id": null,
+      "contributes": ["taxonomy ID", "scientific name", "rank", "lineage", "merged/deleted taxon history"],
+      "canonical_identifiers": ["ncbi_taxonomy_id"],
+      "duplication_risks": ["merged taxonomy IDs"],
+      "deduplication_strategy": "Resolve merged IDs to the current ID while retaining the source-reported ID.",
+      "terms_review": "NCBI policies.",
+      "role": "REFERENCE_VOCABULARY",
+      "evidence_grade_capable": false
+    },
+    {
+      "source_id": "ncbi_datasets_assembly",
+      "label": "NCBI Datasets / Assembly",
+      "mirror_group_id": null,
+      "contributes": ["assembly accession.version", "GenBank/RefSeq pairing", "assembly name", "organism"],
+      "canonical_identifiers": ["insdc_assembly_accession"],
+      "duplication_risks": ["GCA vs GCF accessions for the same assembly", "patch versions"],
+      "deduplication_strategy": "Pair GCA/GCF explicitly; treat each accession version as distinct.",
+      "terms_review": "NCBI policies.",
+      "role": "REFERENCE_VOCABULARY",
+      "evidence_grade_capable": false
+    },
+    {
+      "source_id": "giab",
+      "label": "Genome in a Bottle (NIST)",
+      "mirror_group_id": null,
+      "contributes": ["benchmark truth VCFs and BEDs by sample, version and assembly", "genome stratifications", "reference sequence sets", "indexes of public sequencing data for GIAB samples"],
+      "canonical_identifiers": ["giab_sample_id", "benchmark_release_version", "file_url_with_checksum"],
+      "duplication_risks": ["sequencing data indexed by GIAB also present in INSDC", "same truth set mirrored on several hosts"],
+      "deduplication_strategy": "Truth sets keyed by (sample, release version, assembly, file checksum); sequencing data keyed by INSDC run accession where one exists.",
+      "terms_review": "NIST data terms as recorded in v1 source_artifacts.tsv; re-verify per release.",
+      "role": "TRUTH_AND_EVIDENCE",
+      "evidence_grade_capable": true
+    },
+    {
+      "source_id": "precisionfda_truth_challenge_v2",
+      "label": "precisionFDA Truth Challenge V2 (NIST PDR mds2-2336)",
+      "mirror_group_id": null,
+      "contributes": ["public submission VCFs with publisher checksums", "participant-supplied pipeline metadata"],
+      "canonical_identifiers": ["submission_id", "sample_id"],
+      "duplication_risks": ["already used in v1.0.0"],
+      "deduplication_strategy": "Key on (submission_id, sample_id); records already in v1.0.0 are referenced, never re-added as new.",
+      "terms_review": "Recorded in v1 source_artifacts.tsv.",
+      "role": "TRUTH_AND_EVIDENCE",
+      "evidence_grade_capable": true
+    },
+    {
+      "source_id": "vendor_public_datasets",
+      "label": "Sequencing-vendor public benchmark datasets (e.g. ONT Open Data, PacBio and Illumina public datasets)",
+      "mirror_group_id": null,
+      "contributes": ["run-level files and sometimes VCFs for reference samples", "chemistry and basecaller detail often richer than INSDC"],
+      "canonical_identifiers": ["vendor_dataset_id", "file_url_with_checksum", "insdc_run_accession_when_present"],
+      "duplication_risks": ["same data also deposited in INSDC", "re-basecalled versions of the same raw signal"],
+      "deduplication_strategy": "Link to INSDC accession when present; treat re-basecalled outputs as derived artifacts of the same raw data, not new datasets.",
+      "terms_review": "Each vendor's dataset licence must be read and snapshotted; vendor-produced data carries a conflict-of-interest flag for any comparative use.",
+      "role": "DISCOVERY_ONLY_UNTIL_TERMS_REVIEWED",
+      "evidence_grade_capable": true
+    },
+    {
+      "source_id": "europe_pmc",
+      "label": "Europe PMC / PubMed",
+      "mirror_group_id": null,
+      "contributes": ["publication identity (DOI, PMID, PMCID)", "dataset-accession mentions"],
+      "canonical_identifiers": ["doi", "pmid"],
+      "duplication_risks": ["preprint and journal versions of one study"],
+      "deduplication_strategy": "Key on DOI; link preprint and published versions explicitly.",
+      "terms_review": "Metadata only; full text is not redistributed.",
+      "role": "DISCOVERY_AND_METADATA",
+      "evidence_grade_capable": false
+    }
+  ]
+}

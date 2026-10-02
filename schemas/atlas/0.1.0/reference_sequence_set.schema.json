@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/reference_sequence_set.schema.json",
+  "title": "REFERENCE_SEQUENCE_SET",
+  "description": "A concrete FASTA representation of an assembly (e.g. a no-alt analysis set, with or without decoys, with a particular contig naming). Two callsets on the same assembly but different sequence sets are not automatically comparable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sequence_set_id", "assembly_id", "label", "includes_alt_contigs", "includes_decoys", "contig_naming"],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "sequence_set_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "assembly_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "label": {"type": "string", "minLength": 1},
+    "includes_alt_contigs": {"type": ["boolean", "null"]},
+    "includes_decoys": {"type": ["boolean", "null"]},
+    "contig_naming": {"enum": ["UCSC_chr_prefix", "INSDC_numeric", "REFSEQ_accession", "MIXED", "UNKNOWN"]},
+    "fasta_uri": {"$ref": "common.defs.schema.json#/$defs/https_or_ftp_uri"},
+    "fasta_checksum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "value", "source"],
+      "properties": {
+        "algorithm": {"enum": ["sha256", "md5"]},
+        "value": {"type": "string", "pattern": "^[0-9a-f]{32,64}$"},
+        "source": {"enum": ["PUBLISHER", "COMPUTED_ON_RETRIEVAL"]}
+      }
+    }
+  }
+}
