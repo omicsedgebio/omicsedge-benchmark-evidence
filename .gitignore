@@ -14,6 +14,11 @@ __pycache__/
 .coverage
 htmlcov/
 
+# M1A canonical catalog outputs are produced and retained as a manual
+# GitHub Actions artifact. Live expansion outputs must not persist locally.
+data/catalog/m1a/
+results/catalog/
+
 # IDE / editors
 .vscode/
 .idea/

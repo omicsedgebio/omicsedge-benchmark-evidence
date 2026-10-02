@@ -35,9 +35,12 @@ The **[OmicsEdge Evidence Atlas](https://omicsedge.bio/evidence-atlas)** is the 
 |---|---|
 | ✅ **RELEASED** | **Evidence Atlas v1.0.0** (Project 003): human (GRCh38), HG002 · HG003 · HG004, Illumina · Oxford Nanopore, germline small-variant benchmark evidence. Frozen and checksummed. DOI [`10.5281/zenodo.23085673`](https://doi.org/10.5281/zenodo.23085673). |
 | 🔒 **FROZEN DEVELOPMENT MILESTONE** | **M0 — Evidence Atlas Expansion Protocol** (approved 2026-10-01). Defines the architecture and scientific rules for cross-species / cross-platform expansion. **Rules only: no data, no model, no new evidence.** Locked by [`docs/atlas/m0_expansion_protocol.lock`](docs/atlas/m0_expansion_protocol.lock). |
-| ⏭️ **NEXT** | **M1 — Automated Public Data Catalog.** Not started. |
+| 🧪 **IN REVIEW** | **M1A — bounded Automated Public Data Catalog implementation.** Canonical pilot pending manual GitHub Actions run; metadata only, not evidence or a release. |
 
-No expansion data has been ingested or released. See [Evidence Atlas expansion](#evidence-atlas-expansion-in-development).
+No expansion record has been admitted as evidence or released. The repository
+contains the M1A implementation and offline fixtures only; canonical pilot
+outputs must be produced off-Mac by the manual GitHub Actions workflow. See
+[Evidence Atlas expansion](#evidence-atlas-expansion-in-development).
 
 ---
 
@@ -579,10 +582,13 @@ and released. M0 itself does **not** mean any of the following:
 - multispecies evidence has been released. It has not; v1.0.0 is human-only.
 - PacBio or other additional technologies are part of Atlas v1. They are not;
   v1.0.0 covers Illumina and Oxford Nanopore only.
-- public sequencing runs have been ingested. None have.
+- public sequencing runs had been ingested by M0. None were; M1A now contains
+  catalog code and offline fixtures, not canonical live outputs, sequencing
+  payloads or evidence.
 - an ML model has been trained. None has, and no ML threshold is active.
 - automated evidence admission is running. It is not.
-- M1 is complete. M1 has not started.
+- M1 is complete. It is not; only the bounded M1A implementation/pilot is
+  awaiting review, and M1B has not started.
 
 ## Goal
 
@@ -658,7 +664,8 @@ The current values are provisional placeholders, pending M2 calibration.
 
 ```text
 M0  Expansion protocol            FROZEN / APPROVED (2026-10-01)
-M1  Automated metadata catalog    NEXT, not started
+M1A Bounded metadata pilot        IMPLEMENTATION READY, cloud pilot pending
+M1B Automated metadata catalog    not started
 M2  Normalization engine          not started
 M3  Eligibility engine            not started
 M4  Human multi-platform release  not started
@@ -671,6 +678,9 @@ M6  Automated release pipeline    not started
   verify with `python scripts/atlas/freeze_m0_protocol.py --check`)
 - Roadmap with validation gates: [`docs/roadmap.md`](docs/roadmap.md)
 - Public progress policy: [`docs/public_progress_policy.md`](docs/public_progress_policy.md)
+- M1A catalog pilot: [`docs/atlas/m1a_catalog.md`](docs/atlas/m1a_catalog.md)
+  (canonical run is manual GitHub Actions only; local tests are offline; no raw
+  sequence processing, ML, evidence validation, release or deployment)
 
 ---
 
