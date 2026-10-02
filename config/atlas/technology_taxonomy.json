@@ -1,0 +1,172 @@
+{
+  "taxonomy_version": "0.1.0",
+  "status": "M0_FROZEN_APPROVED",
+  "notice": "Seed controlled vocabulary for Evidence Atlas expansion. Non-exhaustive and extensible. Inclusion here means a value is recognised for normalization; it does not mean any dataset of that technology is Atlas evidence. Source alias strings are seed forms to be checked against live source vocabularies during M1/M2 before they are relied on.",
+  "hierarchy": [
+    "technology_family",
+    "vendor",
+    "instrument_family",
+    "instrument_model",
+    "chemistry",
+    "read_mode"
+  ],
+  "rules": [
+    "An instrument family or instrument model is never a technology family.",
+    "A vendor is never a technology family; one vendor may operate several technology families.",
+    "Technology family is resolved from the instrument model or instrument family, never from the vendor alone when the vendor operates more than one family.",
+    "If a source names only an instrument family (e.g. 'PromethION'), instrument_model is UNSPECIFIED; a model is never guessed.",
+    "Chemistry, read mode and basecaller are recorded separately from the instrument."
+  ],
+  "technology_families": [
+    {
+      "id": "short_read_sbs",
+      "label": "Short-read sequencing by synthesis (reversible terminator)",
+      "evidence_scope": "RELEASED_IN_V1"
+    },
+    {
+      "id": "short_read_sbb",
+      "label": "Short-read sequencing by binding",
+      "evidence_scope": "CATALOG_ONLY"
+    },
+    {
+      "id": "short_read_avidity",
+      "label": "Short-read avidity sequencing",
+      "evidence_scope": "CATALOG_ONLY"
+    },
+    {
+      "id": "short_read_dnb",
+      "label": "Short-read DNA nanoball sequencing (combinatorial probe-anchor synthesis)",
+      "evidence_scope": "CATALOG_ONLY"
+    },
+    {
+      "id": "short_read_flow_sbs",
+      "label": "Short-read flow-based sequencing by synthesis (mostly natural nucleotides)",
+      "evidence_scope": "CATALOG_ONLY"
+    },
+    {
+      "id": "semiconductor",
+      "label": "Semiconductor (ion-sensing) sequencing",
+      "evidence_scope": "CATALOG_ONLY"
+    },
+    {
+      "id": "nanopore",
+      "label": "Nanopore single-molecule sequencing",
+      "evidence_scope": "RELEASED_IN_V1"
+    },
+    {
+      "id": "smrt",
+      "label": "Single-molecule real-time (SMRT) sequencing",
+      "evidence_scope": "EXPANSION_TARGET"
+    },
+    {
+      "id": "pyrosequencing",
+      "label": "Pyrosequencing (legacy)",
+      "evidence_scope": "CATALOG_ONLY"
+    },
+    {
+      "id": "capillary_electrophoresis",
+      "label": "Capillary electrophoresis (Sanger)",
+      "evidence_scope": "CATALOG_ONLY"
+    }
+  ],
+  "vendors": [
+    {"id": "illumina", "label": "Illumina"},
+    {"id": "oxford_nanopore", "label": "Oxford Nanopore Technologies"},
+    {"id": "pacbio", "label": "Pacific Biosciences"},
+    {"id": "element", "label": "Element Biosciences"},
+    {"id": "mgi", "label": "MGI Tech / Complete Genomics (DNBSEQ)"},
+    {"id": "ultima", "label": "Ultima Genomics"},
+    {"id": "thermo_ion_torrent", "label": "Thermo Fisher Scientific (Ion Torrent)"},
+    {"id": "roche_454", "label": "Roche 454 Life Sciences"},
+    {"id": "capillary_vendors", "label": "Capillary sequencer vendors (unspecified)"}
+  ],
+  "instrument_families": [
+    {"id": "illumina_hiseq", "label": "HiSeq", "vendor_id": "illumina", "technology_family_id": "short_read_sbs", "family_level_aliases": ["Illumina HiSeq"]},
+    {"id": "illumina_miseq", "label": "MiSeq", "vendor_id": "illumina", "technology_family_id": "short_read_sbs", "family_level_aliases": []},
+    {"id": "illumina_nextseq", "label": "NextSeq", "vendor_id": "illumina", "technology_family_id": "short_read_sbs", "family_level_aliases": ["NextSeq"]},
+    {"id": "illumina_novaseq", "label": "NovaSeq", "vendor_id": "illumina", "technology_family_id": "short_read_sbs", "family_level_aliases": ["NovaSeq"]},
+    {"id": "illumina_iseq", "label": "iSeq", "vendor_id": "illumina", "technology_family_id": "short_read_sbs", "family_level_aliases": []},
+    {"id": "ont_minion", "label": "MinION", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore", "family_level_aliases": ["MinION"]},
+    {"id": "ont_gridion", "label": "GridION", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore", "family_level_aliases": ["GridION"]},
+    {"id": "ont_promethion", "label": "PromethION", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore", "family_level_aliases": ["PromethION"]},
+    {"id": "pacbio_rs", "label": "PacBio RS", "vendor_id": "pacbio", "technology_family_id": "smrt", "family_level_aliases": []},
+    {"id": "pacbio_sequel", "label": "Sequel", "vendor_id": "pacbio", "technology_family_id": "smrt", "family_level_aliases": []},
+    {"id": "pacbio_revio", "label": "Revio", "vendor_id": "pacbio", "technology_family_id": "smrt", "family_level_aliases": []},
+    {"id": "pacbio_vega", "label": "Vega", "vendor_id": "pacbio", "technology_family_id": "smrt", "family_level_aliases": []},
+    {"id": "pacbio_onso", "label": "Onso", "vendor_id": "pacbio", "technology_family_id": "short_read_sbb", "family_level_aliases": []},
+    {"id": "element_aviti", "label": "AVITI", "vendor_id": "element", "technology_family_id": "short_read_avidity", "family_level_aliases": []},
+    {"id": "mgi_dnbseq", "label": "DNBSEQ", "vendor_id": "mgi", "technology_family_id": "short_read_dnb", "family_level_aliases": ["DNBSEQ"]},
+    {"id": "ultima_ug", "label": "UG", "vendor_id": "ultima", "technology_family_id": "short_read_flow_sbs", "family_level_aliases": []},
+    {"id": "thermo_ion_torrent", "label": "Ion Torrent", "vendor_id": "thermo_ion_torrent", "technology_family_id": "semiconductor", "family_level_aliases": ["Ion Torrent"]},
+    {"id": "roche_454_gs", "label": "454 GS", "vendor_id": "roche_454", "technology_family_id": "pyrosequencing", "family_level_aliases": ["454 GS"]},
+    {"id": "capillary_sequencer", "label": "Capillary sequencer", "vendor_id": "capillary_vendors", "technology_family_id": "capillary_electrophoresis", "family_level_aliases": []}
+  ],
+  "instrument_models": [
+    {"id": "illumina_hiseq_2000", "label": "HiSeq 2000", "instrument_family_id": "illumina_hiseq", "source_aliases": ["Illumina HiSeq 2000"]},
+    {"id": "illumina_hiseq_2500", "label": "HiSeq 2500", "instrument_family_id": "illumina_hiseq", "source_aliases": ["Illumina HiSeq 2500"]},
+    {"id": "illumina_hiseq_4000", "label": "HiSeq 4000", "instrument_family_id": "illumina_hiseq", "source_aliases": ["Illumina HiSeq 4000"]},
+    {"id": "illumina_hiseq_x", "label": "HiSeq X", "instrument_family_id": "illumina_hiseq", "source_aliases": ["Illumina HiSeq X", "HiSeq X Ten", "HiSeq X Five"]},
+    {"id": "illumina_miseq", "label": "MiSeq", "instrument_family_id": "illumina_miseq", "source_aliases": ["Illumina MiSeq"]},
+    {"id": "illumina_nextseq_500", "label": "NextSeq 500", "instrument_family_id": "illumina_nextseq", "source_aliases": ["NextSeq 500"]},
+    {"id": "illumina_nextseq_550", "label": "NextSeq 550", "instrument_family_id": "illumina_nextseq", "source_aliases": ["NextSeq 550"]},
+    {"id": "illumina_nextseq_1000", "label": "NextSeq 1000", "instrument_family_id": "illumina_nextseq", "source_aliases": ["NextSeq 1000"]},
+    {"id": "illumina_nextseq_2000", "label": "NextSeq 2000", "instrument_family_id": "illumina_nextseq", "source_aliases": ["NextSeq 2000"]},
+    {"id": "illumina_novaseq_6000", "label": "NovaSeq 6000", "instrument_family_id": "illumina_novaseq", "source_aliases": ["Illumina NovaSeq 6000"]},
+    {"id": "illumina_novaseq_x", "label": "NovaSeq X", "instrument_family_id": "illumina_novaseq", "source_aliases": ["Illumina NovaSeq X"]},
+    {"id": "illumina_novaseq_x_plus", "label": "NovaSeq X Plus", "instrument_family_id": "illumina_novaseq", "source_aliases": ["Illumina NovaSeq X Plus"]},
+    {"id": "illumina_iseq_100", "label": "iSeq 100", "instrument_family_id": "illumina_iseq", "source_aliases": ["Illumina iSeq 100"]},
+    {"id": "ont_minion_mk1b", "label": "MinION Mk1B", "instrument_family_id": "ont_minion", "source_aliases": []},
+    {"id": "ont_minion_mk1c", "label": "MinION Mk1C", "instrument_family_id": "ont_minion", "source_aliases": []},
+    {"id": "ont_gridion_mk1", "label": "GridION Mk1", "instrument_family_id": "ont_gridion", "source_aliases": []},
+    {"id": "ont_promethion_24", "label": "PromethION 24", "instrument_family_id": "ont_promethion", "source_aliases": ["P24"]},
+    {"id": "ont_promethion_48", "label": "PromethION 48", "instrument_family_id": "ont_promethion", "source_aliases": ["P48"]},
+    {"id": "ont_promethion_2_solo", "label": "PromethION 2 Solo", "instrument_family_id": "ont_promethion", "source_aliases": ["P2 Solo"]},
+    {"id": "pacbio_rs_ii", "label": "PacBio RS II", "instrument_family_id": "pacbio_rs", "source_aliases": []},
+    {"id": "pacbio_sequel", "label": "Sequel", "instrument_family_id": "pacbio_sequel", "source_aliases": ["PacBio Sequel"]},
+    {"id": "pacbio_sequel_ii", "label": "Sequel II", "instrument_family_id": "pacbio_sequel", "source_aliases": ["PacBio Sequel II"]},
+    {"id": "pacbio_sequel_iie", "label": "Sequel IIe", "instrument_family_id": "pacbio_sequel", "source_aliases": ["PacBio Sequel IIe"]},
+    {"id": "pacbio_revio", "label": "Revio", "instrument_family_id": "pacbio_revio", "source_aliases": ["PacBio Revio"]},
+    {"id": "pacbio_vega", "label": "Vega", "instrument_family_id": "pacbio_vega", "source_aliases": ["PacBio Vega"]},
+    {"id": "pacbio_onso", "label": "Onso", "instrument_family_id": "pacbio_onso", "source_aliases": ["PacBio Onso"]},
+    {"id": "element_aviti", "label": "AVITI", "instrument_family_id": "element_aviti", "source_aliases": ["Element AVITI"]},
+    {"id": "mgi_dnbseq_g400", "label": "DNBSEQ-G400", "instrument_family_id": "mgi_dnbseq", "source_aliases": ["MGISEQ-2000RS"]},
+    {"id": "mgi_dnbseq_t7", "label": "DNBSEQ-T7", "instrument_family_id": "mgi_dnbseq", "source_aliases": []},
+    {"id": "ultima_ug_100", "label": "UG 100", "instrument_family_id": "ultima_ug", "source_aliases": []},
+    {"id": "thermo_ion_pgm", "label": "Ion Torrent PGM", "instrument_family_id": "thermo_ion_torrent", "source_aliases": []},
+    {"id": "thermo_ion_proton", "label": "Ion Torrent Proton", "instrument_family_id": "thermo_ion_torrent", "source_aliases": []},
+    {"id": "thermo_ion_genestudio_s5", "label": "Ion GeneStudio S5", "instrument_family_id": "thermo_ion_torrent", "source_aliases": []}
+  ],
+  "chemistries": [
+    {"id": "illumina_xleap_sbs", "label": "XLEAP-SBS", "vendor_id": "illumina", "technology_family_id": "short_read_sbs", "kind": "sequencing_chemistry"},
+    {"id": "ont_r9_4", "label": "R9.4 flow cell", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore", "kind": "pore_version"},
+    {"id": "ont_r9_4_1", "label": "R9.4.1 flow cell", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore", "kind": "pore_version"},
+    {"id": "ont_r10_4_1", "label": "R10.4.1 flow cell", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore", "kind": "pore_version"}
+  ],
+  "read_modes": [
+    {"id": "sbs_paired_end", "label": "Paired-end", "technology_family_ids": ["short_read_sbs", "short_read_sbb", "short_read_avidity", "short_read_dnb"]},
+    {"id": "sbs_single_end", "label": "Single-end", "technology_family_ids": ["short_read_sbs", "short_read_sbb", "short_read_avidity", "short_read_dnb", "short_read_flow_sbs", "semiconductor"]},
+    {"id": "nanopore_simplex", "label": "Simplex", "technology_family_ids": ["nanopore"]},
+    {"id": "nanopore_duplex", "label": "Duplex", "technology_family_ids": ["nanopore"]},
+    {"id": "smrt_hifi", "label": "HiFi (circular consensus)", "technology_family_ids": ["smrt"]},
+    {"id": "smrt_clr", "label": "Continuous long read (CLR)", "technology_family_ids": ["smrt"]}
+  ],
+  "basecallers": [
+    {"id": "ont_guppy", "label": "Guppy", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore"},
+    {"id": "ont_dorado", "label": "Dorado", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore"},
+    {"id": "pacbio_ccs", "label": "ccs (HiFi consensus)", "vendor_id": "pacbio", "technology_family_id": "smrt"},
+    {"id": "illumina_bcl2fastq", "label": "bcl2fastq", "vendor_id": "illumina", "technology_family_id": "short_read_sbs"},
+    {"id": "illumina_bcl_convert", "label": "BCL Convert", "vendor_id": "illumina", "technology_family_id": "short_read_sbs"}
+  ],
+  "insdc_platform_terms": [
+    {"term": "ILLUMINA", "vendor_id": "illumina", "technology_family_id": "short_read_sbs"},
+    {"term": "OXFORD_NANOPORE", "vendor_id": "oxford_nanopore", "technology_family_id": "nanopore"},
+    {"term": "PACBIO_SMRT", "vendor_id": "pacbio", "technology_family_id": null, "note": "Vendor term only; the instrument model decides between smrt and short_read_sbb."},
+    {"term": "ELEMENT", "vendor_id": "element", "technology_family_id": "short_read_avidity"},
+    {"term": "DNBSEQ", "vendor_id": "mgi", "technology_family_id": "short_read_dnb"},
+    {"term": "BGISEQ", "vendor_id": "mgi", "technology_family_id": "short_read_dnb"},
+    {"term": "ULTIMA", "vendor_id": "ultima", "technology_family_id": "short_read_flow_sbs"},
+    {"term": "ION_TORRENT", "vendor_id": "thermo_ion_torrent", "technology_family_id": "semiconductor"},
+    {"term": "LS454", "vendor_id": "roche_454", "technology_family_id": "pyrosequencing"},
+    {"term": "CAPILLARY", "vendor_id": "capillary_vendors", "technology_family_id": "capillary_electrophoresis"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/publication.schema.json",
+  "title": "PUBLICATION",
+  "description": "A publication or preprint describing a study, dataset or truth resource. Metadata only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "publication_id", "title", "identifiers"],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "publication_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "title": {"type": "string", "minLength": 1},
+    "identifiers": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "doi": {"$ref": "common.defs.schema.json#/$defs/doi"},
+        "pmid": {"type": "string", "pattern": "^[0-9]+$"},
+        "pmcid": {"type": "string", "pattern": "^PMC[0-9]+$"}
+      }
+    },
+    "publication_type": {"enum": ["JOURNAL_ARTICLE", "PREPRINT", "DATA_DESCRIPTOR", "OTHER"]},
+    "version_of_publication_id": {"$ref": "common.defs.schema.json#/$defs/id"}
+  }
+}

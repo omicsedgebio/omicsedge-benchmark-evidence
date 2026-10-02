@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/sample.schema.json",
+  "title": "SAMPLE",
+  "description": "A biological sample, keyed by BioSample accession where one exists. A sample is not a sequencing run: one sample may have many runs on many platforms.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sample_id", "organism", "aliases", "access_class", "source_record_ids"],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "sample_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+    "biosample_accession": {"$ref": "common.defs.schema.json#/$defs/biosample_accession"},
+    "organism": {
+      "allOf": [
+        {"$ref": "common.defs.schema.json#/$defs/normalized_value"},
+        {"properties": {"value": {"anyOf": [{"type": "integer", "minimum": 1}, {"const": "UNKNOWN"}]}}}
+      ]
+    },
+    "strain_or_line": {"type": "string"},
+    "aliases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["namespace", "value", "source_record_id"],
+        "properties": {
+          "namespace": {"type": "string", "minLength": 1},
+          "value": {"type": "string", "minLength": 1},
+          "source_record_id": {"$ref": "common.defs.schema.json#/$defs/id"}
+        }
+      }
+    },
+    "access_class": {"$ref": "common.defs.schema.json#/$defs/access_class"},
+    "source_record_ids": {"type": "array", "items": {"$ref": "common.defs.schema.json#/$defs/id"}, "minItems": 1, "uniqueItems": true}
+  }
+}

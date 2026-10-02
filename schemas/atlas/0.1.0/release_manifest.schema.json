@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/release_manifest.schema.json",
+  "title": "RELEASE_MANIFEST",
+  "description": "The authority for membership of an immutable Evidence Atlas release. A release can only be built from a PASS validation report and never changes after publication; corrections produce a new release version.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "release_version", "release_kind", "previous_release",
+    "created_at", "entity_schema_version", "policy_versions", "git",
+    "source_snapshot", "records", "artifacts", "checksums_manifest",
+    "validation_report", "provenance", "zenodo", "website"
+  ],
+  "properties": {
+    "schema_version": {"$ref": "common.defs.schema.json#/$defs/schema_version"},
+    "release_version": {"$ref": "common.defs.schema.json#/$defs/semver"},
+    "release_kind": {"enum": ["MAJOR", "MINOR", "PATCH"]},
+    "previous_release": {"oneOf": [{"type": "null"}, {"$ref": "common.defs.schema.json#/$defs/semver"}]},
+    "created_at": {"$ref": "common.defs.schema.json#/$defs/utc_timestamp"},
+    "entity_schema_version": {"type": "string", "minLength": 1},
+    "policy_versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eligibility_policy", "ml_policy", "technology_taxonomy", "organisms_assemblies", "sources"],
+      "properties": {
+        "eligibility_policy": {"$ref": "common.defs.schema.json#/$defs/semver"},
+        "ml_policy": {"$ref": "common.defs.schema.json#/$defs/semver"},
+        "technology_taxonomy": {"$ref": "common.defs.schema.json#/$defs/semver"},
+        "organisms_assemblies": {"$ref": "common.defs.schema.json#/$defs/semver"},
+        "sources": {"$ref": "common.defs.schema.json#/$defs/semver"}
+      }
+    },
+    "git": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tag", "commit"],
+      "properties": {
+        "tag": {"type": "string", "pattern": "^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+        "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+      }
+    },
+    "source_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshot_id", "taken_at", "sources"],
+      "properties": {
+        "snapshot_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+        "taken_at": {"$ref": "common.defs.schema.json#/$defs/utc_timestamp"},
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_id", "retrieved_at", "raw_snapshot_sha256"],
+            "properties": {
+              "source_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+              "retrieved_at": {"$ref": "common.defs.schema.json#/$defs/utc_timestamp"},
+              "raw_snapshot_sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"}
+            }
+          }
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["record_id", "record_version", "content_sha256"],
+        "properties": {
+          "record_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+          "record_version": {"type": "integer", "minimum": 1},
+          "content_sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"}
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "size_bytes"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"},
+          "size_bytes": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "checksums_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"}}
+    },
+    "validation_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "verdict", "gates_passed", "gates_total"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "common.defs.schema.json#/$defs/sha256"},
+        "verdict": {"const": "PASS"},
+        "gates_passed": {"type": "integer", "minimum": 1},
+        "gates_total": {"type": "integer", "minimum": 1}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["build_activity_id", "workflow"],
+      "properties": {
+        "build_activity_id": {"$ref": "common.defs.schema.json#/$defs/id"},
+        "workflow": {"type": "string", "minLength": 1},
+        "workflow_run_url": {"$ref": "common.defs.schema.json#/$defs/https_or_ftp_uri"}
+      }
+    },
+    "zenodo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deposit_status"],
+      "properties": {
+        "deposit_status": {"enum": ["NOT_DEPOSITED", "DEPOSITED"]},
+        "concept_doi": {"$ref": "common.defs.schema.json#/$defs/doi"},
+        "version_doi": {"$ref": "common.defs.schema.json#/$defs/doi"}
+      },
+      "if": {"properties": {"deposit_status": {"const": "DEPOSITED"}}},
+      "then": {"required": ["version_doi"]}
+    },
+    "website": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["release_path", "is_latest_at_publication"],
+      "properties": {
+        "release_path": {"type": "string", "pattern": "^/"},
+        "is_latest_at_publication": {"type": "boolean"}
+      }
+    }
+  }
+}

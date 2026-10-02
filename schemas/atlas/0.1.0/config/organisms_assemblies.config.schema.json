@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omicsedgebio.example/schemas/atlas/0.1.0/config/organisms_assemblies.config.schema.json",
+  "title": "Organism and assembly seed registry configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registry_version",
+    "status",
+    "notice",
+    "rules",
+    "organisms",
+    "assemblies",
+    "reference_sequence_sets"
+  ],
+  "properties": {
+    "registry_version": {
+      "$ref": "../common.defs.schema.json#/$defs/semver"
+    },
+    "status": {
+      "type": "string"
+    },
+    "notice": {
+      "type": "string"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "organisms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ncbi_taxonomy_id",
+          "scientific_name",
+          "rank",
+          "atlas_scope",
+          "verification_status"
+        ],
+        "properties": {
+          "ncbi_taxonomy_id": {
+            "$ref": "../common.defs.schema.json#/$defs/ncbi_taxonomy_id"
+          },
+          "scientific_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rank": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parent_ncbi_taxonomy_id": {
+            "$ref": "../common.defs.schema.json#/$defs/ncbi_taxonomy_id"
+          },
+          "atlas_scope": {
+            "enum": [
+              "RELEASED_IN_V1",
+              "EXPANSION_TARGET",
+              "CATALOG_ONLY"
+            ]
+          },
+          "verification_status": {
+            "const": "VERIFIED_AGAINST_NCBI"
+          }
+        }
+      }
+    },
+    "assemblies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assembly_id",
+          "ncbi_taxonomy_id",
+          "assembly_name",
+          "insdc_accession",
+          "insdc_ncbi_status_observed",
+          "reference_generation",
+          "verification_status",
+          "verification_record"
+        ],
+        "properties": {
+          "assembly_id": {
+            "$ref": "../common.defs.schema.json#/$defs/id"
+          },
+          "ncbi_taxonomy_id": {
+            "$ref": "../common.defs.schema.json#/$defs/ncbi_taxonomy_id"
+          },
+          "assembly_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "insdc_accession": {
+            "type": "string",
+            "pattern": "^GCA_[0-9]{9}\\.[0-9]+$"
+          },
+          "insdc_ncbi_status_observed": {
+            "enum": [
+              "current",
+              "previous",
+              "suppressed"
+            ]
+          },
+          "refseq_accession": {
+            "type": "string",
+            "pattern": "^GCF_[0-9]{9}\\.[0-9]+$"
+          },
+          "refseq_ncbi_status_observed": {
+            "enum": [
+              "current",
+              "previous",
+              "suppressed"
+            ]
+          },
+          "ucsc_db": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]+$"
+          },
+          "reference_generation": {
+            "description": "Whether this is the current or a legacy reference generation for the organism; not NCBI version status.",
+            "enum": [
+              "CURRENT",
+              "LEGACY"
+            ]
+          },
+          "verification_status": {
+            "description": "Only verified identifiers may enter the controlled vocabulary.",
+            "const": "VERIFIED_AGAINST_NCBI"
+          },
+          "verification_record": {
+            "const": "config/atlas/provenance/assembly_verification.json"
+          },
+          "used_in_v1": {
+            "type": "boolean"
+          },
+          "verification_note": {
+            "type": "string"
+          }
+        },
+        "dependentRequired": {
+          "refseq_accession": [
+            "refseq_ncbi_status_observed"
+          ]
+        }
+      }
+    },
+    "reference_sequence_sets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sequence_set_id",
+          "assembly_id",
+          "label",
+          "includes_alt_contigs",
+          "includes_decoys",
+          "contig_naming",
+          "verification_status"
+        ],
+        "properties": {
+          "sequence_set_id": {
+            "$ref": "../common.defs.schema.json#/$defs/id"
+          },
+          "assembly_id": {
+            "$ref": "../common.defs.schema.json#/$defs/id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "includes_alt_contigs": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "includes_decoys": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "includes_decoys_note": {
+            "type": "string"
+          },
+          "contig_naming": {
+            "enum": [
+              "UCSC_chr_prefix",
+              "INSDC_numeric",
+              "REFSEQ_accession",
+              "MIXED",
+              "UNKNOWN"
+            ]
+          },
+          "source_artifact_ref": {
+            "type": "string"
+          },
+          "source_artifact_manifest": {
+            "type": "string"
+          },
+          "verification_status": {
+            "enum": [
+              "SEED_UNVERIFIED",
+              "USED_IN_V1",
+              "VERIFIED"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "combined_freeze": {
+    "file_count": 467,
+    "manifest": "releases/v1.0.0/frozen_artifacts.sha256",
+    "manifest_sha256": "e685d5572582d832b40b4d908960f4c03537692114062cfad06729cb130193bc",
+    "note": "Union of the scientific_release and web_delivery lineages. It does not claim that all files existed at the v1.0.0 tag."
+  },
+  "freeze_record_version": "2.0.0",
+  "immutability_policy": "docs/atlas/v1_immutability_policy.md",
+  "living_paths_excluded": [
+    ".gitignore",
+    "CITATION.cff",
+    "README.md",
+    "pyproject.toml",
+    "tests/"
+  ],
+  "scientific_release": {
+    "authoritative_archive": {
+      "path": "results/phase2e/omicsedge_phase2_final_results.tar.gz",
+      "sha256": "186cbed74fa718a728f7a24b43d58118a308165fae385eb95cc4cb4444788ca3",
+      "size_bytes": 8708768
+    },
+    "file_count": 197,
+    "git_tag": "v1.0.0",
+    "manifest": "releases/v1.0.0/scientific_release.sha256",
+    "manifest_sha256": "0cfba995b027ec73b2856b7aabaab278275d82f0e95b5d06de6603080159e2a1",
+    "present_at_git_tag": true,
+    "registry_schema_version": "1.0.0",
+    "source_commit": "c61b84335a8cdce0e27fedc146da263f3b10a7fd",
+    "version": "v1.0.0",
+    "zenodo_doi": "10.5281/zenodo.23085673"
+  },
+  "web_delivery": {
+    "alters_scientific_observations": false,
+    "derived_from": "v1.0.0",
+    "file_count": 270,
+    "introducing_commits": [
+      {
+        "commit": "0eec7d6ea586f30e7a69c9a98da3c57f2907ab29",
+        "subject": "Freeze Evidence Explorer v1 data contract"
+      },
+      {
+        "commit": "77d9293d50ce79b83c585f0b5ba56a596ac71bef",
+        "subject": "Add validated Evidence Explorer v1 export"
+      },
+      {
+        "commit": "fbaf0e341cfe996f8d653b363174b616bfcd98c8",
+        "subject": "Freeze Evidence Explorer web delivery v1 contract"
+      },
+      {
+        "commit": "da195997c5fc14d7b11f55550a9650a4ab568811",
+        "subject": "Add validated Evidence Explorer web delivery bundle"
+      }
+    ],
+    "manifest": "releases/v1.0.0/web_delivery.sha256",
+    "manifest_sha256": "1d98e91a44887c09ebe012ad944bad3edb71333f057adfc25e6e22bbc53ca452",
+    "path_prefixes": [
+      "docs/explorer/",
+      "results/explorer_v1/",
+      "results/explorer_web_v1/",
+      "scripts/explorer/"
+    ],
+    "present_at_git_tag": false,
+    "role": "validated Evidence Explorer delivery for the frozen v1 scientific release",
+    "source_commit": "da195997c5fc14d7b11f55550a9650a4ab568811",
+    "source_commit_short": "da19599",
+    "statement": "Added after the v1.0.0 tag. These files are the validated Evidence Explorer canonical export and its static browser-delivery bundle. They re-represent the frozen v1.0.0 observations for the web and do not add, remove, recompute or alter any scientific observation."
+  }
+}
